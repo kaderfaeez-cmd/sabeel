@@ -43,7 +43,11 @@ multiple ayahs, topic-based browsing, and cross-device sync (Phase 9, on Supabas
   dataset before any page cites them; none is ever asserted from memory
 - ✅ **Learn Wudhu** — 9 steps, each classified by weight, all citations verified through
   the gate, common mistakes, and a closed-by-default "Scholarly differences" section
-- ⬜ Learn Salah (larger: positions, recitations, transliteration, audio)
+- ✅ **Learn Salah** — 9 positions as a mini-application: physical action, recitations
+  with Arabic/transliteration/meaning, "Why am I saying this?", evidence, common
+  mistakes, and evidence-backed accessibility guidance on each position
+- ⬜ Salah audio (the audio layer is built; recordings still to be sourced)
+- ⬜ The remaining prayers' rak'ah counts and timings
 - ⬜ Learn Ghusl
 - ⬜ Nullifiers and practice checklists
 - ⬜ Wudhu step illustrations (environment/diagram only — no figurative depiction)
