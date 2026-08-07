@@ -53,21 +53,65 @@ AlAdhan API, with user-selectable calculation method. No auto-play audio.
 | 2026-08-07 | Recitation audio (verses.quran.com) | ✅ 12 reciters, per-ayah audio reachable |
 | 2026-08-07 | Hadith authenticity gate | ✅ `npm run verify:hadith` — all cases match this policy |
 
+## The authenticity policy
+
+**Owner ruling, 2026-08-07 — binding:**
+
+> The platform should never present uncertain evidence as established evidence. If a
+> hadith cannot be confidently authenticated according to the platform's policy, do not
+> cite it as proof.
+
+Where supporting hadith cannot be verified, the platform:
+
+1. Continues teaching anything clearly established by the **Quran**.
+2. Includes **authentic hadith** where available.
+3. Shows an **Authenticity Notice** stating precisely what is and is not known.
+
+> Never lower the evidentiary standard simply because another Islamic website includes a
+> narration. Our goal is trust, not volume.
+
 ## The authenticity gate
 
-Implemented in `src/lib/hadith/api.ts`. `fetchHadith` returns `null` — never a usable
-block — when authenticity cannot be established, so a caller cannot present it by accident.
+Implemented in `src/lib/hadith/api.ts` as `lookupHadith`. Only a `verified` result
+carries a citable block; every other result carries the reference and each scholar's
+assessment so the reader can be told the truth about what was checked.
+
+### The five states are never blurred together
+
+This is the point of the design. These are different claims, and only some of them are
+Sabeel's to make:
+
+| Status | Means | Sabeel's claim |
+|---|---|---|
+| `verified` | Meets the publication policy | May be cited as proof |
+| `unverified-in-dataset` | Our dataset carries no grading | **A statement about our checking, not about the narration** |
+| `disputed` | Recognised scholars reached different conclusions | A real difference; shown with each assessment, not presented as settled |
+| `weak` | Explicitly graded da'if by those who assessed it | Not cited as evidence |
+| `fabricated` | Explicitly graded mawdu' | Never cited, never reproduced |
+| `not-found` | No narration at that reference | Nothing to show |
+
+"Weak" is **not** "no grading available". "No grading available" is **not** "fabricated".
+"Two scholars differed" is **not** "weak". The UI gives each its own wording and its own
+visual treatment, and `EVIDENCE_STATUS_COPY` is unit-tested to keep them distinct.
+
+### Rules
 
 1. **Sahih al-Bukhari and Sahih Muslim** are accepted as authentic by the collection
-   itself. The dataset ships them with an empty `grades` array, which here means "no
-   separate grading is required", not "ungraded".
-2. **Every other collection** requires an explicit grading from a named scholar. An
-   ungraded narration from a Sunan collection is **refused**.
-3. Gradings weaker than *hasan* — da'if, weak, mawdu' and the rest — are **refused**.
-   Sabeel does not cite weak narrations as evidence.
-4. Where several scholars have graded a narration, the strongest acceptable grading is
-   used and **that scholar is credited by name** in the citation.
+   itself — but only where the dataset gives no grading. A narration in either that *is*
+   graded weak is still refused.
+2. **Every other collection** requires an explicit grading from a named scholar.
+3. Gradings weaker than *hasan* are refused.
+4. Where several scholars graded a narration, the strongest acceptable grading is used
+   and **that scholar is credited by name**.
 5. An unrecognised grading string is refused rather than guessed at.
+
+### Established practice, citation pending
+
+The Quran establishes the obligation of Salah, while many details of its performance come
+through the Sunnah. A page must therefore **never read as "there is no evidence"** merely
+because the gate has not yet cleared a specific narration. Where a practice is established
+within mainstream Sunni scholarship but no citation has yet passed the gate, the page says
+exactly that, and that further authenticated references may be added in future updates.
 
 `npm run verify:hadith` checks these rules against the live dataset rather than mocks,
 because the thing being verified is whether the real data still behaves as assumed.

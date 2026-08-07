@@ -16,8 +16,12 @@ const KIND_STYLE: Record<SourcedContent['kind'], string> = {
   quran: 'border-l-2 border-l-emerald bg-surface-raised',
   // Narration sits just below it.
   hadith: 'border-l-2 border-l-gold bg-surface-raised',
-  // Commentary and context are visibly secondary.
+  // A Companion's statement sits below narration and is visibly distinct from it.
+  athar: 'border-l-2 border-l-line-strong bg-surface',
+  // Commentary, consensus and context are visibly secondary.
   tafsir: 'border-l border-l-line-strong bg-surface',
+  ijma: 'border-l border-l-line-strong bg-surface',
+  scholarly: 'border-l border-l-line-strong bg-surface',
   history: 'border-l border-l-line-strong bg-surface',
   // Our own words are visually the quietest, and say so on the label.
   summary: 'border border-dashed border-line-strong bg-surface-sunken',
@@ -26,7 +30,10 @@ const KIND_STYLE: Record<SourcedContent['kind'], string> = {
 const LABEL_STYLE: Record<SourcedContent['kind'], string> = {
   quran: 'text-emerald',
   hadith: 'text-gold-ink',
+  athar: 'text-ink-muted',
   tafsir: 'text-ink-faint',
+  ijma: 'text-ink-faint',
+  scholarly: 'text-ink-faint',
   history: 'text-ink-faint',
   summary: 'text-ink-faint',
 };
@@ -80,7 +87,17 @@ export function ContentBlock({
           </>
         )}
 
-        {(block.kind === 'tafsir' || block.kind === 'history') && (
+        {block.kind === 'athar' && (
+          <>
+            {block.arabic && <ArabicLine text={block.arabic} />}
+            <p className="leading-relaxed text-ink">{block.translation}</p>
+          </>
+        )}
+
+        {(block.kind === 'tafsir' ||
+          block.kind === 'ijma' ||
+          block.kind === 'scholarly' ||
+          block.kind === 'history') && (
           <p className="leading-relaxed text-ink-muted">{block.text}</p>
         )}
 

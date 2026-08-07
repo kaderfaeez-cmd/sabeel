@@ -72,6 +72,42 @@ describe('formatCitation', () => {
     expect(citation).toBe('Tafsir Ibn Kathir by Ibn Kathir, on Quran 2:255');
   });
 
+  test('attributes a Companion statement to the Companion and a locatable work', () => {
+    const citation = formatCitation({
+      kind: 'athar',
+      companion: 'Ibn Mas‘ud',
+      work: 'Musannaf Ibn Abi Shaybah',
+      locator: '1/234',
+    });
+
+    expect(citation).toContain('Ibn Mas‘ud');
+    expect(citation).toContain('Musannaf Ibn Abi Shaybah');
+    expect(citation).toContain('1/234');
+  });
+
+  test('names who reported a consensus — never an unattributed "scholars agree"', () => {
+    const citation = formatCitation({
+      kind: 'ijma',
+      reportedBy: 'Ibn Qudamah',
+      work: 'al-Mughni',
+    });
+
+    expect(citation).toContain('reported by Ibn Qudamah');
+    expect(citation).toContain('al-Mughni');
+  });
+
+  test('names the school when a scholarly explanation is school-specific', () => {
+    const citation = formatCitation({
+      kind: 'scholarly',
+      author: 'an-Nawawi',
+      work: 'al-Majmu',
+      madhhab: 'shafii',
+    });
+
+    expect(citation).toContain('an-Nawawi');
+    expect(citation).toContain("Shafi'i school");
+  });
+
   test('marks platform-written content as ours, with a review date', () => {
     const citation = formatCitation({ kind: 'editorial', reviewedOn: '2026-08-07' });
 
@@ -93,6 +129,9 @@ describe('content labelling', () => {
     'quran',
     'hadith',
     'tafsir',
+    'athar',
+    'ijma',
+    'scholarly',
     'history',
     'summary',
   ];
@@ -113,5 +152,16 @@ describe('content labelling', () => {
     expect(isPrimarySource('tafsir')).toBe(false);
     expect(isPrimarySource('history')).toBe(false);
     expect(isPrimarySource('summary')).toBe(false);
+  });
+
+  test('a Companion statement is NOT primary — it must never read as a hadith', () => {
+    expect(isPrimarySource('athar')).toBe(false);
+    expect(KIND_LABEL.athar).toMatch(/Companion/);
+    expect(KIND_LABEL.athar).not.toMatch(/^Hadith$/);
+  });
+
+  test('reported consensus is labelled as reported, not as revelation', () => {
+    expect(isPrimarySource('ijma')).toBe(false);
+    expect(KIND_LABEL.ijma).toMatch(/Reported/);
   });
 });

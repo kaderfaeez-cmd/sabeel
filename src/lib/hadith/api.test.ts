@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { fetchHadith, HadithError, normaliseGrading, selectGrading, splitNarrator } from './api';
+import { classifyGrades, HadithError, lookupHadith, normaliseGrading, splitNarrator } from './api';
 
 const originalFetch = globalThis.fetch;
 
@@ -17,92 +17,121 @@ function mockHadith(body: unknown, status = 200) {
 }
 
 describe('normaliseGrading', () => {
-  test('accepts the gradings Sabeel is willing to present', () => {
+  test('accepts the gradings Sabeel may publish', () => {
     expect(normaliseGrading('Sahih')).toBe('sahih');
     expect(normaliseGrading('Hasan')).toBe('hasan');
     expect(normaliseGrading('Mutawatir')).toBe('mutawatir');
-  });
-
-  test('treats "Hasan Sahih" as sahih', () => {
     expect(normaliseGrading('Hasan Sahih')).toBe('sahih');
   });
 
-  test('distinguishes the li-ghayrihi gradings from the plain ones', () => {
+  test('distinguishes the li-ghayrihi gradings', () => {
     expect(normaliseGrading('Sahih li-ghayrihi')).toBe('sahih-li-ghayrihi');
     expect(normaliseGrading('Hasan li ghayrihi')).toBe('hasan-li-ghayrihi');
   });
 
-  test('rejects weak gradings — Sabeel does not cite them as evidence', () => {
+  test('rejects weak and fabricated gradings', () => {
     expect(normaliseGrading('Daif')).toBeNull();
     expect(normaliseGrading("Da'if")).toBeNull();
     expect(normaliseGrading('Weak')).toBeNull();
-    expect(normaliseGrading('Daif Jiddan')).toBeNull();
+    expect(normaliseGrading('Munkar')).toBeNull();
+    expect(normaliseGrading('Mawdu')).toBeNull();
   });
 
-  test('rejects anything it does not recognise rather than guessing', () => {
+  test('does not let a compound weak grading pass as sahih', () => {
+    // "Daif" contains no "sahih", but this guards the ordering of the checks.
+    expect(normaliseGrading('Daif, not sahih')).toBeNull();
+  });
+
+  test('rejects the unrecognised rather than guessing', () => {
     expect(normaliseGrading('')).toBeNull();
     expect(normaliseGrading('Unknown')).toBeNull();
-    expect(normaliseGrading('Mawdu')).toBeNull();
   });
 });
 
-describe('selectGrading', () => {
-  test('picks the strongest acceptable grading and credits the grader', () => {
-    const result = selectGrading([
-      { name: 'Zubair Ali Zai', grade: 'Hasan' },
+describe('classifyGrades — the distinction that matters', () => {
+  test('NO gradings is "unverified-in-dataset", never "weak"', () => {
+    // This is the correction the owner asked for: silence in our dataset is a fact about
+    // our data, not a claim about the narration.
+    const result = classifyGrades([]);
+
+    expect(result.status).toBe('unverified-in-dataset');
+    expect(result.status).not.toBe('weak');
+  });
+
+  test('all scholars acceptable is "verified"', () => {
+    const result = classifyGrades([
       { name: 'Al-Albani', grade: 'Sahih' },
+      { name: 'Zubair Ali Zai', grade: 'Hasan' },
     ]);
 
-    expect(result).toEqual({ grading: 'sahih', gradedBy: 'Al-Albani' });
+    expect(result.status).toBe('verified');
+    expect(result.best).toEqual({ grading: 'sahih', gradedBy: 'Al-Albani' });
   });
 
-  test('ignores weak gradings when a strong one exists', () => {
-    const result = selectGrading([
+  test('scholars disagreeing is "disputed", never "weak"', () => {
+    const result = classifyGrades([
+      { name: 'Al-Albani', grade: 'Sahih' },
+      { name: 'Zubair Ali Zai', grade: 'Daif' },
+    ]);
+
+    expect(result.status).toBe('disputed');
+    expect(result.status).not.toBe('weak');
+  });
+
+  test('all scholars grading it weak is "weak"', () => {
+    const result = classifyGrades([
       { name: 'A', grade: 'Daif' },
-      { name: 'B', grade: 'Hasan' },
+      { name: 'B', grade: 'Weak' },
     ]);
 
-    expect(result?.grading).toBe('hasan');
-    expect(result?.gradedBy).toBe('B');
+    expect(result.status).toBe('weak');
   });
 
-  test('returns null when every grading is weak', () => {
-    expect(selectGrading([{ name: 'A', grade: 'Daif' }])).toBeNull();
+  test('a fabrication grading is "fabricated", never merely "weak"', () => {
+    const result = classifyGrades([
+      { name: 'A', grade: 'Daif' },
+      { name: 'B', grade: 'Mawdu' },
+    ]);
+
+    expect(result.status).toBe('fabricated');
   });
 
-  test('returns null for no gradings at all', () => {
-    expect(selectGrading([])).toBeNull();
+  test('records every scholar verbatim, flagged for acceptability', () => {
+    const result = classifyGrades([
+      { name: 'Al-Albani', grade: 'Sahih' },
+      { name: 'Zubair Ali Zai', grade: 'Daif' },
+    ]);
+
+    expect(result.gradings).toEqual([
+      { scholar: 'Al-Albani', grade: 'Sahih', acceptable: true },
+      { scholar: 'Zubair Ali Zai', grade: 'Daif', acceptable: false },
+    ]);
   });
 });
 
 describe('splitNarrator', () => {
   test('separates the narrator from the body', () => {
-    const { narrator, body } = splitNarrator(
-      "Narrated 'Umar bin Al-Khattab: I heard Allah's Messenger saying...",
-    );
-
-    expect(narrator).toBe("'Umar bin Al-Khattab");
-    expect(body).toBe("I heard Allah's Messenger saying...");
+    const { narrator, body } = splitNarrator("Narrated 'Umar: I heard the Messenger say...");
+    expect(narrator).toBe("'Umar");
+    expect(body).toBe('I heard the Messenger say...');
   });
 
   test('leaves text without a narrator prefix untouched', () => {
-    expect(splitNarrator('The reward of deeds...')).toEqual({
-      body: 'The reward of deeds...',
-    });
+    expect(splitNarrator('The reward of deeds...')).toEqual({ body: 'The reward of deeds...' });
   });
 });
 
-describe('fetchHadith', () => {
+describe('lookupHadith', () => {
   test('refuses a collection Sabeel does not cite', async () => {
-    await expect(fetchHadith('not-a-collection', 1)).rejects.toThrow(HadithError);
+    await expect(lookupHadith('not-a-collection', 1)).rejects.toThrow(HadithError);
   });
 
   test('refuses an invalid hadith number', async () => {
-    await expect(fetchHadith('bukhari', 0)).rejects.toThrow(HadithError);
-    await expect(fetchHadith('bukhari', 1.5)).rejects.toThrow(HadithError);
+    await expect(lookupHadith('bukhari', 0)).rejects.toThrow(HadithError);
+    await expect(lookupHadith('bukhari', 1.5)).rejects.toThrow(HadithError);
   });
 
-  test('accepts an ungraded Bukhari hadith as sahih by collection', async () => {
+  test('accepts an ungraded Bukhari narration as sahih by collection', async () => {
     mockHadith({
       hadiths: [
         {
@@ -114,66 +143,81 @@ describe('fetchHadith', () => {
       ],
     });
 
-    const block = await fetchHadith('bukhari', 1);
+    const result = await lookupHadith('bukhari', 1);
 
-    expect(block?.source.grading).toBe('sahih');
-    expect(block?.source.gradedBy).toBeUndefined();
-    expect(block?.source.collectionName).toBe('Sahih al-Bukhari');
-    expect(block?.narrator).toBe("'Umar");
+    expect(result.status).toBe('verified');
+    if (result.status !== 'verified') throw new Error('expected verified');
+    expect(result.block.source.grading).toBe('sahih');
+    expect(result.block.source.collectionName).toBe('Sahih al-Bukhari');
   });
 
-  test('REFUSES an ungraded hadith from a collection that requires grading', async () => {
-    // This is the core authenticity gate: Sunan collections are not authentic wholesale,
-    // so an ungraded narration from one is not returned at all.
+  test('an ungraded Sunan narration is "unverified-in-dataset", NOT "weak"', async () => {
+    mockHadith({ hadiths: [{ hadithnumber: 5, text: 'Something', grades: [], reference: {} }] });
+
+    const result = await lookupHadith('tirmidhi', 5);
+
+    expect(result.status).toBe('unverified-in-dataset');
+    if (result.status === 'verified') throw new Error('should not be citable');
+    expect(result.reference).toContain('at-Tirmidhi');
+  });
+
+  test('a narration graded weak reports "weak" and is not citable', async () => {
     mockHadith({
-      hadiths: [{ hadithnumber: 5, text: 'Something', grades: [], reference: {} }],
+      hadiths: [
+        { hadithnumber: 9, text: 'x', grades: [{ name: 'Al-Albani', grade: 'Daif' }], reference: {} },
+      ],
     });
 
-    await expect(fetchHadith('tirmidhi', 5)).resolves.toBeNull();
+    const result = await lookupHadith('abudawud', 9);
+
+    expect(result.status).toBe('weak');
   });
 
-  test('REFUSES a hadith graded weak', async () => {
+  test('a disputed narration reports every scholar assessment', async () => {
     mockHadith({
       hadiths: [
         {
-          hadithnumber: 9,
-          text: 'Something',
-          grades: [{ name: 'Al-Albani', grade: 'Daif' }],
+          hadithnumber: 11,
+          text: 'x',
+          grades: [
+            { name: 'Al-Albani', grade: 'Sahih' },
+            { name: 'Zubair Ali Zai', grade: 'Daif' },
+          ],
           reference: {},
         },
       ],
     });
 
-    await expect(fetchHadith('abudawud', 9)).resolves.toBeNull();
+    const result = await lookupHadith('tirmidhi', 11);
+
+    expect(result.status).toBe('disputed');
+    if (result.status === 'verified') throw new Error('should not be citable');
+    expect(result.gradings).toHaveLength(2);
+    expect(result.gradings.filter((g) => g.acceptable)).toHaveLength(1);
   });
 
-  test('accepts a graded Sunan hadith and credits the grader', async () => {
+  test('a Bukhari narration that IS graded weak is still refused', async () => {
+    // Collection-level acceptance applies only where the dataset gives no grading.
     mockHadith({
       hadiths: [
-        {
-          hadithnumber: 61,
-          text: 'Narrated Abu Hurairah: The Prophet said...',
-          grades: [{ name: 'Al-Albani', grade: 'Hasan Sahih' }],
-          reference: { book: 1, hadith: 61 },
-        },
+        { hadithnumber: 3, text: 'x', grades: [{ name: 'A', grade: 'Daif' }], reference: {} },
       ],
     });
 
-    const block = await fetchHadith('abudawud', 61);
+    const result = await lookupHadith('bukhari', 3);
 
-    expect(block?.source.grading).toBe('sahih');
-    expect(block?.source.gradedBy).toBe('Al-Albani');
-    expect(block?.source.hadithNumber).toBe(61);
+    expect(result.status).toBe('weak');
   });
 
-  test('returns null when the hadith does not exist', async () => {
+  test('a missing narration reports "not-found"', async () => {
     mockHadith({}, 404);
-    await expect(fetchHadith('bukhari', 999_999)).resolves.toBeNull();
+    await expect(lookupHadith('bukhari', 999_999)).resolves.toMatchObject({
+      status: 'not-found',
+    });
   });
 
   test('raises a typed error when the source is unreachable', async () => {
     globalThis.fetch = vi.fn().mockRejectedValue(new Error('offline')) as unknown as typeof fetch;
-
-    await expect(fetchHadith('bukhari', 1)).rejects.toThrow(/Could not reach the hadith source/);
+    await expect(lookupHadith('bukhari', 1)).rejects.toThrow(/Could not reach the hadith source/);
   });
 });

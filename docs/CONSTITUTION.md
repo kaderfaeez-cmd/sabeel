@@ -43,6 +43,16 @@ Islamic rulings.
 
 If something cannot be verified, say so in the product. Never guess. Never invent.
 
+**And say so precisely.** "We could not verify this" is not the same claim as "this is
+weak", which is not the same as "this is fabricated", which is not the same as "scholars
+differed". Overstating what Sabeel knows about a narration is itself a form of
+inauthenticity — it misrepresents scholarship in the opposite direction. The platform
+distinguishes these states in its data model and in its wording. See
+[SOURCES.md](./SOURCES.md), "The authenticity policy".
+
+Never lower the evidentiary standard because another website includes a narration.
+**The goal is trust, not volume.**
+
 ### 3.1 Engineering consequence (non-negotiable)
 
 Because a language model can fabricate fluently, religious text is **never** authored by

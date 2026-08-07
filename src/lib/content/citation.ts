@@ -1,4 +1,4 @@
-import type { ContentKind, ContentSource, HadithGrading } from './types';
+import { MADHHAB_LABEL, type ContentKind, type ContentSource, type HadithGrading } from './types';
 
 /**
  * Turns a source into the citation a reader can actually verify against the printed
@@ -24,6 +24,9 @@ export const KIND_LABEL: Record<ContentKind, string> = {
   quran: 'Quran',
   hadith: 'Hadith',
   tafsir: 'Tafsir',
+  athar: 'Statement of a Companion',
+  ijma: 'Reported scholarly consensus',
+  scholarly: 'Scholarly explanation',
   history: 'Historical context',
   summary: 'Sabeel — educational summary',
 };
@@ -52,6 +55,19 @@ export function formatCitation(source: ContentSource): string {
     case 'tafsir':
       return `${source.work} by ${source.author}, on Quran ${source.onAyah.surah}:${source.onAyah.ayah}`;
 
+    case 'athar':
+      return `Statement of ${source.companion} — ${source.work}, ${source.locator}`;
+
+    case 'ijma':
+      return `Consensus reported by ${source.reportedBy} — ${source.work}${
+        source.locator ? `, ${source.locator}` : ''
+      }`;
+
+    case 'scholarly':
+      return `${source.author}, ${source.work}${source.locator ? `, ${source.locator}` : ''}${
+        source.madhhab ? ` (${MADHHAB_LABEL[source.madhhab]} school)` : ''
+      }`;
+
     case 'history':
       return `${source.work} by ${source.author}`;
 
@@ -67,6 +83,9 @@ export function formatCitation(source: ContentSource): string {
  * True when the block is revelation or narration rather than commentary or our own
  * words. Used to give the two highest tiers of the source hierarchy (Constitution §3.2)
  * a visually weightier treatment.
+ *
+ * A Companion's statement is deliberately NOT primary: it is evidence of a different
+ * weight and must never be presented as a Prophetic narration.
  */
 export function isPrimarySource(kind: ContentKind): boolean {
   return kind === 'quran' || kind === 'hadith';

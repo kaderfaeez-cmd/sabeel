@@ -10,6 +10,8 @@
  * Nothing in this file describes presentation. See components/content/ for that.
  */
 
+import type { EvidenceStatus, ScholarGrading } from './evidence';
+
 // ---------------------------------------------------------------------------
 // References — the "where did this come from" half of every block
 // ---------------------------------------------------------------------------
@@ -69,6 +71,41 @@ export interface HistoryRef {
 }
 
 /**
+ * A statement of a Companion (athar), which is evidence of a different weight from a
+ * Prophetic narration and is never presented as one.
+ */
+export interface AtharRef {
+  readonly kind: 'athar';
+  /** The Companion the statement is attributed to. */
+  readonly companion: string;
+  /** The work recording it, with a locator a reader can check. */
+  readonly work: string;
+  readonly locator: string;
+}
+
+/**
+ * Reported scholarly consensus (ijma'). Requires a named scholar reporting it — "the
+ * scholars agree" with no attribution is not usable.
+ */
+export interface IjmaRef {
+  readonly kind: 'ijma';
+  /** Who reported the consensus, e.g. 'Ibn Qudamah'. */
+  readonly reportedBy: string;
+  readonly work: string;
+  readonly locator?: string;
+}
+
+/** Named scholarly explanation that is not tafsir of a specific ayah. */
+export interface ScholarlyRef {
+  readonly kind: 'scholarly';
+  readonly author: string;
+  readonly work: string;
+  readonly locator?: string;
+  /** The madhhab this explanation belongs to, where it is school-specific. */
+  readonly madhhab?: Madhhab;
+}
+
+/**
  * Platform-authored educational framing. This is the ONLY kind that Sabeel writes
  * itself, and it is always rendered in a visually distinct editorial treatment so it
  * can never be mistaken for revelation (Constitution §4).
@@ -83,6 +120,9 @@ export type ContentSource =
   | QuranRef
   | HadithRef
   | TafsirRef
+  | AtharRef
+  | IjmaRef
+  | ScholarlyRef
   | HistoryRef
   | EditorialRef;
 
@@ -127,6 +167,25 @@ export interface HistoryBlock extends BlockBase {
   readonly text: string;
 }
 
+export interface AtharBlock extends BlockBase {
+  readonly kind: 'athar';
+  readonly source: AtharRef;
+  readonly arabic?: string;
+  readonly translation: string;
+}
+
+export interface IjmaBlock extends BlockBase {
+  readonly kind: 'ijma';
+  readonly source: IjmaRef;
+  readonly text: string;
+}
+
+export interface ScholarlyBlock extends BlockBase {
+  readonly kind: 'scholarly';
+  readonly source: ScholarlyRef;
+  readonly text: string;
+}
+
 export interface SummaryBlock extends BlockBase {
   readonly kind: 'summary';
   readonly source: EditorialRef;
@@ -142,6 +201,9 @@ export type SourcedContent =
   | QuranBlock
   | HadithBlock
   | TafsirBlock
+  | AtharBlock
+  | IjmaBlock
+  | ScholarlyBlock
   | HistoryBlock
   | SummaryBlock;
 
@@ -199,6 +261,59 @@ export interface FiqhDifference {
 }
 
 /**
+ * The evidence supporting a teaching point.
+ *
+ * Structured by source type rather than as one flat list, so the platform can grow into
+ * companion statements, reported consensus and named scholarly explanation without
+ * reshaping every page. Only `quran` and `hadith` are populated at present; the rest are
+ * declared now so later phases add data, not schema.
+ *
+ * The ordering of the fields mirrors the source hierarchy in Constitution §3.2.
+ */
+export interface Evidence {
+  readonly quran?: readonly QuranBlock[];
+  readonly hadith?: readonly HadithBlock[];
+  /** Companion statements — weaker than a Prophetic narration, never shown as one. */
+  readonly athar?: readonly AtharBlock[];
+  /** Reported scholarly consensus, always attributed to who reported it. */
+  readonly ijma?: readonly IjmaBlock[];
+  /** Named scholarly explanation. */
+  readonly scholarly?: readonly ScholarlyBlock[];
+  /**
+   * Set when supporting hadith evidence could not be verified through the authenticity
+   * gate. Carries the precise reason, so the reader is told what Sabeel actually knows
+   * rather than being left to infer a defect. See lib/content/evidence.ts.
+   */
+  readonly notices?: readonly EvidenceNotice[];
+}
+
+export interface EvidenceNotice {
+  readonly id: string;
+  /** Never 'verified' — a verified source appears as evidence, not as a notice. */
+  readonly status: Exclude<EvidenceStatus, 'verified'>;
+  /** The reference that was checked, so the reader can look it up themselves. */
+  readonly reference?: string;
+  /** Each scholar's assessment, verbatim, when the status is 'disputed'. */
+  readonly gradings?: readonly ScholarGrading[];
+  /**
+   * True when the practice is established in mainstream Sunni scholarship even though
+   * Sabeel has not yet cleared a citation for it. Prevents a page reading as though
+   * there were no evidence at all.
+   */
+  readonly establishedPractice?: boolean;
+}
+
+/** True when a step rests on at least one source Sabeel may present as proof. */
+export function hasCitableEvidence(evidence: Evidence): boolean {
+  return (
+    (evidence.quran?.length ?? 0) > 0 ||
+    (evidence.hadith?.length ?? 0) > 0 ||
+    (evidence.athar?.length ?? 0) > 0 ||
+    (evidence.ijma?.length ?? 0) > 0
+  );
+}
+
+/**
  * A single step of a fiqh act (a wudhu washing, a salah position).
  *
  * `ruling` and `agreedUpon` are both required. `agreedUpon: true` means all four schools
@@ -213,8 +328,8 @@ export interface FiqhStep {
   /** The beginner-facing instruction — one valid, widely accepted method (§4). */
   readonly instruction: string;
   readonly passage?: ArabicPassage;
-  /** Quran and hadith evidence for this step (§6). */
-  readonly evidence: readonly SourcedContent[];
+  /** Evidence for this step (§6), grouped by source type. */
+  readonly evidence: Evidence;
   readonly differences?: readonly FiqhDifference[];
   readonly commonMistakes?: readonly string[];
 }
