@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+
+/* Class-based theming so the user's choice wins over the OS, and so SSR can render
+   the correct theme on first paint via a cookie-set class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens — "illuminated manuscript"
+   Light  : warm parchment, ink-green text, gold hairlines.
+   Dark   : midnight ink, luminous emerald, warm gold.
+   Both themes are designed. Neither is an afterthought.
+   Contrast (measured, not assumed — see docs/ACCESSIBILITY.md):
+     ink, ink-muted, ink-faint, emerald and gold-ink all meet WCAG AA (>=4.5:1)
+     against `surface` in BOTH themes, so any of them is safe on small text.
+     `gold` is the decorative role only — hairlines, ornament, borders, and the
+     large Arabic wordmark. Never use `gold` for small text; use `gold-ink`.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --surface: oklch(97.5% 0.012 85);
+  --surface-raised: oklch(99.2% 0.007 85);
+  --surface-sunken: oklch(94.5% 0.016 82);
+
+  --ink: oklch(24% 0.021 165);
+  --ink-muted: oklch(45% 0.02 165);
+  --ink-faint: oklch(52% 0.018 165);
+
+  --line: oklch(88% 0.016 82);
+  --line-strong: oklch(78% 0.022 82);
+
+  --emerald: oklch(46% 0.095 168);
+  --emerald-strong: oklch(38% 0.1 168);
+  --emerald-soft: oklch(93% 0.028 168);
+
+  /* Decorative gold — hairlines, ornament, borders, large wordmark. Not for text. */
+  --gold: oklch(62% 0.1 76);
+  /* Text-safe gold. Reads as antique bronze in light, as gilt in dark. */
+  --gold-ink: oklch(47% 0.085 70);
+  --gold-soft: oklch(93% 0.036 82);
+
+  --shadow-paper: 0 1px 2px oklch(24% 0.02 165 / 0.04), 0 8px 24px -12px oklch(24% 0.02 165 / 0.18);
+  --shadow-lift: 0 2px 4px oklch(24% 0.02 165 / 0.05), 0 20px 48px -20px oklch(24% 0.02 165 / 0.26);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --surface: oklch(17.5% 0.018 195);
+  --surface-raised: oklch(21.5% 0.021 195);
+  --surface-sunken: oklch(13% 0.016 195);
+
+  --ink: oklch(94% 0.012 85);
+  --ink-muted: oklch(73% 0.016 88);
+  --ink-faint: oklch(64% 0.016 88);
+
+  --line: oklch(30% 0.022 195);
+  --line-strong: oklch(40% 0.026 195);
+
+  --emerald: oklch(76% 0.11 168);
+  --emerald-strong: oklch(84% 0.12 168);
+  --emerald-soft: oklch(27% 0.045 168);
+
+  --gold: oklch(81% 0.1 80);
+  --gold-ink: oklch(81% 0.1 80);
+  --gold-soft: oklch(29% 0.042 80);
+
+  --shadow-paper: 0 1px 2px oklch(0% 0 0 / 0.4), 0 8px 24px -12px oklch(0% 0 0 / 0.6);
+  --shadow-lift: 0 2px 4px oklch(0% 0 0 / 0.45), 0 20px 48px -20px oklch(0% 0 0 / 0.7);
+}
+
+/* `inline` keeps utilities pointing at the live custom properties, so a theme swap
+   is a single class change on <html> with no stylesheet reflow. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-emerald: var(--emerald);
+  --color-emerald-strong: var(--emerald-strong);
+  --color-emerald-soft: var(--emerald-soft);
+
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
+
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-arabic), 'Scheherazade New', serif;
+
+  --shadow-paper: var(--shadow-paper);
+  --shadow-lift: var(--shadow-lift);
+
+  /* Fluid type scale. Rhythm is intentional, not uniform. */
+  --text-hero: clamp(3rem, 1.6rem + 6.4vw, 7rem);
+  --text-hero--line-height: 0.94;
+  --text-display: clamp(2.25rem, 1.4rem + 3.6vw, 4rem);
+  --text-display--line-height: 1.04;
+  --text-title: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  --text-title--line-height: 1.16;
+  --text-lede: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
+  --text-lede--line-height: 1.6;
+
+  --spacing-section: clamp(4.5rem, 3rem + 6vw, 10rem);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible, designed focus. Never removed. */
+  :focus-visible {
+    outline: 2px solid var(--emerald);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--emerald-soft);
+    color: var(--ink);
+  }
+
+  [lang='ar'] {
+    font-family: var(--font-arabic), 'Scheherazade New', serif;
+    line-height: 2;
+  }
+}
+
+@layer utilities {
+  /* Skip-link: present for keyboard users, out of the way for everyone else. */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 100;
+    transition: top 150ms ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Geometric ornament layer. Eight-point star (khatam) tessellation, drawn in the
+     line colour so it reads as texture rather than decoration. */
+  .ornament-field {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23000' stroke-opacity='0.5' stroke-width='1'%3E%3Cpath d='M32 4 44 16 60 16 60 32 44 44 44 60 32 60 20 44 4 44 4 32 20 20 20 4z'/%3E%3Cpath d='M32 4 20 16 4 16 4 32 20 44 20 60 32 60 44 44 60 44 60 32 44 20 44 4z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 64px 64px;
+    opacity: 0.05;
+  }
+  .dark .ornament-field {
+    filter: invert(1);
+    opacity: 0.07;
+  }
+
+  .hairline-gold {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+}
+
+/* Motion is a clarifier, never a requirement. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
