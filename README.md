@@ -42,9 +42,13 @@ five distinct content kinds — each labelled, never blended.
 - **Phase 1 — Content spine: complete.** `SourcedContent` union, `<ContentBlock>`
   renderer, citation formatting, fiqh types enforcing the fiqh policy. 49 tests, 91%
   line coverage.
-- **Phase 2 — The Quran: in progress.** All 114 surahs readable in Arabic with five
-  translations, transliteration, search and per-ayah references. Audio, bookmarks and
-  offline persistence still to come.
+- **Phase 2 — The Quran: complete.** All 114 surahs in Arabic with five translations,
+  transliteration, recitation from five reciters with per-ayah sync, search with match
+  highlighting, and local-first bookmarks, notes and reading progress that work with no
+  account and survive offline. 97 tests, 95% line coverage.
+
+Next: **Phase 3 — Learn Salah, Wudhu and Ghusl**, the first content governed by
+[FIQH-POLICY.md](docs/FIQH-POLICY.md).
 
 Full detail in [ROADMAP.md](docs/ROADMAP.md).
 

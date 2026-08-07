@@ -81,6 +81,14 @@ Full source policy and pinning strategy: [SOURCES.md](./SOURCES.md).
 
 ## Rendering & performance
 
+> **Rule learned in Phase 2, and binding from here on:** a client component must be
+> referenced from a component the router renders **directly**. Placed behind a *nested*
+> async server component, it server-renders but never hydrates, and a Suspense boundary
+> around such a component is not reliably finalised on the client — leaving a permanent
+> loading state. Resolve the data at page level and render the client component there.
+> This cost real debugging time three separate times (recitation player, reading tracker,
+> search results) before being written down.
+
 - Server Components by default. `'use client'` only for interaction, animation, audio.
 - Route-level code splitting; Framer Motion and any R3F work dynamically imported.
 - Budgets: landing < 150 kB JS gzipped; reading surfaces < 200 kB. LCP < 2.5 s, CLS < 0.1.

@@ -1,5 +1,6 @@
 import type { QuranBlock } from '@/lib/content/types';
 import { formatAyahRange } from '@/lib/content/citation';
+import { AyahActions } from './ayah-actions';
 
 /**
  * A single ayah in the reading surface.
@@ -53,6 +54,14 @@ export function AyahRow({ block }: { block: QuranBlock }) {
       )}
 
       <p className="mt-5 text-lg leading-relaxed text-ink-muted">{block.translation}</p>
+
+      <AyahActions
+        surah={block.source.surah}
+        ayah={block.source.ayahFrom}
+        arabic={block.arabic}
+        translation={block.translation}
+        translatorName={block.source.translatorName}
+      />
     </article>
   );
 }

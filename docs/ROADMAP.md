@@ -20,16 +20,21 @@ attribution, citation formatting, the fiqh types enforcing FIQH-POLICY.md, and t
 Quran fetch layer. 49 tests, 91% line coverage on `src/lib`.
 **Nothing renders without a source after this phase.**
 
-### Phase 2 — The Quran 🔨 *in progress*
+### Phase 2 — The Quran ✅ *complete*
 - ✅ Baked 114-surah index (6,236 ayahs) — offline, zero network cost
 - ✅ Surah index with instant search by name, meaning or number
 - ✅ Reading surface: Uthmani Arabic, 5 translations, transliteration, per-ayah references
 - ✅ URL-held reading state, so every position is shareable
 - ✅ Source-failure state that shows nothing rather than something unverified
 - ✅ Recitation with per-ayah sync, 5 reciters, active-ayah highlight, never autoplaying
-- ⬜ Bookmarks, notes, highlights, reading progress (local-first)
-- ⬜ Full-text and topic search
-- ⬜ Offline persistence via IndexedDB
+- ✅ Bookmarks, notes and reading progress — local-first in IndexedDB, no account needed
+- ✅ Copy an ayah with its reference and translator attached
+- ✅ Search with match highlighting, parsed into safe segments (never raw API markup)
+- ✅ Offline persistence: an opened surah is cached with its attribution intact
+- ✅ "Continue reading" and bookmark chips on the surah index
+
+Deferred to later phases (they depend on work not yet done): highlights spanning
+multiple ayahs, topic-based browsing, and cross-device sync (Phase 9, on Supabase).
 
 ### Phase 3 — Learn Salah + Learn Wudhu + Learn Ghusl
 Step-by-step interactive guides. Arabic / transliteration / translation / meaning per

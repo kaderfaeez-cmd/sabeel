@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { AyahRow } from '@/features/quran/ayah-row';
 import { ReadingControls } from '@/features/quran/reading-controls';
+import { ReadingTracker } from '@/features/quran/reading-tracker';
 import { RecitationPlayer } from '@/features/quran/recitation-player';
+import type { QuranBlock } from '@/lib/content/types';
 import { fetchSurahVerses, QuranApiError } from '@/lib/quran/api';
 import {
   fetchSurahAudio,
@@ -58,20 +60,31 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
   const previous = number > 1 ? getSurah(number - 1) : undefined;
   const next = number < TOTAL_SURAHS ? getSurah(number + 1) : undefined;
 
-  // Awaited here rather than inside a nested async component: a client component only
-  // registers for hydration when it is referenced from a component the router renders
-  // directly. Behind a nested async boundary it server-renders but never becomes
-  // interactive — verified by inspecting the flight payload.
-  //
-  // Audio is never allowed to break reading, so a failure yields an empty list and the
-  // player is simply not shown.
-  const audioUrls = await loadRecitation(number, reciterId);
+  /**
+   * Both fetches happen here rather than inside nested async components.
+   *
+   * A client component only registers for hydration when it is referenced from a
+   * component the router renders directly; behind a nested async boundary it
+   * server-renders but stays inert. RecitationPlayer and ReadingTracker are both client
+   * components that depend on this data, so the data is resolved at this level.
+   *
+   * The two requests run in parallel — audio must never delay text.
+   */
+  const [verses, audioUrls] = await Promise.all([
+    loadVerses(number, translationId, showTransliteration),
+    loadRecitation(number, reciterId),
+  ]);
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20">
-      <Link href="/quran" className="text-sm text-ink-muted hover:text-ink">
-        ← All surahs
-      </Link>
+      <div className="flex items-center justify-between gap-4">
+        <Link href="/quran" className="text-sm text-ink-muted hover:text-ink">
+          ← All surahs
+        </Link>
+        <Link href="/quran/search" className="text-sm text-ink-muted hover:text-ink">
+          Search
+        </Link>
+      </div>
 
       <header className="mt-8 border-b border-line pb-9">
         <p className="font-display text-xs uppercase tracking-[0.24em] text-gold-ink">
@@ -110,7 +123,7 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
         </div>
       </header>
 
-      {surah.hasBismillah && (
+      {surah.hasBismillah && verses !== null && (
         <p
           lang="ar"
           dir="rtl"
@@ -120,14 +133,19 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
         </p>
       )}
 
-      <Verses
-        surahNumber={number}
-        translationId={translationId}
-        showTransliteration={showTransliteration}
-      />
+      {verses === null ? (
+        <SourceUnavailable />
+      ) : (
+        <>
+          <ReadingTracker surah={number} translationId={translationId} blocks={verses} />
+          {verses.map((block) => (
+            <AyahRow key={block.id} block={block} />
+          ))}
+        </>
+      )}
 
       {/* Audio never starts on its own — the player only appears, it does not play. */}
-      {audioUrls.length > 0 && (
+      {audioUrls.length > 0 && verses !== null && (
         <RecitationPlayer
           audioUrls={audioUrls}
           reciterName={reciter ? reciterLabel(reciter) : 'Unknown reciter'}
@@ -159,57 +177,21 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
 }
 
 /**
- * Fetches and renders the verses.
- *
  * A source failure must never render an empty or partial surah that a reader could
- * mistake for the real thing (Constitution §3) — so the failure is stated plainly.
+ * mistake for the real thing (Constitution §3) — so `null` means "say so", not "show
+ * nothing quietly".
  */
-async function Verses({
-  surahNumber,
-  translationId,
-  showTransliteration,
-}: {
-  surahNumber: number;
-  translationId: number;
-  showTransliteration: boolean;
-}) {
-  // Resolve the data first; render afterwards. Keeping JSX out of the try block means a
-  // rendering error inside AyahRow can never be swallowed by this catch and reported as
-  // a source failure.
-  let verses: Awaited<ReturnType<typeof fetchSurahVerses>> | null = null;
-  let failure: string | null = null;
-
+async function loadVerses(
+  surahNumber: number,
+  translationId: number,
+  includeTransliteration: boolean,
+): Promise<readonly QuranBlock[] | null> {
   try {
-    verses = await fetchSurahVerses(surahNumber, translationId, {
-      includeTransliteration: showTransliteration,
-    });
+    return await fetchSurahVerses(surahNumber, translationId, { includeTransliteration });
   } catch (error) {
-    failure = error instanceof QuranApiError ? error.message : 'Unexpected error';
+    if (!(error instanceof QuranApiError)) throw error;
+    return null;
   }
-
-  if (verses === null) {
-    return (
-      <div
-        role="alert"
-        className="mt-10 rounded-lg border border-dashed border-line-strong bg-surface-sunken px-6 py-8"
-      >
-        <h2 className="font-display text-title text-ink">The text could not be loaded</h2>
-        <p className="mt-3 leading-relaxed text-ink-muted">
-          Sabeel could not reach the source for this surah, so it is showing nothing rather
-          than showing something it cannot verify. Please try again shortly.
-        </p>
-        <p className="mt-4 text-xs text-ink-faint">{failure}</p>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      {verses.map((block) => (
-        <AyahRow key={block.id} block={block} />
-      ))}
-    </div>
-  );
 }
 
 /**
@@ -225,4 +207,19 @@ async function loadRecitation(
   } catch {
     return [];
   }
+}
+
+function SourceUnavailable() {
+  return (
+    <div
+      role="alert"
+      className="mt-10 rounded-lg border border-dashed border-line-strong bg-surface-sunken px-6 py-8"
+    >
+      <h2 className="font-display text-title text-ink">The text could not be loaded</h2>
+      <p className="mt-3 leading-relaxed text-ink-muted">
+        Sabeel could not reach the source for this surah, so it is showing nothing rather
+        than showing something it cannot verify. Please try again shortly.
+      </p>
+    </div>
+  );
 }

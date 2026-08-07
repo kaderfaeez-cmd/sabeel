@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ContinueReading } from '@/features/quran/continue-reading';
 import { SurahIndex } from '@/features/quran/surah-index';
 import { TOTAL_AYAHS, TOTAL_SURAHS } from '@/lib/quran/surahs';
 
@@ -22,6 +24,16 @@ export default function QuranPage() {
         a translation of your choosing, with every verse carrying its reference and its
         translator.
       </p>
+
+      <Link
+        href="/quran/search"
+        className="mt-7 inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm text-ink transition-colors duration-300 hover:border-emerald hover:text-emerald"
+      >
+        Search the Quran
+        <span aria-hidden>→</span>
+      </Link>
+
+      <ContinueReading />
 
       <SurahIndex />
     </div>
