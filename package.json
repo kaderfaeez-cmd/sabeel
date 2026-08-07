@@ -13,7 +13,8 @@
     "generate:surahs": "node scripts/generate-surah-index.mjs",
     "verify:hadith": "node scripts/verify-hadith.mjs",
     "check:hadith": "node scripts/check-hadith-substance.mjs",
-    "probe:hadith": "node scripts/probe-hadith.mjs"
+    "probe:hadith": "node scripts/probe-hadith.mjs",
+    "generate:names": "node scripts/generate-names.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

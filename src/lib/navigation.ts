@@ -51,6 +51,13 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
           'All 114 surahs in Arabic with five trusted translations, transliteration, recitation and search.',
         status: 'live',
       },
+      {
+        title: 'Stories of the Quran',
+        href: '/stories',
+        blurb:
+          'Yusuf, Maryam, Musa and more — read in the Quran’s own words, with lessons and questions.',
+        status: 'live',
+      },
     ],
   },
   {
@@ -98,6 +105,12 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
         blurb: 'For morning, evening, worry, protection, forgiveness and family — each with its reference.',
         status: 'live',
       },
+      {
+        title: '99 Names of Allah',
+        href: '/names',
+        blurb: 'Al-Asmāʼ al-Ḥusnā — each name in Arabic with its transliteration and meaning.',
+        status: 'live',
+      },
     ],
   },
   {
@@ -129,7 +142,7 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
 export const PRIMARY_NAV = [
   { title: 'Start here', href: '/roadmap' },
   { title: 'The Quran', href: '/quran' },
+  { title: 'Stories', href: '/stories' },
   { title: 'Salah', href: '/salah' },
   { title: 'Duas', href: '/duas' },
-  { title: 'Prayer times', href: '/prayer-times' },
 ] as const;
