@@ -63,12 +63,26 @@ describe('what does not break wudhu', () => {
     }
   });
 
-  test('bleeding and vomiting are NOT listed here — they are contested, not settled', () => {
-    // Stating flatly that they do not break wudhu would misrepresent the Hanafi school.
-    const ids = NON_NULLIFIERS.map((item) => item.id);
+  test('bleeding and vomiting appear here, but never as settled', () => {
+    // They are among the most common worries, so the reassurance is worth stating — but
+    // stating it flatly would misrepresent the Hanafi school. Each must name the school
+    // that differs and point to the full discussion.
+    for (const id of ['bleeding', 'vomiting']) {
+      const entry = NON_NULLIFIERS.find((item) => item.id === id);
 
-    expect(ids).not.toContain('bleeding');
-    expect(ids).not.toContain('vomiting');
+      expect(entry).toBeDefined();
+      expect(entry?.clarification).toMatch(/Hanafi/);
+      expect(entry?.seeDifference).toBe(id);
+    }
+  });
+
+  test('every pointer resolves to a difference that actually exists', () => {
+    const differenceIds = new Set(NULLIFIER_DIFFERENCES.map((d) => d.id));
+
+    for (const item of NON_NULLIFIERS) {
+      if (!item.seeDifference) continue;
+      expect(differenceIds.has(item.seeDifference)).toBe(true);
+    }
   });
 
   test('an entry citing evidence for a minority position must say what the evidence shows', () => {

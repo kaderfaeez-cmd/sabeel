@@ -120,10 +120,27 @@ export default async function NullifiersPage() {
                   <AuthenticityNotices notices={nonNullifierEvidence[index]!.notices!} />
                 )}
 
-              {!item.evidence && (
+              {item.seeDifference && (
+                <a
+                  href={`#difference-${item.seeDifference}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm text-emerald hover:underline"
+                >
+                  Read the difference in full
+                  <span aria-hidden>↓</span>
+                </a>
+              )}
+
+              {!item.evidence && !item.seeDifference && (
                 <p className="mt-4 text-xs leading-relaxed text-ink-faint">
                   Sabeel — educational summary of the positions reported in the standard
                   fiqh literature. No primary citation is shown here yet.
+                </p>
+              )}
+
+              {item.seeDifference && (
+                <p className="mt-3 text-xs leading-relaxed text-ink-faint">
+                  Sabeel — educational summary. The evidence for each position is shown in
+                  the difference section below.
                 </p>
               )}
             </li>

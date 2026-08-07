@@ -145,6 +145,15 @@ export interface NonNullifier {
    * evidence must line up, not merely sit next to each other.
    */
   readonly evidenceShows?: string;
+  /**
+   * Id of a difference section this entry points down to.
+   *
+   * Set when the majority position is reassuring but the matter is genuinely contested.
+   * The entry then states the majority view in plain language, says plainly that a school
+   * differs, and links to the detail — rather than either omitting the reassurance or
+   * presenting it as settled.
+   */
+  readonly seeDifference?: string;
 }
 
 export const NON_NULLIFIERS: readonly NonNullifier[] = [
@@ -155,9 +164,24 @@ export const NON_NULLIFIERS: readonly NonNullifier[] = [
       'If you had wudhu and are now uncertain, you still have it. The Prophet ﷺ was asked about exactly this and said not to leave the prayer unless you hear a sound or smell something. Certainty is not removed by doubt.',
     evidence: { hadith: [{ collection: 'bukhari', number: 137 }] },
   },
-  // Bleeding and vomiting are NOT listed here. Both are genuine Hanafi-versus-majority
-  // differences, so stating flatly that they do not break wudhu would misrepresent an
-  // accepted school. They appear under "Where the schools differ" instead.
+  // Bleeding and vomiting appear here in plain language because they are among the most
+  // common worries — but both are genuine Hanafi-versus-majority differences, so neither
+  // is stated as settled. Each gives the majority view, names the school that differs,
+  // and points down to the full discussion.
+  {
+    id: 'bleeding',
+    claim: 'A small cut, a nosebleed, or a graze',
+    clarification:
+      'According to the majority of scholars this does not break wudhu, and you can carry on praying. The Hanafi school holds that flowing blood does break it, so this one depends on the school you follow.',
+    seeDifference: 'bleeding',
+  },
+  {
+    id: 'vomiting',
+    claim: 'Vomiting',
+    clarification:
+      'According to the majority of scholars this does not break wudhu. The Hanafi school holds that a mouthful does. If you are unsure which position to follow, performing wudhu again is always safe.',
+    seeDifference: 'vomiting',
+  },
   {
     id: 'laughing',
     claim: 'Laughing outside of prayer',

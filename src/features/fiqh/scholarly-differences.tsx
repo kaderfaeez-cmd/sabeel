@@ -35,7 +35,8 @@ export function ScholarlyDifferences({
         {differences.map((difference) => (
           <details
             key={difference.id}
-            className="group rounded-xl border border-line bg-surface-raised px-6 py-5"
+            id={`difference-${difference.id}`}
+            className="group scroll-mt-24 rounded-xl border border-line bg-surface-raised px-6 py-5"
           >
             <summary className="cursor-pointer list-none font-display text-lg text-ink marker:content-none">
               <span className="flex items-center justify-between gap-4">
