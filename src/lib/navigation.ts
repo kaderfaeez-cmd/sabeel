@@ -74,8 +74,8 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
       {
         title: 'Learn Salah',
         href: '/salah',
-        blurb: 'Every position, word and meaning — with the evidence for each, and the common mistakes.',
-        status: 'planned',
+        blurb: 'Every position and word, what it means and why you say it, with evidence and guidance if you cannot stand.',
+        status: 'live',
         phase: 3,
       },
       {

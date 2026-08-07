@@ -44,6 +44,15 @@ const CANDIDATES = [
   ['bukhari', 631, 'Pray as you have seen me pray'],
   ['muslim', 397, 'Al-Fatihah is essential'],
   ['bukhari', 756, 'No prayer without Al-Fatihah'],
+  ['bukhari', 1117, 'Pray standing; if not able, sitting; if not, on your side'],
+  ['bukhari', 831, 'The tashahhud taught by Ibn Masud'],
+  ['abudawud', 869, 'Tasbih in ruku and sujud'],
+  ['abudawud', 870, 'Tasbih in ruku and sujud'],
+  ['muslim', 772, 'The Prophet supplication in prayer'],
+  ['bukhari', 793, 'Description of ruku and sujud'],
+  ['tirmidhi', 265, 'Tasbih in ruku'],
+  ['abudawud', 857, 'The man who prayed badly - full description'],
+  ['nasai', 1145, 'Sujud on seven bones'],
 ];
 
 const rows = [];
