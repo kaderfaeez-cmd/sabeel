@@ -35,6 +35,8 @@ five distinct content kinds — each labelled, never blended.
 | [ACCESSIBILITY.md](docs/ACCESSIBILITY.md) | Measured contrast, verified behaviours, known gaps |
 | [DECISIONS.md](docs/DECISIONS.md) | Settled decisions and open questions |
 
+**Live: https://sabeel-sigma.vercel.app**
+
 ## Status
 
 - **Phase 0 — Foundation: complete.** Constitution, fiqh policy, architecture, verified
