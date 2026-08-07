@@ -59,11 +59,6 @@ export default function StoriesPage() {
           </li>
         ))}
       </ul>
-
-      <p className="mt-14 max-w-2xl rounded-lg border border-line bg-surface-sunken px-6 py-5 text-sm leading-relaxed text-ink-muted">
-        More stories are being added. Sabeel lists only the ones that are finished — you
-        will not find a title here that opens an empty page.
-      </p>
     </div>
   );
 }
