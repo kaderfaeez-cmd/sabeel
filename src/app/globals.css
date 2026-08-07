@@ -123,6 +123,11 @@
     scroll-behavior: smooth;
   }
 
+  html {
+    /* Overridden from Settings, so a reader can enlarge everything at once. */
+    font-size: calc(100% * var(--text-scale, 1));
+  }
+
   body {
     background-color: var(--surface);
     color: var(--ink);

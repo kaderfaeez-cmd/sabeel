@@ -5,13 +5,11 @@ import { SECTION_GROUPS, type SectionStatus } from '@/lib/navigation';
 const STATUS_LABEL: Record<SectionStatus, string> = {
   live: 'Available',
   building: 'In build',
-  planned: 'Planned',
 };
 
 const STATUS_STYLE: Record<SectionStatus, string> = {
   live: 'border-emerald/40 text-emerald',
   building: 'border-gold/50 text-gold-ink',
-  planned: 'border-line-strong text-ink-faint',
 };
 
 export function SectionDirectory() {
@@ -26,9 +24,8 @@ export function SectionDirectory() {
           Everything being built, and where it stands.
         </h2>
         <p className="mt-6 text-lede leading-relaxed text-ink-muted">
-          Sabeel is built in phases, and each one is finished properly before the next begins.
-          Sections are labelled honestly — you will never open an empty page dressed up as a
-          finished one.
+          Everything listed here is built and working. Sabeel does not advertise sections
+          that do not exist yet — if it is on this page, you can use it now.
         </p>
       </div>
 
@@ -65,7 +62,6 @@ export function SectionDirectory() {
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">
                       {section.blurb}
                     </p>
-                    <span className="mt-5 text-xs text-ink-faint">Phase {section.phase}</span>
                   </Link>
                 </li>
               ))}
