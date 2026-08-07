@@ -31,6 +31,12 @@ const TONE: Record<
     frame: 'border-l-2 border-l-gold border-line bg-surface-raised',
     label: 'text-gold-ink',
   },
+  // Neutral: authenticity is settled; only usability is pending a person's look.
+  'needs-review': {
+    icon: Info,
+    frame: 'border-line-strong bg-surface-sunken',
+    label: 'text-ink-faint',
+  },
   weak: { icon: ShieldAlert, frame: 'border-line-strong bg-surface-sunken', label: 'text-ink-faint' },
   fabricated: {
     icon: ShieldAlert,

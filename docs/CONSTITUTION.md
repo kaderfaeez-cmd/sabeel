@@ -66,7 +66,29 @@ a model in this codebase. It is **retrieved** from a pinned, verifiable dataset.
 - Every content record carries a `source` field. **Content without a source does not
   render.** This is enforced at the type level, not by convention.
 
-### 3.2 Source hierarchy
+### 3.2 Traceability — no orphaned assertions
+
+**Every Islamic claim displayed to a user must be traceable.** Each statement either:
+
+- links directly to its evidence, or
+- is clearly identified as an explanatory summary.
+
+There is no third category. A sentence that asserts something about Islam without either a
+citation or a visible "this is our explanation" label is a defect, regardless of whether
+it happens to be correct.
+
+### 3.3 Automate detection, do not automate judgement
+
+Where a heuristic can identify a *possible* problem — an unusable narration, a suspicious
+citation, a broken reference — it flags the item for human review and the item stays
+**unpublished** until reviewed. The heuristic never makes the final call in either
+direction.
+
+This cuts both ways deliberately: an imperfect rule must not publish something unusable,
+and it must not silently discard something valid either. Detection is cheap and can be
+approximate; judgement is not, and stays with a person.
+
+### 3.4 Source hierarchy
 
 1. Quran
 2. Authentic Sunnah

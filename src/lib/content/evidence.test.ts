@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import {
+  awaitsHumanReview,
   ESTABLISHED_PRACTICE_NOTICE,
   EVIDENCE_STATUS,
   EVIDENCE_STATUS_COPY,
@@ -85,6 +86,35 @@ describe('isDisplayable', () => {
   test('an unverified reference is not displayed as evidence', () => {
     expect(isDisplayable('unverified-in-dataset')).toBe(false);
     expect(isDisplayable('not-found')).toBe(false);
+  });
+});
+
+describe('needs-review — an open question, not a conclusion', () => {
+  test('is not citable and not displayed as evidence', () => {
+    expect(isCitableAsProof('needs-review')).toBe(false);
+    expect(isDisplayable('needs-review')).toBe(false);
+  });
+
+  test('is the only status awaiting a human decision', () => {
+    expect(awaitsHumanReview('needs-review')).toBe(true);
+    for (const status of EVIDENCE_STATUS.filter((s) => s !== 'needs-review')) {
+      expect(awaitsHumanReview(status)).toBe(false);
+    }
+  });
+
+  test('its wording says nothing about the narration itself', () => {
+    // Constitution §3.3: detection flagged it; no judgement has been made.
+    const body = EVIDENCE_STATUS_COPY['needs-review'].body;
+
+    expect(body).toContain('says nothing about the narration itself');
+    expect(body).toContain('human review');
+    expect(body).not.toMatch(/\bweak\b/i);
+  });
+
+  test('does not share wording with weak or unverified-in-dataset', () => {
+    const body = EVIDENCE_STATUS_COPY['needs-review'].body;
+    expect(body).not.toBe(EVIDENCE_STATUS_COPY.weak.body);
+    expect(body).not.toBe(EVIDENCE_STATUS_COPY['unverified-in-dataset'].body);
   });
 });
 

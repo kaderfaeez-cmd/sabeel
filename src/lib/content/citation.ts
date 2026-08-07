@@ -36,6 +36,22 @@ export function formatAyahRange(surah: number, from: number, to: number): string
   return from === to ? `${surah}:${from}` : `${surah}:${from}–${to}`;
 }
 
+/**
+ * The locator alone, without the grading.
+ *
+ * Used where authenticity is displayed as its own field, so the grading is not stated
+ * twice. `formatCitation` remains the complete one-line citation, used when a reference
+ * travels on its own — copied text, share targets, exports.
+ */
+export function formatReference(source: ContentSource): string {
+  if (source.kind !== 'hadith') return formatCitation(source);
+
+  const book = source.bookName
+    ? `, Book ${source.bookNumber ?? '?'}: ${source.bookName}`
+    : '';
+  return `${source.collectionName}${book}, Hadith ${source.hadithNumber}`;
+}
+
 export function formatCitation(source: ContentSource): string {
   switch (source.kind) {
     case 'quran': {

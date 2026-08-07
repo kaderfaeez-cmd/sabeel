@@ -1,3 +1,5 @@
+import type { AudioSource } from '@/lib/audio/providers';
+
 /**
  * Recitation sources.
  *
@@ -11,6 +13,22 @@ export interface Reciter {
   readonly name: string;
   readonly style?: string;
   readonly note: string;
+}
+
+/**
+ * The reciters expressed in the platform-wide audio vocabulary, so any audio surface —
+ * not only the Quran reader — can offer the same choice without new code.
+ */
+export function reciterSources(): readonly AudioSource[] {
+  return RECITERS.map((reciter) => ({
+    id: String(reciter.id),
+    kind: 'quran-recitation' as const,
+    performer: reciter.name,
+    style: reciter.style,
+    provider: 'Quran.com API v4 · verses.quran.com',
+    language: 'ar',
+    note: reciter.note,
+  }));
 }
 
 export const RECITERS: readonly Reciter[] = [

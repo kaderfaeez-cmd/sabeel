@@ -1,4 +1,5 @@
-import { formatCitation, KIND_LABEL } from '@/lib/content/citation';
+import { ArabicDisclosure } from './arabic-disclosure';
+import { formatReference, GRADING_LABEL, KIND_LABEL } from '@/lib/content/citation';
 import type { SourcedContent } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
 
@@ -77,13 +78,16 @@ export function ContentBlock({
           </>
         )}
 
+        {/* Hadith lead with the translation; the complete Arabic sits behind a
+            disclosure. A hadith entry carries its full chain of narration, which buries
+            the meaning for a beginner if placed first — and is never truncated to fit. */}
         {block.kind === 'hadith' && (
           <>
-            {block.arabic && <ArabicLine text={block.arabic} />}
             {block.narrator && (
               <p className="text-sm text-ink-faint">Narrated by {block.narrator}</p>
             )}
             <p className="leading-relaxed text-ink">{block.translation}</p>
+            {block.arabic && <ArabicDisclosure arabic={block.arabic} />}
           </>
         )}
 
@@ -106,10 +110,22 @@ export function ContentBlock({
         )}
       </div>
 
-      {/* The citation already states the grading in its visible text, so there is no
-          screen-reader-only duplicate here — that announced it twice. */}
-      <figcaption className="mt-5 border-t border-line pt-3 text-xs leading-relaxed text-ink-faint">
-        {formatCitation(block.source)}
+      <figcaption className="mt-5 space-y-1.5 border-t border-line pt-3 text-xs leading-relaxed text-ink-faint">
+        <p>
+          <span className="text-ink-muted">Reference</span> · {formatReference(block.source)}
+        </p>
+
+        {/* Authenticity is stated as its own field rather than buried in the citation
+            line, so a reader can see at a glance that this cleared the gate. */}
+        {block.kind === 'hadith' && (
+          <p>
+            <span className="text-ink-muted">Authenticity</span> ·{' '}
+            <span className="text-emerald">
+              Verified — {GRADING_LABEL[block.source.grading]}
+            </span>
+            {block.source.gradedBy && ` (graded by ${block.source.gradedBy})`}
+          </p>
+        )}
       </figcaption>
     </figure>
   );

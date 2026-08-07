@@ -1,6 +1,8 @@
+import { getReview } from '@/data/hadith-review';
 import type { EvidenceStatus, ScholarGrading } from '@/lib/content/evidence';
 import type { HadithBlock, HadithGrading } from '@/lib/content/types';
 import { getCollection } from './collections';
+import { checkSubstance, isFlagged, type SubstanceFlag } from './substance';
 
 /**
  * Hadith retrieval and the authenticity gate.
@@ -46,6 +48,9 @@ export type HadithLookup =
       readonly status: Exclude<EvidenceStatus, 'verified'>;
       readonly reference: string;
       readonly gradings: readonly ScholarGrading[];
+      /** Present on `needs-review`: why detection flagged it, for the build warning. */
+      readonly reviewFlags?: readonly SubstanceFlag[];
+      readonly reviewReasons?: readonly string[];
     };
 
 /**
@@ -193,6 +198,29 @@ export async function lookupHadith(
       status: assessment.status as Exclude<EvidenceStatus, 'verified'>,
       reference,
       gradings: assessment.gradings,
+    };
+  }
+
+  /**
+   * Authenticity is settled by this point. Usability is a separate question —
+   * passing the authenticity gate is not the same as carrying usable content.
+   *
+   * Constitution §3.3: detection is automated, judgement is not. A flagged entry with no
+   * recorded human decision is held as `needs-review`: not published, not discarded.
+   */
+  const substance = checkSubstance(entry.text);
+  const review = getReview(collection.slug, hadithNumber);
+
+  if (isFlagged(substance) && review?.decision !== 'approved') {
+    return {
+      status: 'needs-review',
+      reference,
+      gradings: assessment.gradings,
+      reviewFlags: substance.flags,
+      reviewReasons:
+        review?.decision === 'excluded'
+          ? [`Excluded on review (${review.reviewedOn}): ${review.reason}`]
+          : substance.reasons,
     };
   }
 

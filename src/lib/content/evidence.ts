@@ -24,6 +24,13 @@ export const EVIDENCE_STATUS = [
   'weak',
   /** Explicitly graded fabricated (mawdu'). Never cited, and never quoted as if genuine. */
   'fabricated',
+  /**
+   * Authentic, but the dataset entry was flagged as possibly unusable (chain-only,
+   * truncated, or unusually short) and no person has yet decided. Constitution §3.3:
+   * detection is automated, judgement is not. Unpublished until reviewed — neither
+   * shown nor discarded.
+   */
+  'needs-review',
   /** No such narration at the given reference. */
   'not-found',
 ] as const;
@@ -44,6 +51,15 @@ export function isCitableAsProof(status: EvidenceStatus): boolean {
  */
 export function isDisplayable(status: EvidenceStatus): boolean {
   return status === 'verified' || status === 'disputed';
+}
+
+/**
+ * Whether a human still needs to decide. `needs-review` is the only status that is not
+ * a conclusion — it is an open question, and the item is neither published nor discarded
+ * while it stands (Constitution §3.3).
+ */
+export function awaitsHumanReview(status: EvidenceStatus): boolean {
+  return status === 'needs-review';
 }
 
 /**
@@ -83,6 +99,14 @@ export const EVIDENCE_STATUS_COPY: Record<
     body:
       'A narration sometimes attributed to this point was graded fabricated ' +
       '(mawdu‘). Sabeel does not reproduce it.',
+  },
+  'needs-review': {
+    heading: 'Awaiting review',
+    body:
+      'A narration for this point is authentic, but the entry in Sabeel’s source could ' +
+      'not be automatically confirmed to carry usable text. It is held back pending human ' +
+      'review rather than published or discarded automatically. This says nothing about ' +
+      'the narration itself.',
   },
   'not-found': {
     heading: 'Reference not found',
