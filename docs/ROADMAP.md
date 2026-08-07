@@ -26,7 +26,7 @@ Quran fetch layer. 49 tests, 91% line coverage on `src/lib`.
 - ✅ Reading surface: Uthmani Arabic, 5 translations, transliteration, per-ayah references
 - ✅ URL-held reading state, so every position is shareable
 - ✅ Source-failure state that shows nothing rather than something unverified
-- ⬜ Audio recitation with per-ayah sync
+- ✅ Recitation with per-ayah sync, 5 reciters, active-ayah highlight, never autoplaying
 - ⬜ Bookmarks, notes, highlights, reading progress (local-first)
 - ⬜ Full-text and topic search
 - ⬜ Offline persistence via IndexedDB

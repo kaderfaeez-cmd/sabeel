@@ -179,6 +179,15 @@
   }
 }
 
+/* The ayah currently being recited.
+   Written as a plain rule rather than a `data-[active]:bg-*` utility: theme tokens
+   declared with `@theme inline` do not resolve inside that variant, so the utility
+   generated a transparent background. Verified in the browser. */
+[data-ayah][data-active] {
+  background-color: var(--emerald-soft);
+  border-radius: 0.5rem;
+}
+
 /* Motion is a clarifier, never a requirement. */
 @media (prefers-reduced-motion: reduce) {
   html {

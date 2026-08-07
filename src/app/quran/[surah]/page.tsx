@@ -4,13 +4,20 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { AyahRow } from '@/features/quran/ayah-row';
 import { ReadingControls } from '@/features/quran/reading-controls';
+import { RecitationPlayer } from '@/features/quran/recitation-player';
 import { fetchSurahVerses, QuranApiError } from '@/lib/quran/api';
+import {
+  fetchSurahAudio,
+  getReciter,
+  reciterLabel,
+  resolveReciterId,
+} from '@/lib/quran/recitations';
 import { getSurah, TOTAL_SURAHS } from '@/lib/quran/surahs';
 import { getTranslation, resolveTranslationId } from '@/lib/quran/translations';
 
 interface PageProps {
   params: Promise<{ surah: string }>;
-  searchParams: Promise<{ t?: string; tl?: string }>;
+  searchParams: Promise<{ t?: string; tl?: string; r?: string }>;
 }
 
 /** Validates the route segment before it reaches anything else. */
@@ -43,11 +50,22 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
 
   const query = await searchParams;
   const translationId = resolveTranslationId(query.t);
+  const reciterId = resolveReciterId(query.r);
   const showTransliteration = query.tl === '1';
   const translation = getTranslation(translationId);
+  const reciter = getReciter(reciterId);
 
   const previous = number > 1 ? getSurah(number - 1) : undefined;
   const next = number < TOTAL_SURAHS ? getSurah(number + 1) : undefined;
+
+  // Awaited here rather than inside a nested async component: a client component only
+  // registers for hydration when it is referenced from a component the router renders
+  // directly. Behind a nested async boundary it server-renders but never becomes
+  // interactive — verified by inspecting the flight payload.
+  //
+  // Audio is never allowed to break reading, so a failure yields an empty list and the
+  // player is simply not shown.
+  const audioUrls = await loadRecitation(number, reciterId);
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20">
@@ -85,6 +103,7 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
           <Suspense fallback={null}>
             <ReadingControls
               translationId={translationId}
+              reciterId={reciterId}
               showTransliteration={showTransliteration}
             />
           </Suspense>
@@ -106,6 +125,14 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
         translationId={translationId}
         showTransliteration={showTransliteration}
       />
+
+      {/* Audio never starts on its own — the player only appears, it does not play. */}
+      {audioUrls.length > 0 && (
+        <RecitationPlayer
+          audioUrls={audioUrls}
+          reciterName={reciter ? reciterLabel(reciter) : 'Unknown reciter'}
+        />
+      )}
 
       <nav aria-label="Surah navigation" className="mt-14 flex justify-between gap-4">
         {previous ? (
@@ -183,4 +210,19 @@ async function Verses({
       ))}
     </div>
   );
+}
+
+/**
+ * Loads recitation audio, treating any failure as "no audio available".
+ * Reading must never be blocked by an audio problem.
+ */
+async function loadRecitation(
+  surahNumber: number,
+  reciterId: number,
+): Promise<readonly string[]> {
+  try {
+    return await fetchSurahAudio(surahNumber, reciterId);
+  } catch {
+    return [];
+  }
 }

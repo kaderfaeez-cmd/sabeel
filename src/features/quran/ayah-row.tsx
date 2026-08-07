@@ -26,8 +26,11 @@ export function AyahRow({ block }: { block: QuranBlock }) {
   return (
     <article
       id={`ayah-${block.source.ayahFrom}`}
+      data-ayah={block.source.ayahFrom}
       aria-label={`Ayah ${reference}`}
-      className="scroll-mt-24 border-b border-line py-9 last:border-b-0"
+      // `data-active` is set by the recitation player as it advances; the highlight
+      // itself lives in globals.css (see the [data-ayah][data-active] rule).
+      className="scroll-mt-24 border-b border-line px-4 py-9 transition-colors duration-500 last:border-b-0"
     >
       <div className="flex items-baseline justify-between gap-6">
         <span className="font-display text-xs tracking-[0.14em] text-gold-ink">

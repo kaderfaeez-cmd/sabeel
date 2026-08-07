@@ -60,7 +60,7 @@ function SurahCard({ surah }: { surah: Surah }) {
       >
         <span
           aria-hidden
-          className="grid size-10 shrink-0 place-items-center rounded-lg bg-surface-sunken font-display text-sm text-ink-muted transition-colors duration-300 group-hover:bg-emerald-soft group-hover:text-emerald"
+          className="grid size-10 shrink-0 place-items-center rounded-lg bg-surface-sunken font-display text-sm text-ink-muted transition-colors duration-300 group-hover:bg-[var(--emerald-soft)] group-hover:text-emerald"
         >
           {surah.number}
         </span>

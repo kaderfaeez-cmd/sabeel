@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
+import { RECITERS, reciterLabel } from '@/lib/quran/recitations';
 import { TRANSLATIONS } from '@/lib/quran/translations';
 
 /**
@@ -13,9 +14,11 @@ import { TRANSLATIONS } from '@/lib/quran/translations';
  */
 export function ReadingControls({
   translationId,
+  reciterId,
   showTransliteration,
 }: {
   translationId: number;
+  reciterId: number;
   showTransliteration: boolean;
 }) {
   const router = useRouter();
@@ -53,6 +56,24 @@ export function ReadingControls({
           {TRANSLATIONS.map((translation) => (
             <option key={translation.id} value={translation.id}>
               {translation.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <label htmlFor="reciter" className="text-sm text-ink-muted">
+          Reciter
+        </label>
+        <select
+          id="reciter"
+          value={reciterId}
+          onChange={(event) => update('r', event.target.value)}
+          className="rounded-full border border-line bg-surface-raised px-4 py-2 text-sm text-ink focus:border-emerald focus:outline-none"
+        >
+          {RECITERS.map((reciter) => (
+            <option key={reciter.id} value={reciter.id}>
+              {reciterLabel(reciter)}
             </option>
           ))}
         </select>

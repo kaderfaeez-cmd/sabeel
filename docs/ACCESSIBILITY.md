@@ -48,6 +48,22 @@ AA on small eyebrow labels — the separation makes the mistake unrepeatable.
 - Automated axe pass plus manual review at Phase 12.
 - Low-bandwidth mode (Phase 12).
 
+## Verified in Phase 2
+
+- Recitation never autoplays: `preload="none"`, no `autoplay` attribute, and no `src`
+  assigned until the user presses play. Same principle as the Adhan rule.
+- Player controls are 44×44 px with state-accurate `aria-label`s that flip on activation.
+- Playback position is announced through an `aria-live="polite"` region.
+- Playback failures are stated in that region rather than leaving the player looking stuck.
+
+### Note on browser measurement
+
+Computed styles for properties under a CSS `transition` cannot be measured in this
+environment: the automation pane does not composite frames, so a transitioning property
+reads as its start value indefinitely. When verifying a transitioned property, remove the
+transition class first, or measure a non-transitioned equivalent. This cost real debugging
+time once — it is recorded so it does not again.
+
 ## Known gaps
 
 - No automated a11y test suite yet — added with the test harness in Phase 1.
