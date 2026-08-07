@@ -1,8 +1,8 @@
 import { AuthenticityNotices } from '@/components/content/authenticity-notice';
 import { ContentBlock } from '@/components/content/content-block';
-import type { WudhuStep } from '@/data/fiqh/wudhu';
 import type { Evidence } from '@/lib/content/types';
 import { hasCitableEvidence } from '@/lib/content/types';
+import type { FiqhStepData } from '@/lib/fiqh/step-types';
 import { RulingBadge } from './ruling-badge';
 
 /**
@@ -18,7 +18,7 @@ export function StepCard({
   index,
   evidence,
 }: {
-  step: WudhuStep;
+  step: FiqhStepData;
   index: number;
   evidence: Evidence;
 }) {

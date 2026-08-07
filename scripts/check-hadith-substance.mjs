@@ -10,7 +10,7 @@
  *
  * Run: npm run check:hadith
  */
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -42,9 +42,25 @@ function checkSubstance(text) {
   return reasons;
 }
 
-/** Extracts { collection, number } pairs from the fiqh data files. */
+/**
+ * Extracts { collection, number } pairs from every fiqh data file.
+ *
+ * Reads the directory rather than a hardcoded list — an earlier version listed the files
+ * by hand and silently skipped a newly added page, reporting "no narrations awaiting
+ * review" for content it had never looked at. A check that quietly covers less than you
+ * think is worse than no check.
+ */
 function collectReferences() {
-  const files = ['src/data/fiqh/wudhu.ts', 'src/data/fiqh/salah.ts'];
+  const dir = resolve(ROOT, 'src/data/fiqh');
+  let files;
+  try {
+    files = readdirSync(dir)
+      .filter((name) => name.endsWith('.ts') && !name.endsWith('.test.ts'))
+      .map((name) => `src/data/fiqh/${name}`);
+  } catch {
+    return [];
+  }
+
   const found = new Map();
 
   for (const file of files) {

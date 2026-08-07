@@ -53,6 +53,18 @@ const CANDIDATES = [
   ['tirmidhi', 265, 'Tasbih in ruku'],
   ['abudawud', 857, 'The man who prayed badly - full description'],
   ['nasai', 1145, 'Sujud on seven bones'],
+  // Ghusl
+  ['bukhari', 248, 'Aishah describing the Prophet ghusl from janabah'],
+  ['bukhari', 249, 'Aishah describing the ghusl'],
+  ['bukhari', 254, 'Ghusl description'],
+  ['bukhari', 274, 'Maymunah describing the ghusl'],
+  ['bukhari', 276, 'Maymunah describing the ghusl'],
+  ['muslim', 316, 'Ghusl from janabah'],
+  ['muslim', 317, 'Ghusl from janabah'],
+  ['muslim', 330, 'Ghusl and hair for women'],
+  ['bukhari', 314, 'Ghusl after menstruation'],
+  ['abudawud', 248, 'Ghusl description'],
+  ['tirmidhi', 103, 'Ghusl from janabah'],
 ];
 
 const rows = [];

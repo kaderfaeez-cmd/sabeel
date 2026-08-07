@@ -88,8 +88,8 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
       {
         title: 'Learn Ghusl',
         href: '/ghusl',
-        blurb: 'When it is required, how it is performed, and what invalidates it.',
-        status: 'planned',
+        blurb: 'When the full washing is required and how to perform it, with the evidence for each step.',
+        status: 'live',
         phase: 3,
       },
       {

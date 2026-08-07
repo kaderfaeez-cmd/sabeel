@@ -1,4 +1,4 @@
-import type { WudhuDifference } from '@/data/fiqh/wudhu';
+import type { FiqhDifferenceData } from '@/lib/fiqh/step-types';
 
 /**
  * FIQH-POLICY §4: differences live in a clearly-labelled optional section, outside the
@@ -12,7 +12,7 @@ import type { WudhuDifference } from '@/data/fiqh/wudhu';
 export function ScholarlyDifferences({
   differences,
 }: {
-  differences: readonly WudhuDifference[];
+  differences: readonly FiqhDifferenceData[];
 }) {
   if (differences.length === 0) return null;
 
