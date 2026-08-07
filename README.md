@@ -37,10 +37,16 @@ five distinct content kinds — each labelled, never blended.
 
 ## Status
 
-**Phase 0 — Foundation: complete.** Constitution, architecture, verified sources, design
-system, app shell, home page. Build green, contrast measured AA in both themes.
+- **Phase 0 — Foundation: complete.** Constitution, fiqh policy, architecture, verified
+  sources, design system, app shell, home page. Contrast measured AA in both themes.
+- **Phase 1 — Content spine: complete.** `SourcedContent` union, `<ContentBlock>`
+  renderer, citation formatting, fiqh types enforcing the fiqh policy. 49 tests, 91%
+  line coverage.
+- **Phase 2 — The Quran: in progress.** All 114 surahs readable in Arabic with five
+  translations, transliteration, search and per-ayah references. Audio, bookmarks and
+  offline persistence still to come.
 
-Next: **Phase 1 — the content spine.** After it, nothing renders without a source.
+Full detail in [ROADMAP.md](docs/ROADMAP.md).
 
 ## Stack
 

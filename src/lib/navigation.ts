@@ -48,8 +48,8 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
       {
         title: 'The Quran',
         href: '/quran',
-        blurb: 'Arabic, multiple trusted translations, word-by-word, recitation, notes and offline reading.',
-        status: 'building',
+        blurb: 'All 114 surahs in Arabic with five trusted translations and transliteration. Recitation and notes are next.',
+        status: 'live',
         phase: 2,
       },
       {

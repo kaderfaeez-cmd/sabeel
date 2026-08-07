@@ -14,15 +14,22 @@ verified corpus.
 Constitution, architecture, source verification, Next.js 16 + React 19 + Tailwind v4
 scaffold, design system (tokens, typography, theming), app shell, home page.
 
-### Phase 1 — Content spine
-The `SourcedContent` type union, the `<ContentBlock>` renderer with per-kind attribution,
-the source registry, and the Quran/hadith fetch + cache layer. Unit tested to 80%+.
+### Phase 1 — Content spine ✅ *complete*
+The `SourcedContent` discriminated union, the `<ContentBlock>` renderer with per-kind
+attribution, citation formatting, the fiqh types enforcing FIQH-POLICY.md, and the
+Quran fetch layer. 49 tests, 91% line coverage on `src/lib`.
 **Nothing renders without a source after this phase.**
 
-### Phase 2 — The Quran
-Surah index, reading surface (Arabic + selectable translations + transliteration),
-ayah-level actions (bookmark, note, highlight, copy, share), audio recitation with
-per-ayah sync, search, reading progress, offline persistence, RTL correctness.
+### Phase 2 — The Quran 🔨 *in progress*
+- ✅ Baked 114-surah index (6,236 ayahs) — offline, zero network cost
+- ✅ Surah index with instant search by name, meaning or number
+- ✅ Reading surface: Uthmani Arabic, 5 translations, transliteration, per-ayah references
+- ✅ URL-held reading state, so every position is shareable
+- ✅ Source-failure state that shows nothing rather than something unverified
+- ⬜ Audio recitation with per-ayah sync
+- ⬜ Bookmarks, notes, highlights, reading progress (local-first)
+- ⬜ Full-text and topic search
+- ⬜ Offline persistence via IndexedDB
 
 ### Phase 3 — Learn Salah + Learn Wudhu + Learn Ghusl
 Step-by-step interactive guides. Arabic / transliteration / translation / meaning per

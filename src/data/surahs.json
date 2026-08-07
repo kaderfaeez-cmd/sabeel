@@ -1,0 +1,1142 @@
+[
+  {
+    "number": 1,
+    "name": "Al-Fatihah",
+    "nameArabic": "الفاتحة",
+    "meaning": "The Opener",
+    "ayahCount": 7,
+    "revelationPlace": "makkah",
+    "revelationOrder": 5,
+    "hasBismillah": false
+  },
+  {
+    "number": 2,
+    "name": "Al-Baqarah",
+    "nameArabic": "البقرة",
+    "meaning": "The Cow",
+    "ayahCount": 286,
+    "revelationPlace": "madinah",
+    "revelationOrder": 87,
+    "hasBismillah": true
+  },
+  {
+    "number": 3,
+    "name": "Ali 'Imran",
+    "nameArabic": "آل عمران",
+    "meaning": "Family of Imran",
+    "ayahCount": 200,
+    "revelationPlace": "madinah",
+    "revelationOrder": 89,
+    "hasBismillah": true
+  },
+  {
+    "number": 4,
+    "name": "An-Nisa",
+    "nameArabic": "النساء",
+    "meaning": "The Women",
+    "ayahCount": 176,
+    "revelationPlace": "madinah",
+    "revelationOrder": 92,
+    "hasBismillah": true
+  },
+  {
+    "number": 5,
+    "name": "Al-Ma'idah",
+    "nameArabic": "المائدة",
+    "meaning": "The Table Spread",
+    "ayahCount": 120,
+    "revelationPlace": "madinah",
+    "revelationOrder": 112,
+    "hasBismillah": true
+  },
+  {
+    "number": 6,
+    "name": "Al-An'am",
+    "nameArabic": "الأنعام",
+    "meaning": "The Cattle",
+    "ayahCount": 165,
+    "revelationPlace": "makkah",
+    "revelationOrder": 55,
+    "hasBismillah": true
+  },
+  {
+    "number": 7,
+    "name": "Al-A'raf",
+    "nameArabic": "الأعراف",
+    "meaning": "The Heights",
+    "ayahCount": 206,
+    "revelationPlace": "makkah",
+    "revelationOrder": 39,
+    "hasBismillah": true
+  },
+  {
+    "number": 8,
+    "name": "Al-Anfal",
+    "nameArabic": "الأنفال",
+    "meaning": "The Spoils of War",
+    "ayahCount": 75,
+    "revelationPlace": "madinah",
+    "revelationOrder": 88,
+    "hasBismillah": true
+  },
+  {
+    "number": 9,
+    "name": "At-Tawbah",
+    "nameArabic": "التوبة",
+    "meaning": "The Repentance",
+    "ayahCount": 129,
+    "revelationPlace": "madinah",
+    "revelationOrder": 113,
+    "hasBismillah": false
+  },
+  {
+    "number": 10,
+    "name": "Yunus",
+    "nameArabic": "يونس",
+    "meaning": "Jonah",
+    "ayahCount": 109,
+    "revelationPlace": "makkah",
+    "revelationOrder": 51,
+    "hasBismillah": true
+  },
+  {
+    "number": 11,
+    "name": "Hud",
+    "nameArabic": "هود",
+    "meaning": "Hud",
+    "ayahCount": 123,
+    "revelationPlace": "makkah",
+    "revelationOrder": 52,
+    "hasBismillah": true
+  },
+  {
+    "number": 12,
+    "name": "Yusuf",
+    "nameArabic": "يوسف",
+    "meaning": "Joseph",
+    "ayahCount": 111,
+    "revelationPlace": "makkah",
+    "revelationOrder": 53,
+    "hasBismillah": true
+  },
+  {
+    "number": 13,
+    "name": "Ar-Ra'd",
+    "nameArabic": "الرعد",
+    "meaning": "The Thunder",
+    "ayahCount": 43,
+    "revelationPlace": "madinah",
+    "revelationOrder": 96,
+    "hasBismillah": true
+  },
+  {
+    "number": 14,
+    "name": "Ibrahim",
+    "nameArabic": "ابراهيم",
+    "meaning": "Abraham",
+    "ayahCount": 52,
+    "revelationPlace": "makkah",
+    "revelationOrder": 72,
+    "hasBismillah": true
+  },
+  {
+    "number": 15,
+    "name": "Al-Hijr",
+    "nameArabic": "الحجر",
+    "meaning": "The Rocky Tract",
+    "ayahCount": 99,
+    "revelationPlace": "makkah",
+    "revelationOrder": 54,
+    "hasBismillah": true
+  },
+  {
+    "number": 16,
+    "name": "An-Nahl",
+    "nameArabic": "النحل",
+    "meaning": "The Bee",
+    "ayahCount": 128,
+    "revelationPlace": "makkah",
+    "revelationOrder": 70,
+    "hasBismillah": true
+  },
+  {
+    "number": 17,
+    "name": "Al-Isra",
+    "nameArabic": "الإسراء",
+    "meaning": "The Night Journey",
+    "ayahCount": 111,
+    "revelationPlace": "makkah",
+    "revelationOrder": 50,
+    "hasBismillah": true
+  },
+  {
+    "number": 18,
+    "name": "Al-Kahf",
+    "nameArabic": "الكهف",
+    "meaning": "The Cave",
+    "ayahCount": 110,
+    "revelationPlace": "makkah",
+    "revelationOrder": 69,
+    "hasBismillah": true
+  },
+  {
+    "number": 19,
+    "name": "Maryam",
+    "nameArabic": "مريم",
+    "meaning": "Mary",
+    "ayahCount": 98,
+    "revelationPlace": "makkah",
+    "revelationOrder": 44,
+    "hasBismillah": true
+  },
+  {
+    "number": 20,
+    "name": "Taha",
+    "nameArabic": "طه",
+    "meaning": "Ta-Ha",
+    "ayahCount": 135,
+    "revelationPlace": "makkah",
+    "revelationOrder": 45,
+    "hasBismillah": true
+  },
+  {
+    "number": 21,
+    "name": "Al-Anbya",
+    "nameArabic": "الأنبياء",
+    "meaning": "The Prophets",
+    "ayahCount": 112,
+    "revelationPlace": "makkah",
+    "revelationOrder": 73,
+    "hasBismillah": true
+  },
+  {
+    "number": 22,
+    "name": "Al-Hajj",
+    "nameArabic": "الحج",
+    "meaning": "The Pilgrimage",
+    "ayahCount": 78,
+    "revelationPlace": "madinah",
+    "revelationOrder": 103,
+    "hasBismillah": true
+  },
+  {
+    "number": 23,
+    "name": "Al-Mu'minun",
+    "nameArabic": "المؤمنون",
+    "meaning": "The Believers",
+    "ayahCount": 118,
+    "revelationPlace": "makkah",
+    "revelationOrder": 74,
+    "hasBismillah": true
+  },
+  {
+    "number": 24,
+    "name": "An-Nur",
+    "nameArabic": "النور",
+    "meaning": "The Light",
+    "ayahCount": 64,
+    "revelationPlace": "madinah",
+    "revelationOrder": 102,
+    "hasBismillah": true
+  },
+  {
+    "number": 25,
+    "name": "Al-Furqan",
+    "nameArabic": "الفرقان",
+    "meaning": "The Criterion",
+    "ayahCount": 77,
+    "revelationPlace": "makkah",
+    "revelationOrder": 42,
+    "hasBismillah": true
+  },
+  {
+    "number": 26,
+    "name": "Ash-Shu'ara",
+    "nameArabic": "الشعراء",
+    "meaning": "The Poets",
+    "ayahCount": 227,
+    "revelationPlace": "makkah",
+    "revelationOrder": 47,
+    "hasBismillah": true
+  },
+  {
+    "number": 27,
+    "name": "An-Naml",
+    "nameArabic": "النمل",
+    "meaning": "The Ant",
+    "ayahCount": 93,
+    "revelationPlace": "makkah",
+    "revelationOrder": 48,
+    "hasBismillah": true
+  },
+  {
+    "number": 28,
+    "name": "Al-Qasas",
+    "nameArabic": "القصص",
+    "meaning": "The Stories",
+    "ayahCount": 88,
+    "revelationPlace": "makkah",
+    "revelationOrder": 49,
+    "hasBismillah": true
+  },
+  {
+    "number": 29,
+    "name": "Al-'Ankabut",
+    "nameArabic": "العنكبوت",
+    "meaning": "The Spider",
+    "ayahCount": 69,
+    "revelationPlace": "makkah",
+    "revelationOrder": 85,
+    "hasBismillah": true
+  },
+  {
+    "number": 30,
+    "name": "Ar-Rum",
+    "nameArabic": "الروم",
+    "meaning": "The Romans",
+    "ayahCount": 60,
+    "revelationPlace": "makkah",
+    "revelationOrder": 84,
+    "hasBismillah": true
+  },
+  {
+    "number": 31,
+    "name": "Luqman",
+    "nameArabic": "لقمان",
+    "meaning": "Luqman",
+    "ayahCount": 34,
+    "revelationPlace": "makkah",
+    "revelationOrder": 57,
+    "hasBismillah": true
+  },
+  {
+    "number": 32,
+    "name": "As-Sajdah",
+    "nameArabic": "السجدة",
+    "meaning": "The Prostration",
+    "ayahCount": 30,
+    "revelationPlace": "makkah",
+    "revelationOrder": 75,
+    "hasBismillah": true
+  },
+  {
+    "number": 33,
+    "name": "Al-Ahzab",
+    "nameArabic": "الأحزاب",
+    "meaning": "The Combined Forces",
+    "ayahCount": 73,
+    "revelationPlace": "madinah",
+    "revelationOrder": 90,
+    "hasBismillah": true
+  },
+  {
+    "number": 34,
+    "name": "Saba",
+    "nameArabic": "سبإ",
+    "meaning": "Sheba",
+    "ayahCount": 54,
+    "revelationPlace": "makkah",
+    "revelationOrder": 58,
+    "hasBismillah": true
+  },
+  {
+    "number": 35,
+    "name": "Fatir",
+    "nameArabic": "فاطر",
+    "meaning": "Originator",
+    "ayahCount": 45,
+    "revelationPlace": "makkah",
+    "revelationOrder": 43,
+    "hasBismillah": true
+  },
+  {
+    "number": 36,
+    "name": "Ya-Sin",
+    "nameArabic": "يس",
+    "meaning": "Ya Sin",
+    "ayahCount": 83,
+    "revelationPlace": "makkah",
+    "revelationOrder": 41,
+    "hasBismillah": true
+  },
+  {
+    "number": 37,
+    "name": "As-Saffat",
+    "nameArabic": "الصافات",
+    "meaning": "Those who set the Ranks",
+    "ayahCount": 182,
+    "revelationPlace": "makkah",
+    "revelationOrder": 56,
+    "hasBismillah": true
+  },
+  {
+    "number": 38,
+    "name": "Sad",
+    "nameArabic": "ص",
+    "meaning": "The Letter \"Saad\"",
+    "ayahCount": 88,
+    "revelationPlace": "makkah",
+    "revelationOrder": 38,
+    "hasBismillah": true
+  },
+  {
+    "number": 39,
+    "name": "Az-Zumar",
+    "nameArabic": "الزمر",
+    "meaning": "The Troops",
+    "ayahCount": 75,
+    "revelationPlace": "makkah",
+    "revelationOrder": 59,
+    "hasBismillah": true
+  },
+  {
+    "number": 40,
+    "name": "Ghafir",
+    "nameArabic": "غافر",
+    "meaning": "The Forgiver",
+    "ayahCount": 85,
+    "revelationPlace": "makkah",
+    "revelationOrder": 60,
+    "hasBismillah": true
+  },
+  {
+    "number": 41,
+    "name": "Fussilat",
+    "nameArabic": "فصلت",
+    "meaning": "Explained in Detail",
+    "ayahCount": 54,
+    "revelationPlace": "makkah",
+    "revelationOrder": 61,
+    "hasBismillah": true
+  },
+  {
+    "number": 42,
+    "name": "Ash-Shuraa",
+    "nameArabic": "الشورى",
+    "meaning": "The Consultation",
+    "ayahCount": 53,
+    "revelationPlace": "makkah",
+    "revelationOrder": 62,
+    "hasBismillah": true
+  },
+  {
+    "number": 43,
+    "name": "Az-Zukhruf",
+    "nameArabic": "الزخرف",
+    "meaning": "The Ornaments of Gold",
+    "ayahCount": 89,
+    "revelationPlace": "makkah",
+    "revelationOrder": 63,
+    "hasBismillah": true
+  },
+  {
+    "number": 44,
+    "name": "Ad-Dukhan",
+    "nameArabic": "الدخان",
+    "meaning": "The Smoke",
+    "ayahCount": 59,
+    "revelationPlace": "makkah",
+    "revelationOrder": 64,
+    "hasBismillah": true
+  },
+  {
+    "number": 45,
+    "name": "Al-Jathiyah",
+    "nameArabic": "الجاثية",
+    "meaning": "The Crouching",
+    "ayahCount": 37,
+    "revelationPlace": "makkah",
+    "revelationOrder": 65,
+    "hasBismillah": true
+  },
+  {
+    "number": 46,
+    "name": "Al-Ahqaf",
+    "nameArabic": "الأحقاف",
+    "meaning": "The Wind-Curved Sandhills",
+    "ayahCount": 35,
+    "revelationPlace": "makkah",
+    "revelationOrder": 66,
+    "hasBismillah": true
+  },
+  {
+    "number": 47,
+    "name": "Muhammad",
+    "nameArabic": "محمد",
+    "meaning": "Muhammad",
+    "ayahCount": 38,
+    "revelationPlace": "madinah",
+    "revelationOrder": 95,
+    "hasBismillah": true
+  },
+  {
+    "number": 48,
+    "name": "Al-Fath",
+    "nameArabic": "الفتح",
+    "meaning": "The Victory",
+    "ayahCount": 29,
+    "revelationPlace": "madinah",
+    "revelationOrder": 111,
+    "hasBismillah": true
+  },
+  {
+    "number": 49,
+    "name": "Al-Hujurat",
+    "nameArabic": "الحجرات",
+    "meaning": "The Rooms",
+    "ayahCount": 18,
+    "revelationPlace": "madinah",
+    "revelationOrder": 106,
+    "hasBismillah": true
+  },
+  {
+    "number": 50,
+    "name": "Qaf",
+    "nameArabic": "ق",
+    "meaning": "The Letter \"Qaf\"",
+    "ayahCount": 45,
+    "revelationPlace": "makkah",
+    "revelationOrder": 34,
+    "hasBismillah": true
+  },
+  {
+    "number": 51,
+    "name": "Adh-Dhariyat",
+    "nameArabic": "الذاريات",
+    "meaning": "The Winnowing Winds",
+    "ayahCount": 60,
+    "revelationPlace": "makkah",
+    "revelationOrder": 67,
+    "hasBismillah": true
+  },
+  {
+    "number": 52,
+    "name": "At-Tur",
+    "nameArabic": "الطور",
+    "meaning": "The Mount",
+    "ayahCount": 49,
+    "revelationPlace": "makkah",
+    "revelationOrder": 76,
+    "hasBismillah": true
+  },
+  {
+    "number": 53,
+    "name": "An-Najm",
+    "nameArabic": "النجم",
+    "meaning": "The Star",
+    "ayahCount": 62,
+    "revelationPlace": "makkah",
+    "revelationOrder": 23,
+    "hasBismillah": true
+  },
+  {
+    "number": 54,
+    "name": "Al-Qamar",
+    "nameArabic": "القمر",
+    "meaning": "The Moon",
+    "ayahCount": 55,
+    "revelationPlace": "makkah",
+    "revelationOrder": 37,
+    "hasBismillah": true
+  },
+  {
+    "number": 55,
+    "name": "Ar-Rahman",
+    "nameArabic": "الرحمن",
+    "meaning": "The Beneficent",
+    "ayahCount": 78,
+    "revelationPlace": "madinah",
+    "revelationOrder": 97,
+    "hasBismillah": true
+  },
+  {
+    "number": 56,
+    "name": "Al-Waqi'ah",
+    "nameArabic": "الواقعة",
+    "meaning": "The Inevitable",
+    "ayahCount": 96,
+    "revelationPlace": "makkah",
+    "revelationOrder": 46,
+    "hasBismillah": true
+  },
+  {
+    "number": 57,
+    "name": "Al-Hadid",
+    "nameArabic": "الحديد",
+    "meaning": "The Iron",
+    "ayahCount": 29,
+    "revelationPlace": "madinah",
+    "revelationOrder": 94,
+    "hasBismillah": true
+  },
+  {
+    "number": 58,
+    "name": "Al-Mujadila",
+    "nameArabic": "المجادلة",
+    "meaning": "The Pleading Woman",
+    "ayahCount": 22,
+    "revelationPlace": "madinah",
+    "revelationOrder": 105,
+    "hasBismillah": true
+  },
+  {
+    "number": 59,
+    "name": "Al-Hashr",
+    "nameArabic": "الحشر",
+    "meaning": "The Exile",
+    "ayahCount": 24,
+    "revelationPlace": "madinah",
+    "revelationOrder": 101,
+    "hasBismillah": true
+  },
+  {
+    "number": 60,
+    "name": "Al-Mumtahanah",
+    "nameArabic": "الممتحنة",
+    "meaning": "She that is to be examined",
+    "ayahCount": 13,
+    "revelationPlace": "madinah",
+    "revelationOrder": 91,
+    "hasBismillah": true
+  },
+  {
+    "number": 61,
+    "name": "As-Saf",
+    "nameArabic": "الصف",
+    "meaning": "The Ranks",
+    "ayahCount": 14,
+    "revelationPlace": "madinah",
+    "revelationOrder": 109,
+    "hasBismillah": true
+  },
+  {
+    "number": 62,
+    "name": "Al-Jumu'ah",
+    "nameArabic": "الجمعة",
+    "meaning": "The Congregation, Friday",
+    "ayahCount": 11,
+    "revelationPlace": "madinah",
+    "revelationOrder": 110,
+    "hasBismillah": true
+  },
+  {
+    "number": 63,
+    "name": "Al-Munafiqun",
+    "nameArabic": "المنافقون",
+    "meaning": "The Hypocrites",
+    "ayahCount": 11,
+    "revelationPlace": "madinah",
+    "revelationOrder": 104,
+    "hasBismillah": true
+  },
+  {
+    "number": 64,
+    "name": "At-Taghabun",
+    "nameArabic": "التغابن",
+    "meaning": "The Mutual Disillusion",
+    "ayahCount": 18,
+    "revelationPlace": "madinah",
+    "revelationOrder": 108,
+    "hasBismillah": true
+  },
+  {
+    "number": 65,
+    "name": "At-Talaq",
+    "nameArabic": "الطلاق",
+    "meaning": "The Divorce",
+    "ayahCount": 12,
+    "revelationPlace": "madinah",
+    "revelationOrder": 99,
+    "hasBismillah": true
+  },
+  {
+    "number": 66,
+    "name": "At-Tahrim",
+    "nameArabic": "التحريم",
+    "meaning": "The Prohibition",
+    "ayahCount": 12,
+    "revelationPlace": "madinah",
+    "revelationOrder": 107,
+    "hasBismillah": true
+  },
+  {
+    "number": 67,
+    "name": "Al-Mulk",
+    "nameArabic": "الملك",
+    "meaning": "The Sovereignty",
+    "ayahCount": 30,
+    "revelationPlace": "makkah",
+    "revelationOrder": 77,
+    "hasBismillah": true
+  },
+  {
+    "number": 68,
+    "name": "Al-Qalam",
+    "nameArabic": "القلم",
+    "meaning": "The Pen",
+    "ayahCount": 52,
+    "revelationPlace": "makkah",
+    "revelationOrder": 2,
+    "hasBismillah": true
+  },
+  {
+    "number": 69,
+    "name": "Al-Haqqah",
+    "nameArabic": "الحاقة",
+    "meaning": "The Reality",
+    "ayahCount": 52,
+    "revelationPlace": "makkah",
+    "revelationOrder": 78,
+    "hasBismillah": true
+  },
+  {
+    "number": 70,
+    "name": "Al-Ma'arij",
+    "nameArabic": "المعارج",
+    "meaning": "The Ascending Stairways",
+    "ayahCount": 44,
+    "revelationPlace": "makkah",
+    "revelationOrder": 79,
+    "hasBismillah": true
+  },
+  {
+    "number": 71,
+    "name": "Nuh",
+    "nameArabic": "نوح",
+    "meaning": "Noah",
+    "ayahCount": 28,
+    "revelationPlace": "makkah",
+    "revelationOrder": 71,
+    "hasBismillah": true
+  },
+  {
+    "number": 72,
+    "name": "Al-Jinn",
+    "nameArabic": "الجن",
+    "meaning": "The Jinn",
+    "ayahCount": 28,
+    "revelationPlace": "makkah",
+    "revelationOrder": 40,
+    "hasBismillah": true
+  },
+  {
+    "number": 73,
+    "name": "Al-Muzzammil",
+    "nameArabic": "المزمل",
+    "meaning": "The Enshrouded One",
+    "ayahCount": 20,
+    "revelationPlace": "makkah",
+    "revelationOrder": 3,
+    "hasBismillah": true
+  },
+  {
+    "number": 74,
+    "name": "Al-Muddaththir",
+    "nameArabic": "المدثر",
+    "meaning": "The Cloaked One",
+    "ayahCount": 56,
+    "revelationPlace": "makkah",
+    "revelationOrder": 4,
+    "hasBismillah": true
+  },
+  {
+    "number": 75,
+    "name": "Al-Qiyamah",
+    "nameArabic": "القيامة",
+    "meaning": "The Resurrection",
+    "ayahCount": 40,
+    "revelationPlace": "makkah",
+    "revelationOrder": 31,
+    "hasBismillah": true
+  },
+  {
+    "number": 76,
+    "name": "Al-Insan",
+    "nameArabic": "الانسان",
+    "meaning": "The Man",
+    "ayahCount": 31,
+    "revelationPlace": "madinah",
+    "revelationOrder": 98,
+    "hasBismillah": true
+  },
+  {
+    "number": 77,
+    "name": "Al-Mursalat",
+    "nameArabic": "المرسلات",
+    "meaning": "The Emissaries",
+    "ayahCount": 50,
+    "revelationPlace": "makkah",
+    "revelationOrder": 33,
+    "hasBismillah": true
+  },
+  {
+    "number": 78,
+    "name": "An-Naba",
+    "nameArabic": "النبإ",
+    "meaning": "The Tidings",
+    "ayahCount": 40,
+    "revelationPlace": "makkah",
+    "revelationOrder": 80,
+    "hasBismillah": true
+  },
+  {
+    "number": 79,
+    "name": "An-Nazi'at",
+    "nameArabic": "النازعات",
+    "meaning": "Those who drag forth",
+    "ayahCount": 46,
+    "revelationPlace": "makkah",
+    "revelationOrder": 81,
+    "hasBismillah": true
+  },
+  {
+    "number": 80,
+    "name": "'Abasa",
+    "nameArabic": "عبس",
+    "meaning": "He Frowned",
+    "ayahCount": 42,
+    "revelationPlace": "makkah",
+    "revelationOrder": 24,
+    "hasBismillah": true
+  },
+  {
+    "number": 81,
+    "name": "At-Takwir",
+    "nameArabic": "التكوير",
+    "meaning": "The Overthrowing",
+    "ayahCount": 29,
+    "revelationPlace": "makkah",
+    "revelationOrder": 7,
+    "hasBismillah": true
+  },
+  {
+    "number": 82,
+    "name": "Al-Infitar",
+    "nameArabic": "الإنفطار",
+    "meaning": "The Cleaving",
+    "ayahCount": 19,
+    "revelationPlace": "makkah",
+    "revelationOrder": 82,
+    "hasBismillah": true
+  },
+  {
+    "number": 83,
+    "name": "Al-Mutaffifin",
+    "nameArabic": "المطففين",
+    "meaning": "The Defrauding",
+    "ayahCount": 36,
+    "revelationPlace": "makkah",
+    "revelationOrder": 86,
+    "hasBismillah": true
+  },
+  {
+    "number": 84,
+    "name": "Al-Inshiqaq",
+    "nameArabic": "الإنشقاق",
+    "meaning": "The Sundering",
+    "ayahCount": 25,
+    "revelationPlace": "makkah",
+    "revelationOrder": 83,
+    "hasBismillah": true
+  },
+  {
+    "number": 85,
+    "name": "Al-Buruj",
+    "nameArabic": "البروج",
+    "meaning": "The Mansions of the Stars",
+    "ayahCount": 22,
+    "revelationPlace": "makkah",
+    "revelationOrder": 27,
+    "hasBismillah": true
+  },
+  {
+    "number": 86,
+    "name": "At-Tariq",
+    "nameArabic": "الطارق",
+    "meaning": "The Nightcommer",
+    "ayahCount": 17,
+    "revelationPlace": "makkah",
+    "revelationOrder": 36,
+    "hasBismillah": true
+  },
+  {
+    "number": 87,
+    "name": "Al-A'la",
+    "nameArabic": "الأعلى",
+    "meaning": "The Most High",
+    "ayahCount": 19,
+    "revelationPlace": "makkah",
+    "revelationOrder": 8,
+    "hasBismillah": true
+  },
+  {
+    "number": 88,
+    "name": "Al-Ghashiyah",
+    "nameArabic": "الغاشية",
+    "meaning": "The Overwhelming",
+    "ayahCount": 26,
+    "revelationPlace": "makkah",
+    "revelationOrder": 68,
+    "hasBismillah": true
+  },
+  {
+    "number": 89,
+    "name": "Al-Fajr",
+    "nameArabic": "الفجر",
+    "meaning": "The Dawn",
+    "ayahCount": 30,
+    "revelationPlace": "makkah",
+    "revelationOrder": 10,
+    "hasBismillah": true
+  },
+  {
+    "number": 90,
+    "name": "Al-Balad",
+    "nameArabic": "البلد",
+    "meaning": "The City",
+    "ayahCount": 20,
+    "revelationPlace": "makkah",
+    "revelationOrder": 35,
+    "hasBismillah": true
+  },
+  {
+    "number": 91,
+    "name": "Ash-Shams",
+    "nameArabic": "الشمس",
+    "meaning": "The Sun",
+    "ayahCount": 15,
+    "revelationPlace": "makkah",
+    "revelationOrder": 26,
+    "hasBismillah": true
+  },
+  {
+    "number": 92,
+    "name": "Al-Layl",
+    "nameArabic": "الليل",
+    "meaning": "The Night",
+    "ayahCount": 21,
+    "revelationPlace": "makkah",
+    "revelationOrder": 9,
+    "hasBismillah": true
+  },
+  {
+    "number": 93,
+    "name": "Ad-Duhaa",
+    "nameArabic": "الضحى",
+    "meaning": "The Morning Hours",
+    "ayahCount": 11,
+    "revelationPlace": "makkah",
+    "revelationOrder": 11,
+    "hasBismillah": true
+  },
+  {
+    "number": 94,
+    "name": "Ash-Sharh",
+    "nameArabic": "الشرح",
+    "meaning": "The Relief",
+    "ayahCount": 8,
+    "revelationPlace": "makkah",
+    "revelationOrder": 12,
+    "hasBismillah": true
+  },
+  {
+    "number": 95,
+    "name": "At-Tin",
+    "nameArabic": "التين",
+    "meaning": "The Fig",
+    "ayahCount": 8,
+    "revelationPlace": "makkah",
+    "revelationOrder": 28,
+    "hasBismillah": true
+  },
+  {
+    "number": 96,
+    "name": "Al-'Alaq",
+    "nameArabic": "العلق",
+    "meaning": "The Clot",
+    "ayahCount": 19,
+    "revelationPlace": "makkah",
+    "revelationOrder": 1,
+    "hasBismillah": true
+  },
+  {
+    "number": 97,
+    "name": "Al-Qadr",
+    "nameArabic": "القدر",
+    "meaning": "The Power",
+    "ayahCount": 5,
+    "revelationPlace": "makkah",
+    "revelationOrder": 25,
+    "hasBismillah": true
+  },
+  {
+    "number": 98,
+    "name": "Al-Bayyinah",
+    "nameArabic": "البينة",
+    "meaning": "The Clear Proof",
+    "ayahCount": 8,
+    "revelationPlace": "madinah",
+    "revelationOrder": 100,
+    "hasBismillah": true
+  },
+  {
+    "number": 99,
+    "name": "Az-Zalzalah",
+    "nameArabic": "الزلزلة",
+    "meaning": "The Earthquake",
+    "ayahCount": 8,
+    "revelationPlace": "madinah",
+    "revelationOrder": 93,
+    "hasBismillah": true
+  },
+  {
+    "number": 100,
+    "name": "Al-'Adiyat",
+    "nameArabic": "العاديات",
+    "meaning": "The Courser",
+    "ayahCount": 11,
+    "revelationPlace": "makkah",
+    "revelationOrder": 14,
+    "hasBismillah": true
+  },
+  {
+    "number": 101,
+    "name": "Al-Qari'ah",
+    "nameArabic": "القارعة",
+    "meaning": "The Calamity",
+    "ayahCount": 11,
+    "revelationPlace": "makkah",
+    "revelationOrder": 30,
+    "hasBismillah": true
+  },
+  {
+    "number": 102,
+    "name": "At-Takathur",
+    "nameArabic": "التكاثر",
+    "meaning": "The Rivalry in world increase",
+    "ayahCount": 8,
+    "revelationPlace": "makkah",
+    "revelationOrder": 16,
+    "hasBismillah": true
+  },
+  {
+    "number": 103,
+    "name": "Al-'Asr",
+    "nameArabic": "العصر",
+    "meaning": "The Declining Day",
+    "ayahCount": 3,
+    "revelationPlace": "makkah",
+    "revelationOrder": 13,
+    "hasBismillah": true
+  },
+  {
+    "number": 104,
+    "name": "Al-Humazah",
+    "nameArabic": "الهمزة",
+    "meaning": "The Traducer",
+    "ayahCount": 9,
+    "revelationPlace": "makkah",
+    "revelationOrder": 32,
+    "hasBismillah": true
+  },
+  {
+    "number": 105,
+    "name": "Al-Fil",
+    "nameArabic": "الفيل",
+    "meaning": "The Elephant",
+    "ayahCount": 5,
+    "revelationPlace": "makkah",
+    "revelationOrder": 19,
+    "hasBismillah": true
+  },
+  {
+    "number": 106,
+    "name": "Quraysh",
+    "nameArabic": "قريش",
+    "meaning": "Quraysh",
+    "ayahCount": 4,
+    "revelationPlace": "makkah",
+    "revelationOrder": 29,
+    "hasBismillah": true
+  },
+  {
+    "number": 107,
+    "name": "Al-Ma'un",
+    "nameArabic": "الماعون",
+    "meaning": "The Small kindnesses",
+    "ayahCount": 7,
+    "revelationPlace": "makkah",
+    "revelationOrder": 17,
+    "hasBismillah": true
+  },
+  {
+    "number": 108,
+    "name": "Al-Kawthar",
+    "nameArabic": "الكوثر",
+    "meaning": "The Abundance",
+    "ayahCount": 3,
+    "revelationPlace": "makkah",
+    "revelationOrder": 15,
+    "hasBismillah": true
+  },
+  {
+    "number": 109,
+    "name": "Al-Kafirun",
+    "nameArabic": "الكافرون",
+    "meaning": "The Disbelievers",
+    "ayahCount": 6,
+    "revelationPlace": "makkah",
+    "revelationOrder": 18,
+    "hasBismillah": true
+  },
+  {
+    "number": 110,
+    "name": "An-Nasr",
+    "nameArabic": "النصر",
+    "meaning": "The Divine Support",
+    "ayahCount": 3,
+    "revelationPlace": "madinah",
+    "revelationOrder": 114,
+    "hasBismillah": true
+  },
+  {
+    "number": 111,
+    "name": "Al-Masad",
+    "nameArabic": "المسد",
+    "meaning": "The Palm Fiber",
+    "ayahCount": 5,
+    "revelationPlace": "makkah",
+    "revelationOrder": 6,
+    "hasBismillah": true
+  },
+  {
+    "number": 112,
+    "name": "Al-Ikhlas",
+    "nameArabic": "الإخلاص",
+    "meaning": "The Sincerity",
+    "ayahCount": 4,
+    "revelationPlace": "makkah",
+    "revelationOrder": 22,
+    "hasBismillah": true
+  },
+  {
+    "number": 113,
+    "name": "Al-Falaq",
+    "nameArabic": "الفلق",
+    "meaning": "The Daybreak",
+    "ayahCount": 5,
+    "revelationPlace": "makkah",
+    "revelationOrder": 20,
+    "hasBismillah": true
+  },
+  {
+    "number": 114,
+    "name": "An-Nas",
+    "nameArabic": "الناس",
+    "meaning": "Mankind",
+    "ayahCount": 6,
+    "revelationPlace": "makkah",
+    "revelationOrder": 21,
+    "hasBismillah": true
+  }
+]

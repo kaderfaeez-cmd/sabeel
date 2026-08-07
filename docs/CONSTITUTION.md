@@ -89,6 +89,13 @@ absolute unless there is broad scholarly consensus.
 
 No sectarian debate. Maintain a welcoming educational tone throughout.
 
+**For all fiqh topics, [FIQH-POLICY.md](./FIQH-POLICY.md) is binding** and carries the
+same authority as this document. In summary: teach broad agreement first; attribute every
+differing position to its madhhab and never call one correct and the others wrong; label
+every action as pillar, obligatory, sunnah or recommended; keep the main lesson simple and
+put differences in an optional "Scholarly Differences" section; never issue fatwas; cite
+evidence and mark when a view rests on interpretation; never use sectarian language.
+
 ## 6. Visual policy
 
 **Never** generate, commission or display imagery depicting the Prophet Muhammad ﷺ, any
