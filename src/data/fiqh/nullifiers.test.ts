@@ -63,14 +63,21 @@ describe('what does not break wudhu', () => {
     }
   });
 
-  test('entries without evidence still name the minority position where one exists', () => {
-    // Saying "this does not break wudhu" flatly would misrepresent the Hanafi position
-    // on bleeding and vomiting.
-    const bleeding = NON_NULLIFIERS.find((item) => item.id === 'bleeding');
-    const vomiting = NON_NULLIFIERS.find((item) => item.id === 'vomiting');
+  test('bleeding and vomiting are NOT listed here — they are contested, not settled', () => {
+    // Stating flatly that they do not break wudhu would misrepresent the Hanafi school.
+    const ids = NON_NULLIFIERS.map((item) => item.id);
 
-    expect(bleeding?.clarification).toMatch(/Hanafi/);
-    expect(vomiting?.clarification).toMatch(/Hanafi/);
+    expect(ids).not.toContain('bleeding');
+    expect(ids).not.toContain('vomiting');
+  });
+
+  test('an entry citing evidence for a minority position must say what the evidence shows', () => {
+    // Otherwise a reader sees a citation under "does not break wudhu" and assumes the
+    // narration says so, when it may say close to the opposite.
+    for (const item of NON_NULLIFIERS) {
+      if (!item.evidence) continue;
+      expect(item.clarification.length).toBeGreaterThan(40);
+    }
   });
 });
 
@@ -92,6 +99,22 @@ describe('the differences follow FIQH-POLICY §2', () => {
     expect(text).not.toMatch(
       /strongest|most correct|correct opinion|preferred view|the right view|weaker opinion/,
     );
+  });
+
+  test('bleeding and vomiting each name the narration their positions rest on', () => {
+    const bleeding = JSON.stringify(NULLIFIER_DIFFERENCES.find((d) => d.id === 'bleeding'));
+    const vomiting = JSON.stringify(NULLIFIER_DIFFERENCES.find((d) => d.id === 'vomiting'));
+
+    // Abu Dawud 198 — the sentry struck by arrows who continued praying.
+    expect(bleeding).toMatch(/arrows/i);
+    // Tirmidhi 87 — Abu ad-Darda, the Prophet ﷺ vomited and performed wudhu.
+    expect(vomiting).toMatch(/Abu ad-Darda/);
+  });
+
+  test('where Sabeel has not verified a position’s evidence, it says so rather than omitting it', () => {
+    const bleeding = JSON.stringify(NULLIFIER_DIFFERENCES.find((d) => d.id === 'bleeding'));
+
+    expect(bleeding).toMatch(/has not yet verified/);
   });
 
   test('the two touching-private-parts positions each name the narration they follow', () => {

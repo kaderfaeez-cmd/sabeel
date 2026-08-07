@@ -77,6 +77,16 @@ const CANDIDATES = [
   ['ibnmajah', 483, 'Wudhu after camel meat'],
   ['bukhari', 135, 'No prayer accepted without wudhu after hadath'],
   ['nasai', 165, 'Sleep and wudhu'],
+  // Bleeding and vomiting
+  ['abudawud', 198, 'Ansari shot with an arrow, continued praying while bleeding'],
+  ['abudawud', 199, 'Bleeding during prayer'],
+  ['tirmidhi', 87, 'The Prophet vomited and performed wudhu'],
+  ['ibnmajah', 1221, 'Vomiting or nosebleed during prayer'],
+  ['tirmidhi', 719, 'Vomiting'],
+  ['ibnmajah', 1676, 'Vomiting and the fast'],
+  ['abudawud', 2381, 'Vomiting and the fast'],
+  ['bukhari', 178, 'Washing blood'],
+  ['nasai', 96, 'Wudhu and blood'],
 ];
 
 const rows = [];

@@ -92,6 +92,26 @@ export const NULLIFIERS: readonly Nullifier[] = [
     },
   },
   {
+    id: 'bleeding',
+    title: 'Bleeding from a wound',
+    description:
+      'A cut, a nosebleed, or any bleeding from somewhere other than the two passages.',
+    agreement: 'differed',
+    disagreementNote:
+      'The majority hold that it does not break wudhu. The Hanafi school holds that flowing blood does.',
+    evidence: { hadith: [{ collection: 'abudawud', number: 198 }] },
+  },
+  {
+    id: 'vomiting',
+    title: 'Vomiting',
+    description:
+      'Bringing up the contents of the stomach, whether deliberately or not.',
+    agreement: 'differed',
+    disagreementNote:
+      'The majority hold that it does not break wudhu. The Hanafi school holds that a mouthful does.',
+    evidence: { hadith: [{ collection: 'tirmidhi', number: 87 }] },
+  },
+  {
     id: 'contact-spouses',
     title: 'Contact between spouses',
     description:
@@ -115,6 +135,16 @@ export interface NonNullifier {
   readonly claim: string;
   readonly clarification: string;
   readonly evidence?: EvidenceSpec;
+  /**
+   * What the cited narration actually shows.
+   *
+   * Required whenever the evidence supports a *minority* position rather than the
+   * majority one stated in the clarification. Without it, a reader sees a citation under
+   * a "does not break wudhu" heading and assumes the narration says so — when in the
+   * case of vomiting it says close to the opposite. Constitution §3.2: the claim and its
+   * evidence must line up, not merely sit next to each other.
+   */
+  readonly evidenceShows?: string;
 }
 
 export const NON_NULLIFIERS: readonly NonNullifier[] = [
@@ -125,18 +155,9 @@ export const NON_NULLIFIERS: readonly NonNullifier[] = [
       'If you had wudhu and are now uncertain, you still have it. The Prophet ﷺ was asked about exactly this and said not to leave the prayer unless you hear a sound or smell something. Certainty is not removed by doubt.',
     evidence: { hadith: [{ collection: 'bukhari', number: 137 }] },
   },
-  {
-    id: 'bleeding',
-    claim: 'A small cut, a nosebleed, or a graze',
-    clarification:
-      'Bleeding from somewhere other than the two passages does not break wudhu according to the majority of scholars. The Hanafi school holds that flowing blood does.',
-  },
-  {
-    id: 'vomiting',
-    claim: 'Vomiting',
-    clarification:
-      'Does not break wudhu according to the majority. The Hanafi school holds that a mouthful does.',
-  },
+  // Bleeding and vomiting are NOT listed here. Both are genuine Hanafi-versus-majority
+  // differences, so stating flatly that they do not break wudhu would misrepresent an
+  // accepted school. They appear under "Where the schools differ" instead.
   {
     id: 'laughing',
     claim: 'Laughing outside of prayer',
@@ -212,18 +233,34 @@ export const NULLIFIER_DIFFERENCES: readonly FiqhDifferenceData[] = [
     ],
   },
   {
-    id: 'bleeding-vomiting',
-    question: 'Do bleeding and vomiting break wudhu?',
+    id: 'bleeding',
+    question: 'Does bleeding from a wound break wudhu?',
+    positions: [
+      {
+        schools: ['Maliki', "Shafi'i", 'Hanbali'],
+        position:
+          'No. Only what leaves the two passages breaks wudhu. They point to the sentry from the Ansar who was struck by three arrows while on watch and continued his prayer rather than break it.',
+      },
+      {
+        schools: ['Hanafi'],
+        position:
+          'Yes, when the blood flows rather than merely appears. They rely on reports about wudhu from flowing blood which Sabeel has not yet verified through its publication policy.',
+      },
+    ],
+  },
+  {
+    id: 'vomiting',
+    question: 'Does vomiting break wudhu?',
     positions: [
       {
         schools: ['Hanafi'],
         position:
-          'Flowing blood from anywhere on the body, and a mouthful of vomit, break wudhu.',
+          'A mouthful does. They rely on the narration of Abu ad-Darda, in which the Prophet ﷺ vomited and then performed wudhu, and read that as establishing a requirement.',
       },
       {
         schools: ['Maliki', "Shafi'i", 'Hanbali'],
         position:
-          'Neither breaks wudhu. Only what leaves the two passages does.',
+          'It does not. They read the same narration as showing a recommended act, or a wudhu performed in order to pray rather than because of the vomiting.',
       },
     ],
   },
