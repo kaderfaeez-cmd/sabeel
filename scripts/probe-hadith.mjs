@@ -65,6 +65,18 @@ const CANDIDATES = [
   ['bukhari', 314, 'Ghusl after menstruation'],
   ['abudawud', 248, 'Ghusl description'],
   ['tirmidhi', 103, 'Ghusl from janabah'],
+  // Nullifiers of wudhu
+  ['bukhari', 137, 'No wudhu unless a sound is heard or an odour smelled'],
+  ['muslim', 361, 'Doubt about breaking wudhu'],
+  ['abudawud', 203, 'The eye is the drawstring of the anus - sleep'],
+  ['tirmidhi', 96, 'Touching the private parts - Busrah bint Safwan'],
+  ['abudawud', 181, 'Touching the private parts'],
+  ['tirmidhi', 81, 'Camel meat and wudhu'],
+  ['muslim', 360, 'Camel meat and wudhu'],
+  ['abudawud', 184, 'Camel meat and wudhu'],
+  ['ibnmajah', 483, 'Wudhu after camel meat'],
+  ['bukhari', 135, 'No prayer accepted without wudhu after hadath'],
+  ['nasai', 165, 'Sleep and wudhu'],
 ];
 
 const rows = [];

@@ -58,6 +58,12 @@ describe('the evidence statuses are kept distinct', () => {
     expect(copy.body).not.toMatch(/weak/i);
   });
 
+  test('"disputed" says it is the GRADING that is disputed, not the ruling', () => {
+    // This notice appears beside rulings the four schools agree on. Without naming the
+    // grading it reads as a disagreement about the ruling itself.
+    expect(EVIDENCE_STATUS_COPY.disputed.heading).toMatch(/grading/i);
+  });
+
   test('"fabricated" is distinct from "weak"', () => {
     expect(EVIDENCE_STATUS_COPY.fabricated.body).toMatch(/fabricated/i);
     expect(EVIDENCE_STATUS_COPY.fabricated.body).not.toBe(EVIDENCE_STATUS_COPY.weak.body);

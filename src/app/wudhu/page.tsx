@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ScholarlyDifferences } from '@/features/fiqh/scholarly-differences';
 import { RulingLegend } from '@/features/fiqh/ruling-badge';
 import { StepCard } from '@/features/fiqh/step-card';
@@ -63,6 +64,25 @@ export default async function WudhuPage() {
           />
         ))}
       </ol>
+
+      <Link
+        href="/wudhu/nullifiers"
+        className="group mt-14 flex items-center gap-4 rounded-xl border border-line bg-surface-raised p-6 transition-colors duration-300 hover:border-line-strong"
+      >
+        <span className="min-w-0 flex-1">
+          <span className="block font-display text-xl text-ink">What breaks wudhu</span>
+          <span className="mt-1.5 block text-sm leading-relaxed text-ink-muted">
+            What needs a fresh wudhu, what does not, and the points where the schools
+            differ.
+          </span>
+        </span>
+        <span
+          aria-hidden
+          className="text-emerald transition-transform duration-300 group-hover:translate-x-1"
+        >
+          →
+        </span>
+      </Link>
 
       <ScholarlyDifferences differences={WUDHU_DIFFERENCES} />
 

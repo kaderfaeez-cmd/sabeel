@@ -50,7 +50,9 @@ multiple ayahs, topic-based browsing, and cross-device sync (Phase 9, on Supabas
 - ⬜ The remaining prayers' rak'ah counts and timings
 - ✅ **Learn Ghusl** — 3 occasions requiring it and 8 steps, each with evidence, plus
   4 scholarly differences
-- ⬜ Nullifiers of wudhu, and practice checklists
+- ✅ **What breaks wudhu** — agreed nullifiers, contested ones marked as contested, and
+  a "what does *not* break wudhu" section for the anxiety that causes needless repetition
+- ⬜ Practice checklists
 - ⬜ Wudhu step illustrations (environment/diagram only — no figurative depiction)
 
 ### Phase 4 — Prayer times

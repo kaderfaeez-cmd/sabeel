@@ -81,8 +81,10 @@ export const EVIDENCE_STATUS_COPY: Record<
       'false; it means we cannot confidently present it as evidence. The lesson ' +
       'therefore relies on the Quran and verified sources only.',
   },
+  // Heading deliberately says "grading": a reader meeting this alongside a ruling the
+  // schools agree on must not read it as a disagreement about the ruling itself.
   disputed: {
-    heading: 'Scholars differed on this narration',
+    heading: 'Scholars differed on this narration’s grading',
     body:
       'Recognised scholars reached different conclusions about this narration. Sabeel ' +
       'shows their assessments rather than choosing between them, and does not present ' +
