@@ -1,4 +1,4 @@
-import { formatCitation, GRADING_LABEL, KIND_LABEL } from '@/lib/content/citation';
+import { formatCitation, KIND_LABEL } from '@/lib/content/citation';
 import type { SourcedContent } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
 
@@ -106,13 +106,10 @@ export function ContentBlock({
         )}
       </div>
 
+      {/* The citation already states the grading in its visible text, so there is no
+          screen-reader-only duplicate here — that announced it twice. */}
       <figcaption className="mt-5 border-t border-line pt-3 text-xs leading-relaxed text-ink-faint">
         {formatCitation(block.source)}
-        {block.kind === 'hadith' && (
-          <span className="sr-only">
-            . Grading: {GRADING_LABEL[block.source.grading]}.
-          </span>
-        )}
       </figcaption>
     </figure>
   );

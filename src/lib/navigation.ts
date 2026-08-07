@@ -81,8 +81,8 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
       {
         title: 'Learn Wudhu',
         href: '/wudhu',
-        blurb: 'Step by step, with the sunnah acts, the nullifiers, and a practice checklist.',
-        status: 'planned',
+        blurb: 'Every step with its evidence, the common mistakes, and where the schools differ.',
+        status: 'live',
         phase: 3,
       },
       {

@@ -36,10 +36,17 @@ Quran fetch layer. 49 tests, 91% line coverage on `src/lib`.
 Deferred to later phases (they depend on work not yet done): highlights spanning
 multiple ayahs, topic-based browsing, and cross-device sync (Phase 9, on Supabase).
 
-### Phase 3 — Learn Salah + Learn Wudhu + Learn Ghusl
-Step-by-step interactive guides. Arabic / transliteration / translation / meaning per
-step, audio, evidence from Quran and authentic hadith on every step, common mistakes,
-nullifiers, practice mode. No figurative depiction — motion and diagram only.
+### Phase 3 — Learn Salah + Learn Wudhu + Learn Ghusl 🔨 *in progress*
+- ✅ Authenticity gate distinguishing all five evidence states
+- ✅ Evidence model future-proofed for Quran, hadith, athar, ijma and scholarly explanation
+- ✅ `scripts/probe-hadith.mjs` — candidate references are checked against the live
+  dataset before any page cites them; none is ever asserted from memory
+- ✅ **Learn Wudhu** — 9 steps, each classified by weight, all citations verified through
+  the gate, common mistakes, and a closed-by-default "Scholarly differences" section
+- ⬜ Learn Salah (larger: positions, recitations, transliteration, audio)
+- ⬜ Learn Ghusl
+- ⬜ Nullifiers and practice checklists
+- ⬜ Wudhu step illustrations (environment/diagram only — no figurative depiction)
 
 ### Phase 4 — Prayer times
 Geolocation + manual city, calculation-method selection, next-prayer countdown, quiet
