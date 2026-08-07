@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "generate:surahs": "node scripts/generate-surah-index.mjs"
+    "generate:surahs": "node scripts/generate-surah-index.mjs",
+    "verify:hadith": "node scripts/verify-hadith.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

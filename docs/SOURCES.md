@@ -50,3 +50,24 @@ AlAdhan API, with user-selectable calculation method. No auto-play audio.
 |---|---|---|
 | 2026-08-07 | Quran.com API v4 | ✅ 114 chapters, 126 translations |
 | 2026-08-07 | hadith-api @1 | ✅ 10 editions |
+| 2026-08-07 | Recitation audio (verses.quran.com) | ✅ 12 reciters, per-ayah audio reachable |
+| 2026-08-07 | Hadith authenticity gate | ✅ `npm run verify:hadith` — all cases match this policy |
+
+## The authenticity gate
+
+Implemented in `src/lib/hadith/api.ts`. `fetchHadith` returns `null` — never a usable
+block — when authenticity cannot be established, so a caller cannot present it by accident.
+
+1. **Sahih al-Bukhari and Sahih Muslim** are accepted as authentic by the collection
+   itself. The dataset ships them with an empty `grades` array, which here means "no
+   separate grading is required", not "ungraded".
+2. **Every other collection** requires an explicit grading from a named scholar. An
+   ungraded narration from a Sunan collection is **refused**.
+3. Gradings weaker than *hasan* — da'if, weak, mawdu' and the rest — are **refused**.
+   Sabeel does not cite weak narrations as evidence.
+4. Where several scholars have graded a narration, the strongest acceptable grading is
+   used and **that scholar is credited by name** in the citation.
+5. An unrecognised grading string is refused rather than guessed at.
+
+`npm run verify:hadith` checks these rules against the live dataset rather than mocks,
+because the thing being verified is whether the real data still behaves as assumed.
