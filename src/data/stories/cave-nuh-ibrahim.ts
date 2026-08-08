@@ -23,6 +23,7 @@ export const PEOPLE_OF_THE_CAVE: Story = {
     {
       id: 'opening',
       heading: 'A sign worth thinking about',
+      when: 'Before they slept',
       narrative:
         'The Quran introduces them almost as a question — as if to say: you think this is remarkable? Consider what else Allah does. Then it tells us what happened in the cave.',
       surah: 18,
@@ -34,6 +35,7 @@ export const PEOPLE_OF_THE_CAVE: Story = {
     {
       id: 'their-stand',
       heading: 'What they said before they left',
+      when: 'The decision',
       narrative:
         'They stood up and stated what they believed, knowing it would cost them. Then they reasoned among themselves about what to do next.',
       surah: 18,
@@ -45,6 +47,7 @@ export const PEOPLE_OF_THE_CAVE: Story = {
     {
       id: 'the-sleep',
       heading: 'The long sleep',
+      when: 'Three centuries',
       narrative:
         'The description of them asleep is unexpectedly gentle — the sun moving around the cave, their bodies being turned, a dog at the entrance.',
       surah: 18,
@@ -56,6 +59,7 @@ export const PEOPLE_OF_THE_CAVE: Story = {
     {
       id: 'waking',
       heading: 'Waking into a different world',
+      when: 'Waking',
       narrative:
         'They wake up assuming they have slept a day or less. One of them is sent into the city with their old money to buy food — and the money is centuries out of date.',
       surah: 18,
@@ -67,6 +71,7 @@ export const PEOPLE_OF_THE_CAVE: Story = {
     {
       id: 'how-many',
       heading: 'How many were they?',
+      when: 'Long afterwards',
       narrative:
         'People afterwards argued about the number of the sleepers. The Quran addresses the argument directly — and refuses to settle it.',
       surah: 18,
@@ -95,6 +100,8 @@ export const PEOPLE_OF_THE_CAVE: Story = {
   actionToday:
     'Pick one argument — online or in person — that you have been drawn into and that would change nothing. Leave it today, without needing the last word.',
   relatedDuaId: 'protection-refuge',
+  noMapReason:
+    'The Quran never says where the cave was, and it explicitly warns against disputing the details of this story — including how many of them there were. Sabeel will not plot a location the Quran deliberately withheld.',
 };
 
 export const NUH: Story = {
@@ -120,6 +127,7 @@ export const NUH: Story = {
     {
       id: 'sent',
       heading: 'The task',
+      when: 'The beginning',
       narrative:
         'The surah opens at the very start of his mission, before any of the frustration or the years of rejection. He is sent to his people with a warning, and the way he chooses to open is worth noticing — he does not begin with threats.',
       surah: 71,
@@ -131,6 +139,7 @@ export const NUH: Story = {
     {
       id: 'how-he-tried',
       heading: 'Every way he could think of',
+      when: 'Over lifetimes',
       narrative:
         'Now he describes his own efforts, speaking to Allah. Read this as what it is: a man listing everything he tried.',
       surah: 71,
@@ -142,6 +151,7 @@ export const NUH: Story = {
     {
       id: 'what-he-showed',
       heading: 'He stopped arguing and pointed',
+      when: 'When words failed',
       narrative:
         'When words were not working, he changed tactics entirely. Instead of debating, he turned their attention to the world around them.',
       surah: 71,
@@ -153,6 +163,8 @@ export const NUH: Story = {
     {
       id: 'the-ark',
       heading: 'Building a ship on dry land',
+      when: 'After the years of calling',
+      placeId: 'judi',
       narrative:
         'In Surah Hud, he begins building. His people pass by and laugh at him — a man constructing a ship where there is no sea.',
       surah: 11,
@@ -164,6 +176,8 @@ export const NUH: Story = {
     {
       id: 'his-son',
       heading: 'His son would not come',
+      when: 'As the water rose',
+      placeId: 'judi',
       narrative:
         'The water rises. Nuh calls out to his own son to come aboard. This is the hardest passage in the story.',
       surah: 11,
@@ -217,6 +231,8 @@ export const IBRAHIM: Story = {
     {
       id: 'questioning',
       heading: 'A question, not an accusation',
+      when: 'As a young man',
+      placeId: 'mesopotamia',
       narrative:
         'Ibrahim comes to his father and his people while they are devoted to statues. He does not open with condemnation. He opens by asking them what these things are.',
       surah: 21,
@@ -228,6 +244,8 @@ export const IBRAHIM: Story = {
     {
       id: 'idols',
       heading: 'The broken statues',
+      when: 'While they were away',
+      placeId: 'mesopotamia',
       narrative:
         'While they are away, he breaks the statues — all except the largest, and he leaves the tool with it. When they return and demand to know who did it, his reply is one of the sharpest moments in the Quran.',
       surah: 21,
@@ -239,6 +257,8 @@ export const IBRAHIM: Story = {
     {
       id: 'realising',
       heading: 'They see it, and turn away',
+      when: 'A moment of clarity',
+      placeId: 'mesopotamia',
       narrative:
         'For a moment it works. They turn to each other and admit the problem. And then they go straight back to where they were.',
       surah: 21,
@@ -250,6 +270,8 @@ export const IBRAHIM: Story = {
     {
       id: 'fire',
       heading: 'Their answer was force',
+      when: 'When the argument was lost',
+      placeId: 'mesopotamia',
       narrative:
         'They have just admitted, out loud and to each other, that the statues cannot speak. They have no answer left. So they stop arguing and reach for the only thing they have left — and decide to burn him alive for asking.',
       surah: 21,
@@ -261,6 +283,8 @@ export const IBRAHIM: Story = {
     {
       id: 'the-test',
       heading: 'The hardest instruction',
+      when: 'Much later in his life',
+      placeId: 'makkah',
       narrative:
         'Much later comes the test everyone remembers. What is often missed is that Ibrahim told his son about it, and asked him what he thought.',
       surah: 37,

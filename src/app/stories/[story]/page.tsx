@@ -11,6 +11,8 @@ import {
   Reflections,
   TakeAways,
 } from '@/components/lesson/lesson-blocks';
+import { StoryMap } from '@/components/story/story-map';
+import { StoryTimeline } from '@/components/story/story-timeline';
 import { DUAS } from '@/data/duas';
 import { getStory, STORIES, THEME_LABEL, type StoryPassage } from '@/data/stories';
 import type { QuranBlock } from '@/lib/content/types';
@@ -74,6 +76,20 @@ export default async function StoryPage({ params }: PageProps) {
         {story.where}
         {translation && ` · Translation by ${translation.translator}.`}
       </p>
+
+      {/* Shape of the story, and where it happened — both before the reading begins,
+          so a beginner knows what they are walking into. */}
+      <div className="mt-14">
+        <StoryTimeline passages={story.passages} storyName={story.name} />
+      </div>
+
+      <div className="mt-16">
+        <StoryMap
+          passages={story.passages}
+          storyName={story.name}
+          noMapReason={story.noMapReason}
+        />
+      </div>
 
       {/* The story itself: scene, then revelation, then plain explanation. */}
       <div className="mt-16 space-y-16">

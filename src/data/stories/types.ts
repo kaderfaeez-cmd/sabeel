@@ -48,6 +48,17 @@ export interface StoryPassage {
   readonly heading: string;
 
   /**
+   * Where this moment sits in the story's own sequence — "Before he was born",
+   * "Years later". Deliberately relative, never a date: the Quran does not date these
+   * events, and inventing a chronology would be exactly the kind of confident detail
+   * this platform refuses to add.
+   */
+  readonly when?: string;
+
+  /** Id of a place in places.ts, when this moment has a locatable setting. */
+  readonly placeId?: string;
+
+  /**
    * The story, told plainly, BEFORE the verses.
    *
    * This is Sabeel's writing and is labelled as such on the page. It sets the scene so a
@@ -115,4 +126,14 @@ export interface Story {
 
   /** Id of a dua in the Dua Library that fits this story, if one does. */
   readonly relatedDuaId?: string;
+
+  /**
+   * Why this story has no map, when it has none.
+   *
+   * Required when no passage carries a `placeId`. Some stories are unlocatable on
+   * purpose — the Quran never says where the cave was, and Dhul-Qarnayn's journey names
+   * no place at all. Saying so is more honest than omitting the map silently, and far
+   * more honest than inventing a location to fill the space.
+   */
+  readonly noMapReason?: string;
 }

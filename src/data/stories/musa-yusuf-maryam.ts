@@ -30,6 +30,8 @@ export const MUSA: Story = {
     {
       id: 'the-river',
       heading: 'The river',
+      when: 'The very beginning',
+      placeId: 'egypt',
       narrative:
         'Fir‘awn ruled Egypt and had been killing the sons of the Israelites. A mother has a newborn boy. She receives inspiration from Allah telling her what to do — and it is the last thing any mother would want to hear. She is told to put him in the river, and she is given a promise about what will happen next. Read what she was told, and then read what happened to her heart afterwards.',
       surah: 28,
@@ -41,6 +43,8 @@ export const MUSA: Story = {
     {
       id: 'the-fire',
       heading: 'A fire in the valley',
+      when: 'Years later, returning from Madyan',
+      placeId: 'tuwa',
       narrative:
         'Years pass. Musa is now a grown man who has left Egypt after a killing he did not intend, and he is travelling with his family at night. He sees a fire in the distance. He is not looking for revelation — he is looking for warmth and directions. He tells his family to wait, and walks toward it.',
       surah: 20,
@@ -52,6 +56,8 @@ export const MUSA: Story = {
     {
       id: 'the-task',
       heading: '“Go to Fir‘awn”',
+      when: 'The same night',
+      placeId: 'tuwa',
       narrative:
         'Then comes the instruction. Musa is told to go to the most powerful and most dangerous man in the land — the man whose household raised him, and from whose justice he had fled. Watch what Musa does next. He does not refuse. But he does not pretend to be ready either.',
       surah: 20,
@@ -63,6 +69,8 @@ export const MUSA: Story = {
     {
       id: 'gently',
       heading: 'Speak to him gently',
+      when: 'Before they set out',
+      placeId: 'egypt',
       narrative:
         'Two brothers are now sent to a tyrant who has been killing children. Before they go, they are told how to speak to him. This is one of the most surprising instructions in the Quran.',
       surah: 20,
@@ -74,6 +82,9 @@ export const MUSA: Story = {
     {
       id: 'the-sea',
       heading: 'Trapped at the sea',
+      // No placeId: the Quran does not say where the crossing happened, and the
+      // proposed locations are disputed. Better to leave it unplotted than to pick one.
+      when: 'Leaving Egypt at last',
       narrative:
         'The Israelites leave Egypt. Behind them, an army is closing in. In front of them is open water. His people look at the situation and say the obvious thing: we are caught. Read what Musa says back.',
       surah: 26,
@@ -128,6 +139,8 @@ export const YUSUF: Story = {
     {
       id: 'dream',
       heading: 'A boy tells his father about a dream',
+      when: 'Boyhood',
+      placeId: 'canaan',
       narrative:
         'A young boy comes to his father with something he saw while asleep. His father’s reaction tells you immediately that this is not an ordinary dream — and that the father already knows the boy’s brothers cannot be told.',
       surah: 12,
@@ -139,6 +152,8 @@ export const YUSUF: Story = {
     {
       id: 'brothers',
       heading: 'The brothers make a decision',
+      when: 'Soon after',
+      placeId: 'canaan',
       narrative:
         'The brothers talk among themselves. What is striking is that the Quran lets us hear their reasoning rather than simply condemning them. They feel overlooked. They are jealous. And they talk themselves into something terrible one step at a time.',
       surah: 12,
@@ -150,6 +165,8 @@ export const YUSUF: Story = {
     {
       id: 'well',
       heading: 'The well, and the shirt',
+      when: 'That same day',
+      placeId: 'canaan',
       narrative:
         'They carry it out. Then they return to their father in the evening with a story, and evidence they have prepared. Their father does not believe them — and what he says in response is one of the most quoted lines in the surah.',
       surah: 12,
@@ -161,6 +178,8 @@ export const YUSUF: Story = {
     {
       id: 'egypt',
       heading: 'Sold, and taken to Egypt',
+      when: 'Shortly after',
+      placeId: 'egypt',
       narrative:
         'A passing caravan finds him. He is sold cheaply — the Quran notes how little they valued him — and ends up in the household of a man of standing in Egypt.',
       surah: 12,
@@ -172,6 +191,8 @@ export const YUSUF: Story = {
     {
       id: 'accusation',
       heading: 'Accused of something he refused to do',
+      when: 'Years later, as a young man',
+      placeId: 'egypt',
       narrative:
         'Years later, as a young man in that household, Yusuf is pressured and refuses. The accusation that follows is the opposite of what happened. Even after evidence clears him, he is imprisoned.',
       surah: 12,
@@ -183,6 +204,8 @@ export const YUSUF: Story = {
     {
       id: 'prison',
       heading: 'Forgotten in prison',
+      when: 'Several years',
+      placeId: 'egypt',
       narrative:
         'In prison, two men ask him to interpret their dreams. He does — and before they leave, he asks one of them to mention him to the king. That man walks out and forgets.',
       surah: 12,
@@ -194,6 +217,8 @@ export const YUSUF: Story = {
     {
       id: 'kings-dream',
       heading: 'A dream nobody can interpret',
+      when: 'Long afterwards',
+      placeId: 'egypt',
       narrative:
         'The king has a dream that disturbs him, and none of his advisers can explain it. Suddenly the man who forgot remembers.',
       surah: 12,
@@ -205,6 +230,8 @@ export const YUSUF: Story = {
     {
       id: 'power',
       heading: 'Given authority over the land',
+      when: 'Released at last',
+      placeId: 'egypt',
       narrative:
         'He is cleared and brought out. The king offers him position — and Yusuf asks for a specific job.',
       surah: 12,
@@ -216,6 +243,8 @@ export const YUSUF: Story = {
     {
       id: 'reunion',
       heading: 'His brothers come begging',
+      when: 'When the famine came',
+      placeId: 'egypt',
       narrative:
         'Famine spreads. His brothers travel to Egypt for food, and are brought before the official who controls the stores. They do not recognise him. He recognises them immediately.',
       surah: 12,
@@ -227,6 +256,8 @@ export const YUSUF: Story = {
     {
       id: 'forgiveness',
       heading: 'What he chose',
+      when: 'The moment of recognition',
+      placeId: 'egypt',
       narrative:
         'The moment finally arrives when he tells them who he is. He has every advantage. They have none. Read what he says.',
       surah: 12,
@@ -238,6 +269,8 @@ export const YUSUF: Story = {
     {
       id: 'ending',
       heading: 'The dream, explained',
+      when: 'The family reunited',
+      placeId: 'egypt',
       narrative:
         'The family is reunited, and the dream the boy described at the very start finally makes sense. Yusuf says something about the years in between that reframes the entire story.',
       surah: 12,
@@ -292,6 +325,8 @@ export const MARYAM: Story = {
     {
       id: 'announcement',
       heading: 'A visitor she did not expect',
+      when: 'Withdrawn from her family',
+      placeId: 'jerusalem',
       narrative:
         'Maryam has withdrawn from her family to a place in the east. She is alone, by choice. Then a figure appears in the form of a man. Her first reaction is not wonder — it is to seek protection.',
       surah: 19,
@@ -303,6 +338,7 @@ export const MARYAM: Story = {
     {
       id: 'birth',
       heading: 'Alone, and in pain',
+      when: 'When her time came',
       narrative:
         'The birth comes. She is by herself, holding on to the trunk of a palm tree. What she says next is not what people usually expect to find in scripture.',
       surah: 19,
@@ -314,6 +350,8 @@ export const MARYAM: Story = {
     {
       id: 'return',
       heading: 'Walking back to them',
+      when: 'Carrying the child',
+      placeId: 'jerusalem',
       narrative:
         'She returns to her people carrying the child. They say exactly what she feared they would say. She has been instructed not to speak — so she points at the baby.',
       surah: 19,
@@ -325,6 +363,7 @@ export const MARYAM: Story = {
     {
       id: 'closing',
       heading: 'Stated plainly',
+      when: 'The passage closes',
       narrative:
         'The passage closes by settling what Isa was, and what he was not — a matter people have disagreed about for centuries.',
       surah: 19,

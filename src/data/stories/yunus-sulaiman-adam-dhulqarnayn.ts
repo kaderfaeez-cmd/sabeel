@@ -23,6 +23,8 @@ export const YUNUS: Story = {
     {
       id: 'leaving',
       heading: 'He left',
+      when: 'At the end of his patience',
+      placeId: 'nineveh',
       narrative:
         'The account in Surah As-Saffat moves fast — he runs, boards a ship, lots are drawn, and he ends up in the sea and then swallowed by a great fish.',
       surah: 37,
@@ -34,6 +36,7 @@ export const YUNUS: Story = {
     {
       id: 'the-call',
       heading: 'From inside the darkness',
+      when: 'Inside the fish',
       narrative:
         'Surah Al-Anbiya records the words themselves. Read them slowly, and notice which part comes first.',
       surah: 21,
@@ -87,6 +90,8 @@ export const SULAIMAN: Story = {
     {
       id: 'given',
       heading: 'The gift, and the response to it',
+      when: 'At the height of his kingdom',
+      placeId: 'jerusalem',
       narrative:
         'The passage opens with what Sulaiman and his father Dawud were given, including understanding of speech beyond human language. Then an ant warns her colony to take shelter — and he hears it.',
       surah: 27,
@@ -98,6 +103,8 @@ export const SULAIMAN: Story = {
     {
       id: 'hoopoe',
       heading: 'News from a bird',
+      when: 'At the assembly',
+      placeId: 'jerusalem',
       narrative:
         'He notices a bird missing from the assembly and asks after it. When it returns, it brings news of a kingdom to the south ruled by a woman.',
       surah: 27,
@@ -109,6 +116,8 @@ export const SULAIMAN: Story = {
     {
       id: 'queen',
       heading: 'The queen takes counsel',
+      when: 'When the letter arrived',
+      placeId: 'saba',
       narrative:
         'She receives his letter and does not react alone. She gathers her advisers and asks their view. Then she says something about war that is worth reading twice.',
       surah: 27,
@@ -120,6 +129,8 @@ export const SULAIMAN: Story = {
     {
       id: 'ending',
       heading: 'How it actually ended',
+      when: 'When she came to see',
+      placeId: 'jerusalem',
       narrative:
         'She comes to see for herself. She is shown something that unsettles her assumptions — and then reaches her own conclusion, in her own words.',
       surah: 27,
@@ -174,6 +185,7 @@ export const ADAM: Story = {
     {
       id: 'announcement',
       heading: 'The angels ask a fair question',
+      when: 'Before the beginning',
       narrative:
         'Allah announces that He will place a successive authority on earth. The angels ask something reasonable — will You place one who will cause corruption and shed blood? They are not rebuked for asking.',
       surah: 2,
@@ -185,6 +197,7 @@ export const ADAM: Story = {
     {
       id: 'refusal',
       heading: 'One refused',
+      when: 'The command to prostrate',
       narrative:
         'The command is given to prostrate to Adam. Everyone does, except one. The Quran does not leave his motive to guesswork — it names the reason plainly, and it is not confusion or misunderstanding. Then the passage turns back to Adam, and to a slip of a very different kind.',
       surah: 2,
@@ -196,6 +209,7 @@ export const ADAM: Story = {
     {
       id: 'return',
       heading: 'Words he was given',
+      when: 'After the mistake',
       narrative:
         'This is the turn the whole passage rests on. After the mistake, Adam receives something.',
       surah: 2,
@@ -207,6 +221,7 @@ export const ADAM: Story = {
     {
       id: 'their-words',
       heading: 'What they said',
+      when: 'The first words of return',
       narrative:
         'Surah Al-A‘raf records the supplication itself — the first words of return in human history.',
       surah: 7,
@@ -235,6 +250,8 @@ export const ADAM: Story = {
   actionToday:
     'Bring one thing to mind that you have been avoiding admitting, even privately. Say it to Allah plainly today, without adding the reasons it was not your fault.',
   relatedDuaId: 'sayyid-al-istighfar',
+  noMapReason:
+    'This story begins before there was any geography to map. It is placed in the Garden and then on the earth, without a location.',
 };
 
 export const DHUL_QARNAYN: Story = {
@@ -260,6 +277,7 @@ export const DHUL_QARNAYN: Story = {
     {
       id: 'given',
       heading: 'Established in the land',
+      when: 'Travelling west',
       narrative:
         'The Quran describes a ruler and traveller given real reach — and then follows him west, to a people he now has authority over.',
       surah: 18,
@@ -271,6 +289,7 @@ export const DHUL_QARNAYN: Story = {
     {
       id: 'east',
       heading: 'Travelling east',
+      when: 'Then the other way',
       narrative:
         'He does not stop. He turns and travels the other way, all the way east, until he reaches people living in conditions completely unlike the last — with nothing at all to shelter them from the sun. He is now as far from home as a person could go.',
       surah: 18,
@@ -282,6 +301,7 @@ export const DHUL_QARNAYN: Story = {
     {
       id: 'the-barrier',
       heading: 'They offer to pay him',
+      when: 'At the mountain pass',
       narrative:
         'He reaches a pass between two mountains and finds a people being harmed. They ask him to build a barrier, and offer payment for it. His answer is the heart of the story.',
       surah: 18,
@@ -293,6 +313,7 @@ export const DHUL_QARNAYN: Story = {
     {
       id: 'mercy',
       heading: 'When it was finished',
+      when: 'The work complete',
       narrative:
         'The barrier is complete. It cannot be climbed or bored through. Read the first thing he says.',
       surah: 18,
@@ -321,4 +342,6 @@ export const DHUL_QARNAYN: Story = {
   ],
   actionToday:
     'Do one useful thing for someone today without mentioning that you did it.',
+  noMapReason:
+    'The Quran follows Dhul-Qarnayn west, then east, then to a pass between two mountains — and names none of them. Sabeel will not invent a route the Quran left open.',
 };

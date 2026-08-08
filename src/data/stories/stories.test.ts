@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { activeThemes, getStory, STORIES, storiesWithTheme, THEME_LABEL } from './index';
+import { MAP_BOUNDS, PLACES } from './places';
 import { getSurah } from '@/lib/quran/surahs';
 
 describe('every passage points at a real place in the Quran', () => {
@@ -118,6 +119,66 @@ describe('the visual policy holds in the data', () => {
       expect(keys.some((k) => /image|photo|picture|illustration|avatar|portrait/i.test(k))).toBe(
         false,
       );
+    }
+  });
+});
+
+describe('timelines and maps never invent what the Quran withheld', () => {
+  test('every placeId resolves to a real place', () => {
+    for (const story of STORIES) {
+      for (const passage of story.passages) {
+        if (!passage.placeId) continue;
+        expect(PLACES[passage.placeId], `${story.id}/${passage.id}`).toBeDefined();
+      }
+    }
+  });
+
+  test('every place declares whether the Quran names it', () => {
+    for (const place of Object.values(PLACES)) {
+      expect(['quran', 'traditional'], place.id).toContain(place.basis);
+      // A place only in the historical literature must say so, so the map legend and the
+      // note never imply the Quran located it.
+      if (place.basis === 'traditional') {
+        expect(place.note, place.id).toMatch(/does not name|not name|historical literature/i);
+      }
+    }
+  });
+
+  test('a story with no plotted place explains why, rather than omitting the map silently', () => {
+    for (const story of STORIES) {
+      const hasPlace = story.passages.some((p) => p.placeId);
+      if (hasPlace) continue;
+      expect(story.noMapReason, `${story.id} has no places and no reason given`).toBeTruthy();
+    }
+  });
+
+  test('the stories the Quran deliberately does not locate carry no places', () => {
+    // The cave is never located and the Quran warns against disputing its details;
+    // Dhul-Qarnayn's journey names no place at all. Plotting either would be invention.
+    for (const id of ['people-of-the-cave', 'dhul-qarnayn', 'adam']) {
+      const story = getStory(id)!;
+      expect(story.passages.some((p) => p.placeId), id).toBe(false);
+      expect(story.noMapReason, id).toBeTruthy();
+    }
+  });
+
+  test('every place sits inside the map bounds, so nothing is plotted off-canvas', () => {
+    for (const place of Object.values(PLACES)) {
+      expect(place.lat, place.id).toBeGreaterThanOrEqual(MAP_BOUNDS.minLat);
+      expect(place.lat, place.id).toBeLessThanOrEqual(MAP_BOUNDS.maxLat);
+      expect(place.lon, place.id).toBeGreaterThanOrEqual(MAP_BOUNDS.minLon);
+      expect(place.lon, place.id).toBeLessThanOrEqual(MAP_BOUNDS.maxLon);
+    }
+  });
+
+  test('timeline labels are relative, never dated', () => {
+    // The Quran does not date these events. A year on a timeline would be invented.
+    for (const story of STORIES) {
+      for (const passage of story.passages) {
+        if (!passage.when) continue;
+        expect(passage.when, `${story.id}/${passage.id}`).not.toMatch(/\b\d{3,4}\s?(BC|CE|AD|AH)\b/i);
+        expect(passage.when, `${story.id}/${passage.id}`).not.toMatch(/\b1?\d{3}\b/);
+      }
     }
   });
 });
