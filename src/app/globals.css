@@ -126,10 +126,17 @@
   html {
     /* Overridden from Settings, so a reader can enlarge everything at once. */
     font-size: calc(100% * var(--text-scale, 1));
+    /*
+      The colour floor lives here rather than on <body>.
+      `.site-bg` is fixed at z-index -1 inside <body>, so an opaque <body> background
+      would paint straight over it and the artwork would never be seen. This cost real
+      debugging time — the background was fully built and completely invisible.
+    */
+    background-color: var(--surface);
   }
 
   body {
-    background-color: var(--surface);
+    background-color: transparent;
     color: var(--ink);
     font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -184,6 +191,130 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   The permanent backdrop.
+
+   Readability is the constraint everything here bends to. The measured contrast
+   of every text token must survive, so the artwork never sits directly behind
+   text — a scrim does the protecting, and content surfaces stay near-opaque.
+--------------------------------------------------------------------------- */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* Layer 1: the flat theme colour. The guaranteed contrast floor beneath everything. */
+  background-color: var(--surface);
+}
+
+.site-bg__art {
+  position: absolute;
+  inset: 0;
+  transition: opacity 600ms ease;
+}
+
+.site-bg__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* Only one time of day is visible; the other is fully transparent. */
+.site-bg__art--dawn {
+  opacity: 0.5;
+}
+.site-bg__art--night {
+  opacity: 0;
+}
+.dark .site-bg__art--dawn {
+  opacity: 0;
+}
+.dark .site-bg__art--night {
+  opacity: 0.55;
+}
+
+/*
+  Layer 3 — the scrim. Denser toward the top and bottom, where the header, the
+  footer and most body text sit; thinner across the middle so the artwork is
+  still legible as an image rather than a wash.
+*/
+.site-bg__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--surface) 0%,
+      color-mix(in oklab, var(--surface) 84%, transparent) 22%,
+      color-mix(in oklab, var(--surface) 79%, transparent) 55%,
+      color-mix(in oklab, var(--surface) 90%, transparent) 82%,
+      var(--surface) 100%
+    );
+}
+
+.site-bg__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+}
+.dark .site-bg__pattern {
+  opacity: 0.05;
+}
+
+/* Layer 5 — gentle lighting. Pulls the eye toward the centre of the page. */
+.site-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 40%,
+    transparent 35%,
+    color-mix(in oklab, var(--surface) 55%, transparent) 100%
+  );
+}
+
+/* Layer 6 — drifting dust. Two offset dot fields moving very slowly. */
+.site-bg__dust {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    radial-gradient(circle at 20% 30%, var(--gold) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 70% 65%, var(--gold) 0.5px, transparent 1.2px);
+  background-size: 220px 220px, 340px 340px;
+  opacity: 0.12;
+  animation: sabeel-drift 140s linear infinite;
+  will-change: transform;
+}
+.dark .site-bg__dust {
+  opacity: 0.2;
+}
+
+@keyframes sabeel-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-220px, -140px, 0);
+  }
+}
+
+/*
+  Content surfaces float above the backdrop. Kept deliberately near-opaque:
+  glassmorphism that lets the artwork through the text is a readability failure,
+  not a design flourish.
+*/
+@layer utilities {
+  .bg-surface-raised {
+    background-color: color-mix(in oklab, var(--surface-raised) 93%, transparent);
+    backdrop-filter: blur(14px) saturate(115%);
+  }
+  .bg-surface-sunken {
+    background-color: color-mix(in oklab, var(--surface-sunken) 92%, transparent);
+    backdrop-filter: blur(14px) saturate(115%);
+  }
+}
+
 /* The ayah currently being recited.
    Written as a plain rule rather than a `data-[active]:bg-*` utility: theme tokens
    declared with `@theme inline` do not resolve inside that variant, so the utility
@@ -204,5 +335,11 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* The drifting dust is decoration with no informational value — remove it entirely
+     rather than freezing it in place. */
+  .site-bg__dust {
+    display: none;
   }
 }

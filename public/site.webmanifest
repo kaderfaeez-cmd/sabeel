@@ -1,0 +1,36 @@
+{
+  "name": "Sabeel — the path",
+  "short_name": "Sabeel",
+  "description": "Learn Islam from authentic sources. Every word traceable to where it came from.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1b33",
+  "theme_color": "#0d1b33",
+  "orientation": "portrait-primary",
+  "categories": ["education", "books", "lifestyle"],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Read the Quran", "url": "/quran" },
+    { "name": "Prayer times", "url": "/prayer-times" },
+    { "name": "Stories", "url": "/stories" }
+  ]
+}
