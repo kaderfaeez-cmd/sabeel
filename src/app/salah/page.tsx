@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { LessonHero } from '@/components/lesson/lesson-hero';
 import { ScholarlyDifferences } from '@/features/fiqh/scholarly-differences';
 import { RulingLegend } from '@/features/fiqh/ruling-badge';
 import { PositionCard } from '@/features/salah/position-card';
@@ -23,33 +25,45 @@ export default async function SalahPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
-      <p className="font-display text-xs uppercase tracking-[0.28em] text-gold-ink">Practice</p>
-      <h1 className="mt-5 font-display text-display font-light tracking-[-0.015em] text-ink">
-        Learn Salah
-      </h1>
-      <p className="mt-6 text-lede leading-relaxed text-ink-muted">
-        This walks through a two-rak‘ah prayer from beginning to end — what your body does,
-        what you say, what the words mean, and why you are saying them.
-      </p>
+      <LessonHero
+        eyebrow="Practice"
+        title="Learn Salah"
+        arabicTitle="الصلاة"
+        subtitle="A two-rak‘ah prayer, from the first movement to the last — what your body does, what you say, and what the words actually mean."
+        hook="Most people learning to pray are not worried about the theology. They are worried about standing there not knowing what comes next, or saying something wrong, or looking like they do not belong. This page exists to remove that feeling. Take one position at a time. You do not need to memorise anything today."
+        whyItMatters="Prayer is the practice that shapes a Muslim day more than any other — five short pauses that interrupt whatever you were doing. Learning it is the single thing that most changes how connected you feel, and it is far more achievable than it looks from the outside."
+        whatYoullLearn={[
+          'The nine positions in order, and what to do in each',
+          'What you say, with the meaning of every word',
+          'Why you are saying it — not just the sounds',
+          'What to do if you cannot stand, kneel or prostrate',
+        ]}
+        readingMinutes={14}
+        difficulty="gentle"
+      />
 
       <section
         aria-labelledby="orientation"
-        className="mt-10 rounded-xl border-l-2 border-l-emerald border-line bg-surface-raised px-6 py-5"
+        className="mt-12 rounded-xl border-l-2 border-l-gold border-line bg-surface-raised px-6 py-5"
       >
-        <h2 id="orientation" className="font-display text-xs uppercase tracking-[0.2em] text-emerald">
-          Before you begin
+        <h2 id="orientation" className="font-display text-xs uppercase tracking-[0.2em] text-gold-ink">
+          Two things before you start
         </h2>
         <div className="mt-3 space-y-3 leading-relaxed text-ink-muted">
           <p>
-            The Quran establishes that prayer is obligatory; the details of how it is
-            performed come to us through the Sunnah. That is why most steps below cite a
-            narration rather than a verse.
+            You will need to have performed <Link href="/wudhu" className="text-emerald hover:underline">wudhu</Link>{' '}
+            first, and to face the qiblah — the direction of the Kaaba in Makkah. Any
+            phone compass app will show you.
           </p>
           <p>
-            You will need to have performed wudhu first, and to face the qiblah. If any
-            position is not physically possible for you, look for the
-            <span className="text-gold-ink"> “If you cannot do this”</span> note on that
-            step — the Sunnah itself provides for it.
+            If a position is not physically possible for you, look for the{' '}
+            <span className="text-gold-ink">“If you cannot do this”</span> note on that
+            step. Your prayer is complete either way.
+          </p>
+          <p className="text-sm text-ink-faint">
+            The Quran establishes that prayer is obligatory; how it is performed comes
+            through the Sunnah. That is why most steps below cite a narration rather than a
+            verse.
           </p>
         </div>
       </section>

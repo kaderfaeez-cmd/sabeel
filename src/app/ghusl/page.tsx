@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ContentBlock } from '@/components/content/content-block';
 import { AuthenticityNotices } from '@/components/content/authenticity-notice';
+import { LessonHero } from '@/components/lesson/lesson-hero';
 import { RulingLegend } from '@/features/fiqh/ruling-badge';
 import { ScholarlyDifferences } from '@/features/fiqh/scholarly-differences';
 import { StepCard } from '@/features/fiqh/step-card';
@@ -29,29 +30,36 @@ export default async function GhuslPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
-      <p className="font-display text-xs uppercase tracking-[0.28em] text-gold-ink">Practice</p>
-      <h1 className="mt-5 font-display text-display font-light tracking-[-0.015em] text-ink">
-        Learn Ghusl
-      </h1>
-      <p className="mt-6 text-lede leading-relaxed text-ink-muted">
-        Ghusl is the washing of the whole body. It is required at a few specific times, and
-        it is straightforward once you have done it once.
-      </p>
+      <LessonHero
+        eyebrow="Practice"
+        title="Learn Ghusl"
+        arabicTitle="الغسل"
+        subtitle="The full washing of the body. Required at a few specific times, and straightforward once you have done it once."
+        hook="This is a topic people are often too embarrassed to ask about, so they end up guessing. There is nothing shameful here — it is a wash, it takes a few minutes, and the requirement is simply that water reaches all of you. This page says it plainly so you do not have to ask anyone."
+        whyItMatters="Prayer and fasting resume once ghusl is done, so knowing when it is needed and how to perform it removes real uncertainty. Getting this clear once means never having to wonder again."
+        whatYoullLearn={[
+          'The three situations where ghusl becomes required',
+          'The full sequence, and which part is actually essential',
+          'The spots people commonly leave dry',
+          'Whether you need a separate wudhu afterwards',
+        ]}
+        readingMinutes={7}
+        difficulty="gentle"
+      />
 
       <section
         aria-labelledby="quran-basis"
-        className="mt-10 rounded-xl border-l-2 border-l-emerald border-line bg-surface-raised px-6 py-5"
+        className="mt-12 rounded-xl border-l-2 border-l-emerald border-line bg-surface-raised px-6 py-5"
       >
         <h2 id="quran-basis" className="font-display text-xs uppercase tracking-[0.2em] text-emerald">
-          The Quranic basis
+          Where this comes from
         </h2>
         <p className="mt-3 leading-relaxed text-ink-muted">
-          The same verse that establishes wudhu also establishes ghusl:{' '}
-          <span className="text-ink">
-            “And if you are in a state of janābah, then purify yourselves.”
-          </span>{' '}
-          The detail of how it is performed comes through the Sunnah, and two of the
-          Prophet’s ﷺ wives described it directly.
+          The same verse that establishes wudhu also establishes ghusl — it instructs that
+          those in a state of janābah purify themselves. Janābah is the state following
+          sexual intimacy or a wet dream; the word simply names it, and carries no shame.
+          How the washing is performed comes through the Sunnah, and two of the Prophet’s ﷺ
+          wives described it in detail.
         </p>
       </section>
 
