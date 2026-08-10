@@ -23,6 +23,25 @@ export interface Note {
   readonly updatedAt: number;
 }
 
+/**
+ * A reflection written at the end of a story.
+ *
+ * Stored alongside the ayah notes so the Journal shows one stream rather than two. Kept
+ * as a separate type because it has no surah:ayah — a story reflection is about the whole
+ * story, not one verse.
+ */
+export interface StoryNote {
+  readonly id: string;
+  readonly storyId: string;
+  readonly storyName: string;
+  readonly text: string;
+  readonly updatedAt: number;
+}
+
+export type JournalEntry =
+  | { readonly kind: 'ayah'; readonly note: Note }
+  | { readonly kind: 'story'; readonly note: StoryNote };
+
 export interface ReadingPosition {
   readonly id: 'last-read';
   readonly surah: number;
@@ -114,9 +133,60 @@ export async function getNote(surah: number, ayah: number): Promise<Note | undef
   return get<Note>(STORE.notes, referenceKey(surah, ayah));
 }
 
+/** Ayah notes only. Story reflections share the store but are not surah:ayah records. */
 export async function listNotes(): Promise<readonly Note[]> {
-  const all = await getAll<Note>(STORE.notes);
-  return all.sort((a, b) => b.updatedAt - a.updatedAt);
+  const all = await getAll<Note | StoryNote>(STORE.notes);
+  return all
+    .filter((note): note is Note => !note.id.startsWith('story:'))
+    .sort((a, b) => b.updatedAt - a.updatedAt);
+}
+
+// ---------------------------------------------------------------------------
+// Story reflections
+// ---------------------------------------------------------------------------
+
+const STORY_NOTE_PREFIX = 'story:';
+
+export async function saveStoryNote(
+  storyId: string,
+  storyName: string,
+  text: string,
+): Promise<StoryNote | null> {
+  const trimmed = text.trim();
+  if (trimmed === '') {
+    await remove(STORE.notes, `${STORY_NOTE_PREFIX}${storyId}`);
+    return null;
+  }
+
+  const note: StoryNote = {
+    id: `${STORY_NOTE_PREFIX}${storyId}`,
+    storyId,
+    storyName,
+    text: trimmed.slice(0, MAX_NOTE_LENGTH),
+    updatedAt: Date.now(),
+  };
+  await put(STORE.notes, note);
+  return note;
+}
+
+export async function getStoryNote(storyId: string): Promise<StoryNote | undefined> {
+  return get<StoryNote>(STORE.notes, `${STORY_NOTE_PREFIX}${storyId}`);
+}
+
+function isStoryNote(value: Note | StoryNote): value is StoryNote {
+  return value.id.startsWith(STORY_NOTE_PREFIX);
+}
+
+/** Everything written, newest first — ayah notes and story reflections in one stream. */
+export async function listJournal(): Promise<readonly JournalEntry[]> {
+  const all = await getAll<Note | StoryNote>(STORE.notes);
+  return all
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+    .map((note) =>
+      isStoryNote(note)
+        ? ({ kind: 'story', note } as const)
+        : ({ kind: 'ayah', note } as const),
+    );
 }
 
 // ---------------------------------------------------------------------------

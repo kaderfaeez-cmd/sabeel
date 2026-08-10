@@ -11,6 +11,7 @@ import {
   Reflections,
   TakeAways,
 } from '@/components/lesson/lesson-blocks';
+import { StoryReflection } from '@/features/journal/story-reflection';
 import { StoryMap } from '@/components/story/story-map';
 import { StoryTimeline } from '@/components/story/story-timeline';
 import { DUAS } from '@/data/duas';
@@ -152,6 +153,12 @@ export default async function StoryPage({ params }: PageProps) {
       <TakeAways points={story.lessons.points} character={story.lessons.character} />
 
       <Reflections questions={story.reflections} />
+
+      <StoryReflection
+        storyId={story.id}
+        storyName={story.name}
+        prompt={`Anything from ${story.name} you want to keep. It saves to your journal, on this device only.`}
+      />
 
       <ActionToday
         action={story.actionToday}

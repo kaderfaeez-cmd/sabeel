@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { ContentBlock } from '@/components/content/content-block';
 import { AuthenticityNotices } from '@/components/content/authenticity-notice';
+import { JourneyTrail } from '@/components/lesson/journey-trail';
 import { LessonHero } from '@/components/lesson/lesson-hero';
+import { NextStep } from '@/components/lesson/next-step';
 import { RulingLegend } from '@/features/fiqh/ruling-badge';
 import { ScholarlyDifferences } from '@/features/fiqh/scholarly-differences';
 import { StepCard } from '@/features/fiqh/step-card';
@@ -30,6 +32,8 @@ export default async function GhuslPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
+      <JourneyTrail stepId="ghusl" />
+
       <LessonHero
         eyebrow="Practice"
         title="Learn Ghusl"
@@ -137,6 +141,8 @@ export default async function GhuslPage() {
       </section>
 
       <ScholarlyDifferences differences={GHUSL_DIFFERENCES} />
+
+      <NextStep stepId="ghusl" />
 
       {/* FIQH-POLICY §5 — rendered by the page itself, so it cannot be omitted. */}
       <p className="mt-14 rounded-lg border border-line bg-surface-sunken px-6 py-5 text-sm leading-relaxed text-ink-muted">

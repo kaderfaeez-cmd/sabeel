@@ -3,7 +3,12 @@
 import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getSurah } from '@/lib/quran/surahs';
-import { listNotes, saveNote, type Note } from '@/lib/store/reading';
+import {
+  listJournal,
+  saveNote,
+  saveStoryNote,
+  type JournalEntry,
+} from '@/lib/store/reading';
 
 /**
  * The reflection journal.
@@ -13,14 +18,14 @@ import { listNotes, saveNote, type Note } from '@/lib/store/reading';
  * anywhere, and the page says so rather than leaving the reader to wonder.
  */
 export function JournalPanel() {
-  const [notes, setNotes] = useState<readonly Note[] | null>(null);
+  const [notes, setNotes] = useState<readonly JournalEntry[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
-        const loaded = await listNotes();
+        const loaded = await listJournal();
         if (!cancelled) setNotes(loaded);
       } catch {
         if (!cancelled) {
@@ -34,10 +39,14 @@ export function JournalPanel() {
     };
   }, []);
 
-  async function remove(note: Note) {
+  async function remove(entry: JournalEntry) {
     try {
-      await saveNote(note.surah, note.ayah, '');
-      setNotes(await listNotes());
+      if (entry.kind === 'ayah') {
+        await saveNote(entry.note.surah, entry.note.ayah, '');
+      } else {
+        await saveStoryNote(entry.note.storyId, entry.note.storyName, '');
+      }
+      setNotes(await listJournal());
     } catch {
       setError('That note could not be removed.');
     }
@@ -68,31 +77,46 @@ export function JournalPanel() {
       </p>
 
       <ul className="mt-6 space-y-4">
-        {notes.map((note) => {
-          const surah = getSurah(note.surah);
+        {notes.map((entry) => {
+          const isAyah = entry.kind === 'ayah';
+          const href = isAyah
+            ? `/quran/${entry.note.surah}#ayah-${entry.note.ayah}`
+            : `/stories/${entry.note.storyId}`;
+          const label = isAyah
+            ? `${getSurah(entry.note.surah)?.name ?? `Surah ${entry.note.surah}`} · ${entry.note.surah}:${entry.note.ayah}`
+            : entry.note.storyName;
+          const deleteLabel = isAyah
+            ? `Delete your note on ${entry.note.surah}:${entry.note.ayah}`
+            : `Delete your reflection on ${entry.note.storyName}`;
+
           return (
-            <li key={note.id} className="rounded-2xl border border-line bg-surface-raised p-6">
+            <li
+              key={entry.note.id}
+              className="rounded-2xl border border-line bg-surface-raised p-6"
+            >
               <div className="flex items-start justify-between gap-4">
                 <a
-                  href={`/quran/${note.surah}#ayah-${note.ayah}`}
+                  href={href}
                   className="font-display text-xs uppercase tracking-[0.18em] text-gold-ink hover:underline"
                 >
-                  {surah?.name ?? `Surah ${note.surah}`} · {note.surah}:{note.ayah}
+                  {isAyah ? label : `Story · ${label}`}
                 </a>
                 <button
                   type="button"
-                  onClick={() => void remove(note)}
-                  aria-label={`Delete your note on ${note.surah}:${note.ayah}`}
+                  onClick={() => void remove(entry)}
+                  aria-label={deleteLabel}
                   className="grid size-11 shrink-0 place-items-center rounded-full text-ink-faint transition-colors hover:bg-surface-sunken hover:text-ink"
                 >
                   <Trash2 className="size-4" aria-hidden />
                 </button>
               </div>
 
-              <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">{note.text}</p>
+              <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">
+                {entry.note.text}
+              </p>
 
               <p className="mt-4 text-xs text-ink-faint">
-                {new Date(note.updatedAt).toLocaleDateString(undefined, {
+                {new Date(entry.note.updatedAt).toLocaleDateString(undefined, {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric',

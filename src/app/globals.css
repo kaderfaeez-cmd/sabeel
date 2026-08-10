@@ -223,7 +223,7 @@
 
 /* Only one time of day is visible; the other is fully transparent. */
 .site-bg__art--dawn {
-  opacity: 0.5;
+  opacity: 0.92;
 }
 .site-bg__art--night {
   opacity: 0;
@@ -232,13 +232,14 @@
   opacity: 0;
 }
 .dark .site-bg__art--night {
-  opacity: 0.55;
+  opacity: 0.95;
 }
 
 /*
-  Layer 3 — the scrim. Denser toward the top and bottom, where the header, the
-  footer and most body text sit; thinner across the middle so the artwork is
-  still legible as an image rather than a wash.
+  Layer 3 — the scrim.
+  Deliberately light now: the artwork should read as a photograph, not a wash.
+  Contrast is protected where it actually matters — content sits on near-opaque
+  cards, and the reading column carries its own scrim (see .reading-scrim below).
 */
 .site-bg__scrim {
   position: absolute;
@@ -246,21 +247,22 @@
   background:
     linear-gradient(
       to bottom,
-      var(--surface) 0%,
-      color-mix(in oklab, var(--surface) 84%, transparent) 22%,
-      color-mix(in oklab, var(--surface) 79%, transparent) 55%,
-      color-mix(in oklab, var(--surface) 90%, transparent) 82%,
-      var(--surface) 100%
+      color-mix(in oklab, var(--surface) 72%, transparent) 0%,
+      color-mix(in oklab, var(--surface) 28%, transparent) 26%,
+      color-mix(in oklab, var(--surface) 22%, transparent) 58%,
+      color-mix(in oklab, var(--surface) 46%, transparent) 85%,
+      color-mix(in oklab, var(--surface) 78%, transparent) 100%
     );
 }
 
+/* The khatam pattern is texture, not decoration — kept very faint. */
 .site-bg__pattern {
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.02;
 }
 .dark .site-bg__pattern {
-  opacity: 0.05;
+  opacity: 0.03;
 }
 
 /* Layer 5 — gentle lighting. Pulls the eye toward the centre of the page. */
@@ -268,9 +270,9 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 120% 80% at 50% 40%,
-    transparent 35%,
-    color-mix(in oklab, var(--surface) 55%, transparent) 100%
+    ellipse 130% 90% at 50% 40%,
+    transparent 45%,
+    color-mix(in oklab, var(--surface) 42%, transparent) 100%
   );
 }
 
@@ -297,6 +299,32 @@
   to {
     transform: translate3d(-220px, -140px, 0);
   }
+}
+
+/*
+  The reading wash.
+
+  The global scrim is deliberately light so the artwork reads as a photograph. That
+  leaves bare text — headings and lead paragraphs not sitting on a card — without
+  enough protection: measured at 1.83:1 for muted text in dark mode, which is
+  unreadable.
+
+  Rather than re-fogging the whole image, the protection is applied only behind the
+  centred reading column. On a wide screen the artwork stays fully visible down both
+  edges; on a phone the column is the screen, which is the right trade there.
+*/
+main {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in oklab, var(--surface) 76%, transparent) 10%,
+    color-mix(in oklab, var(--surface) 82%, transparent) 26%,
+    color-mix(in oklab, var(--surface) 82%, transparent) 74%,
+    color-mix(in oklab, var(--surface) 76%, transparent) 90%,
+    transparent 100%
+  );
+  backdrop-filter: blur(3px);
 }
 
 /*

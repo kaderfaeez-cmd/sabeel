@@ -28,6 +28,18 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
     label: 'Begin',
     sections: [
       {
+        title: 'Your first steps',
+        href: '/start',
+        blurb: 'Just became Muslim? Start here — one step at a time, nothing assumed.',
+        status: 'live',
+      },
+      {
+        title: 'I’m struggling with…',
+        href: '/struggling',
+        blurb: 'Distance from Allah, guilt, family, doubt, staying consistent.',
+        status: 'live',
+      },
+      {
         title: 'Where to start',
         href: '/roadmap',
         blurb: 'A gentle, ordered path for anyone starting or returning. No prior knowledge assumed.',
@@ -140,7 +152,7 @@ export const SECTION_GROUPS: readonly SectionGroup[] = [
 
 /** Compact set used in the header. */
 export const PRIMARY_NAV = [
-  { title: 'Start here', href: '/roadmap' },
+  { title: 'Start here', href: '/start' },
   { title: 'The Quran', href: '/quran' },
   { title: 'Stories', href: '/stories' },
   { title: 'Salah', href: '/salah' },

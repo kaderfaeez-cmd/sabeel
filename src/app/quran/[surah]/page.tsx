@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
+import { ContentBlock } from '@/components/content/content-block';
 import { AyahRow } from '@/features/quran/ayah-row';
+import { fetchChapterInfo } from '@/lib/quran/chapter-info';
 import { ReadingControls } from '@/features/quran/reading-controls';
 import { ReadingTracker } from '@/features/quran/reading-tracker';
 import { RecitationPlayer } from '@/features/quran/recitation-player';
@@ -70,9 +72,10 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
    *
    * The two requests run in parallel — audio must never delay text.
    */
-  const [verses, audioUrls] = await Promise.all([
+  const [verses, audioUrls, chapterInfo] = await Promise.all([
     loadVerses(number, translationId, showTransliteration),
     loadRecitation(number, reciterId),
+    fetchChapterInfo(number),
   ]);
 
   return (
@@ -110,6 +113,26 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
             <strong className="font-medium text-ink">{translation.translator}</strong>.
             Every ayah below carries its own reference.
           </p>
+        )}
+
+        {/* What this surah is about, from a named scholar — never Sabeel's own voice. */}
+        {chapterInfo && (
+          <details className="group mt-7 rounded-xl border border-line bg-surface-raised px-6 py-5">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 marker:content-none">
+              <span className="font-display text-lg text-ink">
+                What is this surah about?
+              </span>
+              <span
+                aria-hidden
+                className="shrink-0 text-ink-faint transition-transform duration-300 group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+            <div className="mt-5 border-t border-line pt-5">
+              <ContentBlock block={chapterInfo} />
+            </div>
+          </details>
         )}
 
         <div className="mt-7">

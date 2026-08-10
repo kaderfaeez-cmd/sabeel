@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentBlock } from '@/components/content/content-block';
 import { AuthenticityNotices } from '@/components/content/authenticity-notice';
+import { JourneyTrail } from '@/components/lesson/journey-trail';
+import { NextStep } from '@/components/lesson/next-step';
 import type { EvidenceSpec } from '@/lib/fiqh/loader';
 import { resolveEvidence } from '@/lib/fiqh/loader';
 import { DEFAULT_TRANSLATION_ID } from '@/lib/quran/translations';
@@ -116,6 +118,8 @@ export default async function LearnPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
+      <JourneyTrail stepId="islam" />
+
       <p className="font-display text-xs uppercase tracking-[0.28em] text-gold-ink">Begin</p>
       <h1 className="mt-5 font-display text-display font-light tracking-[-0.015em] text-ink">
         Learn Islam
@@ -197,21 +201,7 @@ export default async function LearnPage() {
         </p>
       </section>
 
-      <div className="mt-14 flex flex-wrap gap-3">
-        <Link
-          href="/roadmap"
-          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald px-6 py-3 text-sm text-surface"
-        >
-          Where to start
-          <span aria-hidden>→</span>
-        </Link>
-        <Link
-          href="/quran"
-          className="inline-flex min-h-11 items-center rounded-full border border-line-strong px-6 py-3 text-sm text-ink transition-colors hover:border-emerald hover:text-emerald"
-        >
-          Read the Quran
-        </Link>
-      </div>
+      <NextStep stepId="islam" />
 
       <p className="mt-14 rounded-lg border border-line bg-surface-sunken px-6 py-5 text-sm leading-relaxed text-ink-muted">
         Sabeel is an educational platform, not a fatwa service. For anything depending on

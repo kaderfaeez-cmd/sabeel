@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { JourneyTrail } from '@/components/lesson/journey-trail';
 import { LessonHero } from '@/components/lesson/lesson-hero';
+import { NextStep } from '@/components/lesson/next-step';
 import { ScholarlyDifferences } from '@/features/fiqh/scholarly-differences';
 import { RulingLegend } from '@/features/fiqh/ruling-badge';
 import { PositionCard } from '@/features/salah/position-card';
@@ -25,6 +27,8 @@ export default async function SalahPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
+      <JourneyTrail stepId="salah" />
+
       <LessonHero
         eyebrow="Practice"
         title="Learn Salah"
@@ -110,6 +114,8 @@ export default async function SalahPage() {
       </section>
 
       <ScholarlyDifferences differences={SALAH_DIFFERENCES} />
+
+      <NextStep stepId="salah" />
 
       {/* FIQH-POLICY §5 — rendered by the page itself, so it cannot be omitted. */}
       <p className="mt-14 rounded-lg border border-line bg-surface-sunken px-6 py-5 text-sm leading-relaxed text-ink-muted">

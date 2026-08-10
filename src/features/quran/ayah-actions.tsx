@@ -103,6 +103,7 @@ export function AyahActions({
         <ActionButton
           onClick={() => void onToggleBookmark()}
           label={bookmarked ? `Remove bookmark on ayah ${ayah}` : `Bookmark ayah ${ayah}`}
+          tip={bookmarked ? 'Remove bookmark' : 'Save this verse'}
           active={bookmarked}
         >
           {bookmarked ? (
@@ -115,6 +116,7 @@ export function AyahActions({
         <ActionButton
           onClick={() => setNoteOpen((open) => !open)}
           label={hasNote ? `Edit your note on ayah ${ayah}` : `Add a note to ayah ${ayah}`}
+          tip={hasNote ? 'Edit your note' : 'Write a note'}
           active={hasNote}
           expanded={noteOpen}
           controls={noteFieldId}
@@ -122,7 +124,11 @@ export function AyahActions({
           <NotebookPen className="size-4" aria-hidden />
         </ActionButton>
 
-        <ActionButton onClick={() => void onCopy()} label={`Copy ayah ${ayah} with its reference`}>
+        <ActionButton
+          onClick={() => void onCopy()}
+          label={`Copy ayah ${ayah} with its reference`}
+          tip={copied ? 'Copied' : 'Copy with reference'}
+        >
           {copied ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
         </ActionButton>
 
@@ -174,9 +180,18 @@ export function AyahActions({
   );
 }
 
+/**
+ * An icon-only control with a visible label on hover and on keyboard focus.
+ *
+ * An icon alone is a guessing game for anyone who has not used the app before — and this
+ * platform's readers are, by design, mostly new. The tooltip is a plain element rather
+ * than the `title` attribute, which is slow to appear and invisible to touch and keyboard
+ * users.
+ */
 function ActionButton({
   onClick,
   label,
+  tip,
   active,
   expanded,
   controls,
@@ -184,24 +199,34 @@ function ActionButton({
 }: {
   onClick: () => void;
   label: string;
+  tip: string;
   active?: boolean;
   expanded?: boolean;
   controls?: string;
   children: React.ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      aria-pressed={active}
-      aria-expanded={expanded}
-      aria-controls={controls}
-      className={`grid size-11 place-items-center rounded-full transition-colors duration-200 hover:bg-surface-sunken ${
-        active ? 'text-emerald' : 'text-ink-faint'
-      }`}
-    >
-      {children}
-    </button>
+    <span className="group/tip relative inline-flex">
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={label}
+        aria-pressed={active}
+        aria-expanded={expanded}
+        aria-controls={controls}
+        className={`grid size-11 place-items-center rounded-full transition-colors duration-200 hover:bg-surface-sunken ${
+          active ? 'text-emerald' : 'text-ink-faint'
+        }`}
+      >
+        {children}
+      </button>
+
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md border border-line bg-surface-raised px-2.5 py-1.5 text-xs text-ink opacity-0 shadow-paper transition-opacity duration-150 group-hover/tip:opacity-100 group-focus-within/tip:opacity-100"
+      >
+        {tip}
+      </span>
+    </span>
   );
 }

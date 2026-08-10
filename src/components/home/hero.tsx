@@ -84,9 +84,6 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        <motion.p {...rise(0.36)} className="mt-8 text-sm text-ink-faint">
-          Free. No account needed to read.
-        </motion.p>
       </div>
     </section>
   );
