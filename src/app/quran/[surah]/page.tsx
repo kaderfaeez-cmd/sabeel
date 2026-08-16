@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -10,14 +11,15 @@ import { ReadingTracker } from '@/features/quran/reading-tracker';
 import { RecitationPlayer } from '@/features/quran/recitation-player';
 import type { QuranBlock } from '@/lib/content/types';
 import { fetchSurahVerses, QuranApiError } from '@/lib/quran/api';
+import { PREF_COOKIE, resolvePreference } from '@/lib/preferences';
 import {
+  DEFAULT_RECITER_ID,
   fetchSurahAudio,
   getReciter,
   reciterLabel,
-  resolveReciterId,
 } from '@/lib/quran/recitations';
 import { getSurah, TOTAL_SURAHS } from '@/lib/quran/surahs';
-import { getTranslation, resolveTranslationId } from '@/lib/quran/translations';
+import { DEFAULT_TRANSLATION_ID, getTranslation } from '@/lib/quran/translations';
 
 interface PageProps {
   params: Promise<{ surah: string }>;
@@ -53,8 +55,25 @@ export default async function SurahPage({ params, searchParams }: PageProps) {
   if (!surah) notFound();
 
   const query = await searchParams;
-  const translationId = resolveTranslationId(query.t);
-  const reciterId = resolveReciterId(query.r);
+
+  /**
+   * URL parameter first, then the saved preference from Settings, then the default.
+   * A shared link always shows what the sharer saw; otherwise the reader's own choice
+   * is honoured on the first render, with no flash of the wrong translation.
+   */
+  const store = await cookies();
+  const translationId = resolvePreference(
+    query.t,
+    store.get(PREF_COOKIE.translation)?.value,
+    (value) => getTranslation(value) !== undefined,
+    DEFAULT_TRANSLATION_ID,
+  );
+  const reciterId = resolvePreference(
+    query.r,
+    store.get(PREF_COOKIE.reciter)?.value,
+    (value) => getReciter(value) !== undefined,
+    DEFAULT_RECITER_ID,
+  );
   const showTransliteration = query.tl === '1';
   const translation = getTranslation(translationId);
   const reciter = getReciter(reciterId);

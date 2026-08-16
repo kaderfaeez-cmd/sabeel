@@ -2,17 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
+import { PREF_COOKIE, PREF_STORAGE, writePreferenceCookie } from '@/lib/preferences';
 import { performerLabel } from '@/lib/audio/providers';
 import { reciterSources } from '@/lib/quran/recitations';
 import { describeProvenance, TRANSLATIONS } from '@/lib/quran/translations';
 import { clearAllReadingData } from '@/lib/store/reading';
 
-const KEYS = {
-  translation: 'sabeel:translation',
-  reciter: 'sabeel:reciter',
-  adhan: 'sabeel:adhan-audio',
-  textScale: 'sabeel:text-scale',
-} as const;
+const KEYS = PREF_STORAGE;
 
 const TEXT_SCALES = [
   { value: '1', label: 'Normal' },
@@ -54,7 +50,11 @@ export function SettingsPanel() {
           <select
             id="translation"
             value={translation}
-            onChange={(e) => setTranslation(e.target.value)}
+            onChange={(e) => {
+              setTranslation(e.target.value);
+              // Mirrored to a cookie so the server honours it on the Quran page.
+              writePreferenceCookie(PREF_COOKIE.translation, e.target.value);
+            }}
             className="min-h-11 w-full rounded-lg border border-line bg-surface-raised px-4 py-2.5 text-ink focus:border-emerald focus:outline-none"
           >
             {TRANSLATIONS.map((t) => (
@@ -96,7 +96,10 @@ export function SettingsPanel() {
           <select
             id="reciter"
             value={reciter}
-            onChange={(e) => setReciter(e.target.value)}
+            onChange={(e) => {
+              setReciter(e.target.value);
+              writePreferenceCookie(PREF_COOKIE.reciter, e.target.value);
+            }}
             className="min-h-11 w-full rounded-lg border border-line bg-surface-raised px-4 py-2.5 text-ink focus:border-emerald focus:outline-none"
           >
             {reciterSources().map((source) => (

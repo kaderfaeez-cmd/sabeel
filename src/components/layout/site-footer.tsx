@@ -11,12 +11,14 @@ export function SiteFooter() {
               <h2 className="font-display text-xs uppercase tracking-[0.22em] text-gold-ink">
                 {group.label}
               </h2>
-              <ul className="mt-4 space-y-2.5 text-sm">
+              {/* min-h-11 because these were 17px tall — far under the 44px touch
+                  minimum, and the footer is where people reach on a phone. */}
+              <ul className="mt-2 text-sm">
                 {group.sections.map((section) => (
                   <li key={section.href}>
                     <Link
                       href={section.href}
-                      className="text-ink-muted transition-colors duration-200 hover:text-ink"
+                      className="flex min-h-11 items-center text-ink-muted transition-colors duration-200 hover:text-ink"
                     >
                       {section.title}
                     </Link>

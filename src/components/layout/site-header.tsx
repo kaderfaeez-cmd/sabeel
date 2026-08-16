@@ -7,7 +7,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-surface/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-8 px-5 sm:px-8">
-        <Link href="/" className="group flex items-baseline gap-2.5">
+        <Link href="/" className="group flex min-h-11 items-center gap-2.5">
           <span className="font-display text-2xl font-semibold tracking-tight text-ink">
             Sabeel
           </span>

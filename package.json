@@ -16,7 +16,8 @@
     "probe:hadith": "node scripts/probe-hadith.mjs",
     "generate:names": "node scripts/generate-names.mjs",
     "optimise:backgrounds": "node scripts/optimise-backgrounds.mjs",
-    "generate:icons": "node scripts/generate-icons.mjs"
+    "generate:icons": "node scripts/generate-icons.mjs",
+    "verify:audio": "node scripts/verify-audio.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

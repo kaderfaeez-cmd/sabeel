@@ -58,6 +58,22 @@ export function useLocalStorage(
   return [value, setValue];
 }
 
+/**
+ * Deletes a key and tells every subscriber.
+ *
+ * Needed because writing an empty string is not the same as removing: it leaves the key
+ * present with a falsy value, so anything checking `getItem(key) !== null` sees a stale
+ * entry that should be gone.
+ */
+export function removeLocalStorage(key: string): void {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    // Nothing to remove.
+  }
+  notify();
+}
+
 /** Same, for a JSON-encoded object. Returns `null` when absent or unparseable. */
 export function useLocalStorageObject<T>(
   key: string,
@@ -75,13 +91,10 @@ export function useLocalStorageObject<T>(
 
   const setValue = useCallback(
     (next: T | null) => {
+      // Remove properly rather than writing an empty string, which would leave the key
+      // behind with a falsy value.
       if (next === null) {
-        try {
-          localStorage.removeItem(key);
-        } catch {
-          /* nothing to remove */
-        }
-        setRaw('');
+        removeLocalStorage(key);
         return;
       }
       setRaw(JSON.stringify(next));

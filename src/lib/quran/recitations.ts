@@ -1,4 +1,4 @@
-import type { AudioSource } from '@/lib/audio/providers';
+import { resolveTrackUrl, type AudioSource } from '@/lib/audio/providers';
 
 /**
  * Recitation sources.
@@ -81,9 +81,16 @@ export function reciterLabel(reciter: Reciter): string {
   return reciter.style ? `${reciter.name} (${reciter.style})` : reciter.name;
 }
 
+/**
+ * Delegates to the shared resolver rather than repeating the logic.
+ *
+ * This existed as a second, subtly different implementation — and it was the one actually
+ * used by `fetchSurahAudio`. It mishandled the protocol-relative URLs that some reciters
+ * return, so those recitations 404'd while others played fine. One resolver, one place to
+ * be correct.
+ */
 export function resolveAudioUrl(relativeOrAbsolute: string): string {
-  if (/^https?:\/\//.test(relativeOrAbsolute)) return relativeOrAbsolute;
-  return `${AUDIO_BASE}${relativeOrAbsolute.replace(/^\/+/, '')}`;
+  return resolveTrackUrl(AUDIO_BASE, relativeOrAbsolute);
 }
 
 interface ApiAudioFile {

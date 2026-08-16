@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { SearchField } from '@/features/quran/search-field';
 import { getSurah } from '@/lib/quran/surahs';
 import { searchQuran, type SearchResponse } from '@/lib/quran/search';
-import { getTranslation, resolveTranslationId } from '@/lib/quran/translations';
+import { PREF_COOKIE, resolvePreference } from '@/lib/preferences';
+import { DEFAULT_TRANSLATION_ID, getTranslation } from '@/lib/quran/translations';
 
 export const metadata: Metadata = {
   title: 'Search the Quran',
@@ -19,7 +21,16 @@ interface PageProps {
 export default async function SearchPage({ searchParams }: PageProps) {
   const { q, t } = await searchParams;
   const query = (q ?? '').trim();
-  const translationId = resolveTranslationId(t);
+
+  // Honour the saved translation here too, so search does not silently disagree with
+  // what the reader chose in Settings and sees on every surah page.
+  const store = await cookies();
+  const translationId = resolvePreference(
+    t,
+    store.get(PREF_COOKIE.translation)?.value,
+    (value) => getTranslation(value) !== undefined,
+    DEFAULT_TRANSLATION_ID,
+  );
   const translation = getTranslation(translationId);
 
   // Resolved here rather than in a nested async component inside Suspense: that shape

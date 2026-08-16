@@ -56,8 +56,22 @@ export function resolveSourceId(
   return findSource(sources, fallbackId) ? fallbackId : (sources[0]?.id ?? fallbackId);
 }
 
-/** Resolves a possibly-relative path against a provider's base URL. */
+/**
+ * Resolves a track reference against a provider's base URL.
+ *
+ * The Quran.com recitation API is not consistent about this. Most reciters return a path
+ * relative to the audio host (`Alafasy/mp3/001001.mp3`), but some — both Husary
+ * recitations, at least — return a **protocol-relative** URL
+ * (`//mirrors.quranicaudio.com/...`). Treating that as a relative path produced
+ * `https://verses.quran.com/mirrors.quranicaudio.com/...`, which 404s, so those reciters
+ * were silently broken while the others worked.
+ */
 export function resolveTrackUrl(base: string, pathOrUrl: string): string {
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  return `${base.replace(/\/+$/, '')}/${pathOrUrl.replace(/^\/+/, '')}`;
+  const value = pathOrUrl.trim();
+
+  if (/^https?:\/\//i.test(value)) return value;
+  // Protocol-relative: a full host, missing only the scheme.
+  if (value.startsWith('//')) return `https:${value}`;
+
+  return `${base.replace(/\/+$/, '')}/${value.replace(/^\/+/, '')}`;
 }

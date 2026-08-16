@@ -89,7 +89,7 @@ export function ContinueReading() {
                 <li key={bookmark.id}>
                   <Link
                     href={`/quran/${bookmark.surah}#ayah-${bookmark.ayah}`}
-                    className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm text-ink-muted transition-colors duration-200 hover:border-emerald hover:text-emerald"
+                    className="inline-flex min-h-11 items-center rounded-full border border-line px-4 py-2 text-sm text-ink-muted transition-colors duration-200 hover:border-emerald hover:text-emerald"
                   >
                     {surah?.name ?? `Surah ${bookmark.surah}`} {bookmark.surah}:{bookmark.ayah}
                   </Link>

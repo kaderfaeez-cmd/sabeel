@@ -51,6 +51,24 @@ describe('resolveTrackUrl', () => {
     const absolute = 'https://download.quranicaudio.com/x/112.mp3';
     expect(resolveTrackUrl('https://verses.quran.com', absolute)).toBe(absolute);
   });
+
+  test('adds the scheme to a protocol-relative URL instead of treating it as a path', () => {
+    // Both Husary recitations return this shape. Treating it as a relative path produced
+    // https://verses.quran.com/mirrors.quranicaudio.com/... which 404s, so those reciters
+    // were silently broken while every other reciter worked.
+    expect(
+      resolveTrackUrl(
+        'https://verses.quran.com',
+        '//mirrors.quranicaudio.com/everyayah/Husary_64kbps/001001.mp3',
+      ),
+    ).toBe('https://mirrors.quranicaudio.com/everyayah/Husary_64kbps/001001.mp3');
+  });
+
+  test('trims stray whitespace before deciding what kind of reference it is', () => {
+    expect(resolveTrackUrl('https://verses.quran.com', '  //cdn.example/a.mp3 ')).toBe(
+      'https://cdn.example/a.mp3',
+    );
+  });
 });
 
 describe('the reciter set is expressed in the shared audio vocabulary', () => {
