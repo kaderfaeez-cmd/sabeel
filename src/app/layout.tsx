@@ -1,13 +1,22 @@
 import type { Metadata, Viewport } from 'next';
 import { SiteBackground } from '@/components/layout/site-background';
 import { SiteFooter } from '@/components/layout/site-footer';
+import { ServiceWorker } from '@/components/layout/service-worker';
 import { SiteHeader } from '@/components/layout/site-header';
 import { ThemeScript } from '@/components/theme/theme-script';
 import { fontVariables } from '@/lib/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sabeel.app'),
+  /**
+   * The canonical origin. Everything relative — Open Graph images, canonical links —
+   * is resolved against this, so it must be a domain we actually control.
+   *
+   * `www` is canonical because the apex 308-redirects to it. If that is ever flipped in
+   * Vercel, change it here too: a manifest `start_url` that redirects breaks the scope
+   * check for an installed app and for a Play Store TWA.
+   */
+  metadataBase: new URL('https://www.sabeel-thepath.com'),
   title: {
     default: 'Sabeel — the path',
     template: '%s · Sabeel',
@@ -72,6 +81,7 @@ export default function RootLayout({
         <a href="#main" className="skip-link rounded-full bg-emerald px-4 py-2 text-sm text-surface">
           Skip to content
         </a>
+        <ServiceWorker />
         <SiteBackground />
         <SiteHeader />
         <main id="main">{children}</main>
