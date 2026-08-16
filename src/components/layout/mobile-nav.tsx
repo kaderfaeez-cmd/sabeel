@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { SECTION_GROUPS } from '@/lib/navigation';
 
 /**
@@ -25,6 +26,19 @@ export function MobileNav() {
   const [openedOn, setOpenedOn] = useState<string | null>(null);
   const open = openedOn === pathname;
   const setOpen = (next: boolean) => setOpenedOn(next ? pathname : null);
+
+  /**
+   * The panel is portalled to <body>.
+   *
+   * The header carries `backdrop-blur`, and a backdrop-filter creates a containing block
+   * for `position: fixed` descendants — so an in-place `fixed inset-0` panel sized itself
+   * to the 64px header instead of the viewport, leaving the menu invisible on every
+   * phone. A portal puts it outside any ancestor that could constrain it.
+   *
+   * No mounted flag is needed: the panel only ever renders after a click, so this never
+   * runs during the server render.
+   */
+  const canPortal = typeof document !== 'undefined';
 
   useEffect(() => {
     if (!open) return;
@@ -58,14 +72,16 @@ export function MobileNav() {
         <Menu className="size-5" aria-hidden />
       </button>
 
-      {open && (
-        <div
-          id={panelId}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-          className="fixed inset-0 z-50 overflow-y-auto bg-surface"
-        >
+      {open &&
+        canPortal &&
+        createPortal(
+          <div
+            id={panelId}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+            className="fixed inset-0 z-[100] h-dvh w-screen overflow-y-auto bg-surface"
+          >
           <div className="flex h-16 items-center justify-between border-b border-line px-5">
             <span className="font-display text-2xl font-semibold text-ink">Sabeel</span>
             <button
@@ -100,8 +116,9 @@ export function MobileNav() {
               </div>
             ))}
           </nav>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
