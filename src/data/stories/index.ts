@@ -1,5 +1,7 @@
+import { AYYUB, LUQMAN, TALUT, ZAKARIYYA } from './ayyub-zakariyya-luqman-talut';
 import { PEOPLE_OF_THE_CAVE, IBRAHIM, NUH } from './cave-nuh-ibrahim';
 import { MARYAM, MUSA, YUSUF } from './musa-yusuf-maryam';
+import { HUD, ISA, LUT, QARUN, SALIH } from './qarun-isa-salih-hud-lut';
 import { ADAM, DHUL_QARNAYN, SULAIMAN, YUNUS } from './yunus-sulaiman-adam-dhulqarnayn';
 import type { Story, StoryTheme } from './types';
 
@@ -15,11 +17,20 @@ export const STORIES: readonly Story[] = [
   MUSA,
   YUSUF,
   MARYAM,
+  AYYUB,
   YUNUS,
+  ZAKARIYYA,
   PEOPLE_OF_THE_CAVE,
   ADAM,
+  LUQMAN,
   NUH,
   IBRAHIM,
+  ISA,
+  LUT,
+  TALUT,
+  QARUN,
+  SALIH,
+  HUD,
   DHUL_QARNAYN,
   SULAIMAN,
 ];

@@ -28,7 +28,9 @@ export type StoryTheme =
   | 'injustice'
   | 'doubt'
   | 'gratitude'
-  | 'power';
+  | 'power'
+  | 'hope'
+  | 'wealth';
 
 export const THEME_LABEL: Record<StoryTheme, string> = {
   loneliness: 'Feeling alone',
@@ -41,6 +43,8 @@ export const THEME_LABEL: Record<StoryTheme, string> = {
   doubt: 'Doubt',
   gratitude: 'Gratitude',
   power: 'Power and responsibility',
+  hope: 'Hope when it seems too late',
+  wealth: 'Money and status',
 };
 
 export interface StoryPassage {

@@ -114,6 +114,30 @@ export const PLACES: Readonly<Record<string, Place>> = {
     basis: 'traditional',
     note: 'Identified as Nineveh in the historical literature. The Quran describes the people but does not name the city.',
   },
+  hijr: {
+    id: 'hijr',
+    name: 'Al-Hijr',
+    lat: 26.79,
+    lon: 37.95,
+    basis: 'quran',
+    note: 'Named directly in the Quran as the dwelling place of Thamud, the people of Salih.',
+  },
+  ahqaf: {
+    id: 'ahqaf',
+    name: 'Al-Ahqaf',
+    lat: 18.5,
+    lon: 51.5,
+    basis: 'quran',
+    note: 'Named directly in the Quran as the land of ‘Ad, the people of Hud.',
+  },
+  lutCities: {
+    id: 'lutCities',
+    name: 'The cities of Lut',
+    lat: 31.3,
+    lon: 35.5,
+    basis: 'traditional',
+    note: 'Placed near the Dead Sea by the historical literature. The Quran describes the cities but does not name them.',
+  },
 } as const;
 
 export function getPlace(id: string): Place | undefined {
@@ -126,7 +150,7 @@ export function getPlace(id: string): Place | undefined {
  */
 export const MAP_BOUNDS = {
   minLon: 26,
-  maxLon: 50,
+  maxLon: 56,
   minLat: 12,
   maxLat: 40,
 } as const;
