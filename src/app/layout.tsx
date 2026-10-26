@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { CloudflareAnalytics } from '@/components/layout/cloudflare-analytics';
 import { SiteBackground } from '@/components/layout/site-background';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { ServiceWorker } from '@/components/layout/service-worker';
@@ -86,6 +87,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <CloudflareAnalytics />
       </body>
     </html>
   );
